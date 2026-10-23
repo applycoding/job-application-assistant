@@ -14,8 +14,7 @@ Senior data engineer with 8+ years building batch and streaming pipelines on clo
 
 ## Skills
 
-Python, SQL, Spark, Airflow, Kubernetes, AWS  
-Go
+Python, SQL, Spark, Airflow, Kubernetes, AWS
 
 ## Experience
 

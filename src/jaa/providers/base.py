@@ -25,6 +25,18 @@ class ProviderError(RuntimeError):
     """User-facing provider failure; run is not saved."""
 
 
+def _as_provider_error(exc: BaseException) -> ProviderError | None:
+    name = type(exc).__name__
+    if name in ("UnexpectedRequest", "RateLimitError"):
+        return ProviderError(str(exc))
+    status = getattr(exc, "status_code", None)
+    if name == "APIStatusError" and status == 429:
+        return ProviderError(str(exc))
+    if name == "ClientError" and getattr(exc, "code", None) == 429:
+        return ProviderError(str(exc))
+    return None
+
+
 class ProviderConfigError(RuntimeError):
     """Startup configuration error."""
 
@@ -96,8 +108,15 @@ class StructuredLLMProvider(ABC):
                 out = LLMDraftOut.model_validate(data)
                 validate_draft(out, req)
                 return out
+            except ProviderError:
+                raise
             except (json.JSONDecodeError, ValidationError, DraftInvariantError) as exc:
                 last_error = str(exc)
+            except Exception as exc:
+                mapped = _as_provider_error(exc)
+                if mapped is not None:
+                    raise mapped from exc
+                raise
         raise ProviderError("The model returned invalid output after retry")
 
     async def judge(self, req: OutboundJudge) -> JudgeOut:
@@ -121,6 +140,13 @@ class StructuredLLMProvider(ABC):
                 out = JudgeOut.model_validate(data)
                 validate_judge(out, req)
                 return out
+            except (JudgeUnavailable, ProviderError):
+                raise
             except (json.JSONDecodeError, ValidationError, DraftInvariantError) as exc:
                 last_error = str(exc)
+            except Exception as exc:
+                mapped = _as_provider_error(exc)
+                if mapped is not None:
+                    raise mapped from exc
+                raise
         raise JudgeUnavailable("Judge returned invalid output after retry")

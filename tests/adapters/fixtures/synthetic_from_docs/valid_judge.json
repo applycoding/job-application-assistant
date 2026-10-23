@@ -1,0 +1,9 @@
+{
+  "verdicts": [
+    {
+      "sentence_id": "Q1.S1",
+      "entailed": true,
+      "rationale": "The claim follows from the cited evidence."
+    }
+  ]
+}

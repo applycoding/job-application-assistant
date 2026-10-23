@@ -1,0 +1,23 @@
+{
+  "answers": [
+    {
+      "question_id": "Q1",
+      "sentences": [
+        {
+          "text": "I built data pipelines with Python.",
+          "citations": ["c1"],
+          "requirement_ids": ["R1"],
+          "rationale": "Evidence c1 supports Python work for R1."
+        }
+      ]
+    }
+  ],
+  "cover_note": [
+    {
+      "text": "My background includes Python API development.",
+      "citations": ["c1"],
+      "requirement_ids": ["R1"],
+      "rationale": "Highlights R1 using c1."
+    }
+  ]
+}

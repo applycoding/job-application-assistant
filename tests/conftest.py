@@ -95,17 +95,6 @@ def socket_connect_attempts() -> list[tuple[object, object]]:
     return _connect_attempts
 
 
-def test_socket_guard_blocks_non_loopback() -> None:
-    import pytest as pt
-
-    with pt.raises(OSError, match="network blocked"):
-        s = socket.socket()
-        try:
-            s.connect(("203.0.113.1", 80))
-        finally:
-            s.close()
-
-
 @pytest.fixture(autouse=True)
 def _env_scrub(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     home = tmp_path / "home"

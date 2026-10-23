@@ -66,8 +66,11 @@ class GoogleProvider(StructuredLLMProvider):
         if not response.candidates:
             raise ValueError("empty candidates")
         candidate = response.candidates[0]
-        if candidate.finish_reason and str(candidate.finish_reason) != "STOP":
-            raise ValueError(f"finish_reason: {candidate.finish_reason}")
+        finish = candidate.finish_reason
+        if finish is not None:
+            finish_name = finish.name if hasattr(finish, "name") else str(finish).split(".")[-1]
+            if finish_name != "STOP":
+                raise ValueError(f"finish_reason: {candidate.finish_reason}")
         text = response.text
         if not text:
             raise ValueError("empty text")

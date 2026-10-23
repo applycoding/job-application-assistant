@@ -1,6 +1,7 @@
 import pytest
 
 from jaa.config import Settings
+from jaa.providers.base import ProviderError
 from jaa.providers.registry import build_provider
 from tests.support.transports import httpx2_handler
 
@@ -25,6 +26,6 @@ async def test_unmatched_request(socket_connect_attempts):
         evidence=[OutboundEvidence(id="c1", section="s", text="t")],
         gap_terms=[],
     )
-    with pytest.raises(Exception):
+    with pytest.raises(ProviderError):
         await provider.draft(req)
     assert socket_connect_attempts == []

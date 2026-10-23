@@ -70,9 +70,24 @@ def build_provider(settings: Settings, *, transport: Any | None = None) -> LLMPr
             budget=budget,
         )
     if name == "google":
+        from google.genai import types
+
         from jaa.providers.google_provider import GoogleProvider
 
-        return GoogleProvider(settings, api_key, model, judge_model, budget=budget)
+        http_options: Any | None = None
+        if transport is not None:
+            http_options = types.HttpOptions(
+                timeout=int(settings.request_timeout_s * 1000),
+                async_client_args={"transport": transport},
+            )
+        return GoogleProvider(
+            settings,
+            api_key,
+            model,
+            judge_model,
+            http_options=http_options,
+            budget=budget,
+        )
     if name == "xai":
         from jaa.providers.openai_provider import XAIProvider
 
