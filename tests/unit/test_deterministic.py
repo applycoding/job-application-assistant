@@ -178,6 +178,14 @@ def test_valid_citation_passes() -> None:
     assert check_sentence(s, {"c1": c}, CTX).status == "checks_passed"
 
 
+def test_gap_term_in_claim_fails_skill() -> None:
+    c = _chunk("c1", "Built Python APIs in production.")
+    s = _claim("I have shipped Go microservices for years.", ["c1"])
+    ctx = CheckContext(lexicon=LEX, reference_date=REF, target_company=None, gap_terms=frozenset({"Go"}))
+    r = check_sentence(s, {"c1": c}, ctx)
+    assert any(f.check == "skill" and f.token == "Go" for f in r.failures)
+
+
 def test_framing_skips_checks() -> None:
     s = Sentence(
         id="C.F1",

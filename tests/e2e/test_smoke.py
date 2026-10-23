@@ -107,10 +107,10 @@ def test_smoke_flow(server_url: str) -> None:
         shot_dir = ROOT / "docs" / "screenshots"
         update_shots = os.environ.get("JAA_UPDATE_SCREENSHOTS") == "1"
         page.goto(server_url + "/")
+        page.get_by_test_id("load-samples").click()
         if update_shots:
             shot_dir.mkdir(parents=True, exist_ok=True)
             page.screenshot(path=str(shot_dir / "home.png"), full_page=True)
-        page.get_by_test_id("load-samples").click()
         page.get_by_test_id("job-link").first.click()
         if update_shots:
             page.screenshot(path=str(shot_dir / "job.png"), full_page=True)

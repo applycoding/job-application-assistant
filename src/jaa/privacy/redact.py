@@ -17,15 +17,9 @@ _ADDRESS_RE = re.compile(
     r"(?:Street|St|Avenue|Ave|Road|Rd|Boulevard|Blvd|Lane|Ln|Drive|Dr|Court|Ct|Way)\.?",
     re.IGNORECASE,
 )
-_INJECTION_RE = re.compile(
-    r"(?i)ignore\s+previous[^\n]*|system:\s*override[^\n]*",
-)
-
-
 def redact(text: str) -> str:
     out = _EMAIL_RE.sub("[email]", text)
     out = _PHONE_RE.sub("[phone]", out)
     out = _URL_RE.sub("[url]", out)
     out = _ADDRESS_RE.sub("[address]", out)
-    out = _INJECTION_RE.sub("[instruction]", out)
     return out

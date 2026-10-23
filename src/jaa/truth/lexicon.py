@@ -9,7 +9,7 @@ from functools import lru_cache
 from importlib import resources
 from pathlib import Path
 
-CASE_SENSITIVE_SKILLS = frozenset({"Go", "R"})
+CASE_SENSITIVE_SKILLS = frozenset({"Go", "R", ".NET", "Node.js"})
 # Allow a sentence-ending '.' after a skill token, but not '.' continuing the token (e.g. Node.js).
 _SKILL_TERM_TRAIL = r"(?![A-Za-z0-9+#])"
 _TOKEN_RE = re.compile(r"[a-z0-9][a-z0-9+#.]*", re.IGNORECASE)

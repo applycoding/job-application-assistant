@@ -23,9 +23,17 @@ The stack favors **local-first** storage (`var/jaa.sqlite3` by default) and a **
 
 ## Code walkthrough
 
-`create_app()` in `app.py` loads `Settings.from_env()`, opens the database via `create_db_engine`, loads `SkillLexicon`, builds `Repository`, and calls `build_provider(cfg)`. Application state holds `repo`, `provider`, `csrf_token`, and related services for HTML and JSON routes.
+Application startup wires settings, storage, and the provider:
 
-The lifespan handler closes async HTTP clients when the server shuts down, which matters for Anthropic, OpenAI, and Google adapters.
+```python
+cfg = Settings.from_env()
+engine = create_db_engine(cfg.db_path)
+lexicon = SkillLexicon.load(cfg.skills_file)
+repo = Repository(engine, clock, ids, lexicon)
+provider = build_provider(cfg)
+```
+
+Runs are created in `create_run()` (`src/jaa/generation/pipeline.py`), which snapshots the corpus, retrieves evidence, calls the provider, and persists drafts plus truth reports.
 
 ## Checkpoint
 

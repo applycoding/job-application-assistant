@@ -15,7 +15,7 @@ from jaa.models import Document, JobPost
 from jaa.storage.repo import Repository
 from jaa.truth.lexicon import SkillLexicon, load_lexicon
 
-FICTIONAL_MARKER = "FICTIONAL SAMPLE DATA — Alex Doe is not a real person."
+FICTIONAL_MARKER = "FICTIONAL SAMPLE DATA - Alex Doe is not a real person."
 
 SAMPLE_DOCUMENTS: tuple[str, ...] = (
     "alex-doe-cv.md",

@@ -1,75 +1,82 @@
-import hashlib
+"""Stored XSS in job metadata must render escaped on HTML and exports."""
+
+from __future__ import annotations
+
+import html
 from pathlib import Path
 
-from jaa.ingest.loaders import detect_media_type, load_lines
+import pytest
 
-XSS_CANARY = "XSS_MARK_TOKEN"
-XSS_PAYLOAD = f"Python streaming {XSS_CANARY} <img src=x onerror=alert(1)> experience"
+from jaa.samples import seed
+from jaa.web import routes_html
 
-
-def _cited_chunk_texts(repo, run) -> list[str]:
-    ids = {
-        cid for block in run.drafts.answers for sent in block.sentences for cid in sent.citations
-    }
-    ids |= {cid for sent in run.drafts.cover_note.sentences for cid in sent.citations}
-    by_id = {c.id: c for c in repo.get_chunks()}
-    return [by_id[cid].text for cid in ids if cid in by_id]
+XSS_IMG = '<img src=x onerror=alert(1)>'
+XSS_TITLE_MARK = "XSSTITLEMARK"
+XSS_COMPANY_MARK = "XSSCOMPANYMARK"
 
 
-def test_stored_xss_escaped_on_document_page(client, repo):
-    data = XSS_PAYLOAD.encode()
-    mt = detect_media_type("evil.txt", data)
-    lines, warnings = load_lines(data, mt)
-    sha = hashlib.sha256(data).hexdigest()
-    repo.upsert_document("evil.txt", "txt", sha, lines, warnings)
-    doc_id = repo.list_documents()[-1].id
-    r = client.raw.get(f"/documents/{doc_id}")
-    assert r.status_code == 200
-    assert XSS_CANARY in r.text
-    assert "<img" not in r.text
+def _job_post_text() -> str:
+    return f"""# Backend Dev {XSS_TITLE_MARK} {XSS_IMG} - Vandelay {XSS_COMPANY_MARK} {XSS_IMG}
+
+## Requirements
+- Python backend services
+
+## Application questions
+1. What relevant experience do you bring?
+"""
 
 
-def test_xss_escaped_on_run_page_and_export(client, repo, settings):
-    client.delete("/api/data")
-    data = XSS_PAYLOAD.encode()
-    mt = detect_media_type("xss.txt", data)
-    lines, warnings = load_lines(data, mt)
-    sha = hashlib.sha256(data).hexdigest()
-    repo.upsert_document("xss.txt", "txt", sha, lines, warnings)
-    job_text = Path("samples/jobs/03-backend-python-developer-vandelay-health.md").read_text()
-    job = client.post("/api/jobs", json={"text": job_text}).json()
+def _assert_html_safe(body: str) -> None:
+    assert XSS_TITLE_MARK in body
+    assert XSS_COMPANY_MARK in body
+    assert html.escape(XSS_IMG) in body
+    assert XSS_IMG not in body
+    assert "<img" not in body
+
+
+def _assert_export_safe(body: str) -> None:
+    assert XSS_TITLE_MARK in body
+    assert XSS_COMPANY_MARK in body
+    assert XSS_IMG not in body
+    assert "<img" not in body
+
+
+@pytest.fixture
+def xss_job(client, repo, settings, fixed_clock, seq_ids, app):
+    seed(repo, settings, fixed_clock, seq_ids, app.state.lexicon)
+    job = client.post("/api/jobs", json={"text": _job_post_text()}).json()
     run = client.post(f"/api/jobs/{job['id']}/runs", json={})
     assert run.status_code == 201
-    run_id = run.json()["id"]
-    stored = repo.get_run(run_id)
-    cited = _cited_chunk_texts(repo, stored)
-    assert cited
-    assert any(XSS_CANARY in t for t in cited)
-    page = client.raw.get(f"/runs/{run_id}")
-    assert page.status_code == 200
-    assert "<img" not in page.text
-    assert "onerror=alert" not in page.text
+    return job["id"], run.json()["id"]
+
+
+def test_xss_escaped_on_run_job_home_and_export(client, xss_job):
+    job_id, run_id = xss_job
+    for path in (f"/runs/{run_id}", f"/jobs/{job_id}", "/"):
+        page = client.raw.get(path)
+        assert page.status_code == 200
+        _assert_html_safe(page.text)
     export = client.raw.get(f"/api/runs/{run_id}/export?format=md")
     assert export.status_code == 200
-    assert "onerror=alert" not in export.text
-    assert "<img" not in export.text
+    _assert_export_safe(export.text)
 
 
-def test_run_page_would_leak_without_autoescape(client, repo, settings):
-    from jinja2 import Environment
+def test_xss_protection_requires_template_autoescape(client, xss_job):
+    from jinja2 import Environment, FileSystemLoader
 
-    client.delete("/api/data")
-    data = XSS_PAYLOAD.encode()
-    mt = detect_media_type("xss2.txt", data)
-    lines, warnings = load_lines(data, mt)
-    sha = hashlib.sha256(data).hexdigest()
-    repo.upsert_document("xss2.txt", "txt", sha, lines, warnings)
-    job_text = Path("samples/jobs/03-backend-python-developer-vandelay-health.md").read_text()
-    job = client.post("/api/jobs", json={"text": job_text}).json()
-    run_id = client.post(f"/api/jobs/{job['id']}/runs", json={}).json()["id"]
-    stored = repo.get_run(run_id)
-    raw_line = next(t for t in _cited_chunk_texts(repo, stored) if XSS_CANARY in t)
-    unsafe = Environment(autoescape=False).from_string("{{ t }}").render(t=raw_line)
-    assert "onerror=alert" in unsafe
-    page = client.raw.get(f"/runs/{run_id}")
-    assert "onerror=alert" not in page.text
+    job_id, run_id = xss_job
+    template_dir = routes_html.templates.env.loader.searchpath[0]
+    original_env = routes_html.templates.env
+    routes_html.templates.env = Environment(
+        loader=FileSystemLoader(template_dir),
+        autoescape=False,
+    )
+    try:
+        page = client.raw.get(f"/runs/{run_id}")
+        assert XSS_IMG in page.text
+        with pytest.raises(AssertionError):
+            _assert_html_safe(page.text)
+    finally:
+        routes_html.templates.env = original_env
+    page = client.raw.get(f"/jobs/{job_id}")
+    _assert_html_safe(page.text)

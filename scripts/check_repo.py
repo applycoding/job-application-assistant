@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SAMPLES = ROOT / "samples"
 FICTIONAL_MARKERS = (
-    "FICTIONAL SAMPLE DATA — Alex Doe is not a real person.",
+    "FICTIONAL SAMPLE DATA - Alex Doe is not a real person.",
     "FICTIONAL SAMPLE DATA - Alex Doe is not a real person.",
     "FICTIONAL SAMPLE DATA for portfolio demo only.",
 )

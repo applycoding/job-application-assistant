@@ -26,9 +26,17 @@ For each requirement, chunks must pass `eligible()` before they enter the candid
 
 ## Code walkthrough
 
-In `retrieve_for_job()`, note the two-level structure: per-requirement scoring, then aggregation into `EvidenceItem` rows with matched terms. `_compute_gaps()` compares required terms against the union of matched terms in the pool.
+Eligibility uses the same skill boundary rules as truth checks:
 
-Open `BM25Ranker` to see how document frequency is computed across the in-memory chunk list for each run snapshot.
+```python
+_SKILL_TERM_TRAIL = r"(?![A-Za-z0-9+#])"
+```
+
+The service caps the global pool size after per-requirement picks:
+
+```python
+pool_ids = pool_ids[:POOL_MAX]
+```
 
 ## Checkpoint
 

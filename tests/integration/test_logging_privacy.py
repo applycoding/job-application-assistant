@@ -6,22 +6,28 @@ import logging
 
 import pytest
 
+from jaa.app import create_app
+from jaa.config import Settings
 from jaa.generation.pipeline import Deps, create_run
 from jaa.models import RunOptions
 from jaa.samples import seed
 
-SENTINEL_KEY = "JAA_LOG_LEAK_SENTINEL"
-SENTINEL_VALUE = "sk-sentinel-must-not-appear-in-logs-7f3a"
+SENTINEL = "sk-sentinel-must-not-appear-in-logs-7f3a"
+KEY_ENVS = ("OPENAI_API_KEY", "ANTHROPIC_API_KEY", "GEMINI_API_KEY", "XAI_API_KEY")
 
 
 @pytest.mark.asyncio
-async def test_logs_exclude_sentinel_and_evidence(
-    caplog, app, settings, repo, fixed_clock, seq_ids, monkeypatch: pytest.MonkeyPatch
+async def test_logs_exclude_provider_keys_and_evidence(
+    caplog, settings, repo, fixed_clock, seq_ids, monkeypatch: pytest.MonkeyPatch, tmp_path
 ):
-    monkeypatch.setenv(SENTINEL_KEY, SENTINEL_VALUE)
-    settings.log_leak_sentinel = SENTINEL_VALUE
-    caplog.set_level(logging.DEBUG, logger="jaa.generation.pipeline")
-    seed(repo, settings, fixed_clock, seq_ids, app.state.lexicon)
+    for name in KEY_ENVS:
+        monkeypatch.setenv(name, SENTINEL)
+    caplog.set_level(logging.DEBUG)
+    application = create_app(settings)
+    from tests.conftest import _wire_test_app
+
+    _wire_test_app(application, settings, fixed_clock, seq_ids)
+    seed(repo, settings, fixed_clock, seq_ids, application.state.lexicon)
     from tests.support.jobs import job_with_marker
 
     job = job_with_marker(repo.list_jobs(), "Acme")
@@ -29,16 +35,17 @@ async def test_logs_exclude_sentinel_and_evidence(
     evidence_snippets = [c.evidence_text for c in chunks[:5]]
     deps = Deps(
         repo=repo,
-        provider=app.state.provider,
+        provider=application.state.provider,
         settings=settings,
-        lexicon=app.state.lexicon,
+        lexicon=application.state.lexicon,
         clock=fixed_clock,
         ids=seq_ids,
     )
     await create_run(deps, job.id, RunOptions(judge=False))
     for record in caplog.records:
         msg = record.getMessage()
-        assert SENTINEL_VALUE not in msg
+        for name in KEY_ENVS:
+            assert SENTINEL not in msg
         assert "api_key" not in msg.lower()
         for snippet in evidence_snippets:
             if snippet.strip():

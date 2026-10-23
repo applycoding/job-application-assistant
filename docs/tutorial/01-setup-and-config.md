@@ -25,7 +25,14 @@ Configure JAA through environment variables and an optional `.env` file, and see
 
 ## Code walkthrough
 
-Open `Settings.from_env()` and trace `_coalesce`: environment wins over `.env` for each key. `resolved_reference_date()` picks `reference_date` or falls back to the clock's current date, which downstream truth checks use for tenure math.
+Environment keys are read with explicit precedence:
+
+```python
+def get(key: str) -> str | None:
+    return _coalesce(raw_env, key, file_vars)
+```
+
+`resolved_reference_date()` picks `reference_date` or falls back to the clock's current date for tenure math.
 
 `resolved_models()` combines `provider`, optional `model` / `judge_model` overrides, and entries from `providers.toml` so adapters always receive a concrete model id.
 

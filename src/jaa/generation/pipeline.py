@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import asyncio
-import logging
 from dataclasses import dataclass
 
 from jaa.clock import Clock
@@ -12,7 +11,6 @@ from jaa.export import is_stale
 from jaa.generation.assemble import assemble_drafts
 from jaa.ids import IdFactory
 from jaa.models import RetrievalResult, Run, RunOptions
-from jaa.privacy.debug_log import format_run_debug
 from jaa.privacy.outbound import build_outbound_draft
 from jaa.providers.base import CallBudget, LLMProvider
 from jaa.retrieval.service import retrieve_for_job
@@ -23,8 +21,6 @@ from jaa.truth.prune import prune_flagged
 from jaa.truth.report import run_truth_check
 
 __all__ = ["Deps", "create_run", "prune_run", "is_stale", "RunDeadlineError"]
-
-_log = logging.getLogger(__name__)
 
 
 @dataclass
@@ -48,10 +44,6 @@ async def create_run(deps: Deps, job_id: str, opts: RunOptions) -> Run:
         raise ValueError("upload documents first")
 
     job = deps.repo.get_job(job_id)
-    _log.debug(
-        "%s",
-        format_run_debug(deps.settings, job_id=job_id, chunk_count=len(chunks)),
-    )
     result = retrieve_for_job(job, chunks, deps.lexicon)
     outbound = build_outbound_draft(job, result)
     pool = {item.chunk.id: item.chunk for item in result.evidence}
@@ -74,6 +66,7 @@ async def create_run(deps: Deps, job_id: str, opts: RunOptions) -> Run:
         lexicon=deps.lexicon,
         reference_date=ref_date,
         target_company=job.company,
+        gap_terms=frozenset(g.term for g in result.gaps if g.term),
     )
     report = await run_truth_check(
         drafts,
@@ -111,12 +104,13 @@ async def prune_run(deps: Deps, run_id: str) -> Run:
     corpus_version, _chunks = deps.repo.corpus_snapshot(ref_date)
     req_map = {r.id: r for r in parent.requirements}
     pool = {item.chunk.id: item.chunk for item in parent.evidence}
+    job = deps.repo.get_job(parent.job_id)
     ctx = CheckContext(
         lexicon=deps.lexicon,
         reference_date=ref_date,
-        target_company=None,
+        target_company=job.company,
+        gap_terms=frozenset(g.term for g in parent.gaps if g.term),
     )
-    job = deps.repo.get_job(parent.job_id)
     outbound = build_outbound_draft(
         job,
         RetrievalResult(evidence=parent.evidence, gaps=parent.gaps),

@@ -15,8 +15,8 @@ _FIXED_DT = (1980, 1, 1, 0, 0, 0)
 
 def _build_docx_bytes() -> bytes:
     doc = Document()
-    doc.add_paragraph("FICTIONAL SAMPLE DATA — Alex Doe is not a real person.")
-    doc.add_heading("Volunteering — Alex Doe", level=1)
+    doc.add_paragraph("FICTIONAL SAMPLE DATA - Alex Doe is not a real person.")
+    doc.add_heading("Volunteering - Alex Doe", level=1)
     doc.add_paragraph(
         "Food Bank of Example City (2019–2021): built a simple Postgres + Metabase "
         "dashboard for donation trends."

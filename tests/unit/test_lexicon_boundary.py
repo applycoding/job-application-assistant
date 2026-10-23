@@ -11,6 +11,11 @@ def test_skill_before_sentence_period() -> None:
     assert "Apache Spark" in lex.find("We use Spark;")
 
 
+def test_dot_net_matches() -> None:
+    lex = SkillLexicon.load(None)
+    assert ".NET" in lex.find("Shipped services on .NET 8.")
+
+
 def test_node_dot_js_still_matches() -> None:
     lex = SkillLexicon.load(None)
     found = lex.find("Experience with Node.js in production.")

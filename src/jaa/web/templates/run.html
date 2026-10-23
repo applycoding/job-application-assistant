@@ -41,10 +41,13 @@
 {% endif %}
 
 <section class="card actions">
+  {% set flagged = report.sentences | selectattr('status', 'in', ['unsupported', 'not_verified']) | list %}
+  {% if flagged %}
   <form method="post" action="/runs/{{ run.id }}/prune">
     <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
     <button type="submit" data-testid="prune-button">Remove flagged claims</button>
   </form>
+  {% endif %}
   <p class="export-links">
     <a href="/api/runs/{{ run.id }}/export?format=md">Download Markdown</a>
     ·

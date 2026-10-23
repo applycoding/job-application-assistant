@@ -1,6 +1,6 @@
 {
-  "check_rules_version": "2026-10-23.1",
-  "corpus_version": "f915171bf498ed394d64c55745ecf01211b6f7a2d76dcd859ed60be5ba35f98f",
+  "check_rules_version": "2026-10-23.2",
+  "corpus_version": "a873a3d3d4a83d3e98b12a799e499f0e20694f6968fc5c57e68834e3393ac695",
   "created_at": "2026-10-23T09:00:00+00:00",
   "drafts": {
     "answers": [
@@ -150,12 +150,12 @@
             ],
             "explanation": {
               "matches": [],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279 (matched: ).",
+              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279.",
               "requirement_ids": []
             },
             "id": "Q2.S3",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279 (matched: ).",
+            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279.",
             "requirement_ids": [],
             "template_id": null,
             "text": "In addition: SQL."

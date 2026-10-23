@@ -24,7 +24,7 @@ from jaa.truth.extractors import (
 from jaa.truth.lexicon import SkillLexicon
 from jaa.truth.verdict import status_from_checks
 
-CHECK_RULES_VERSION = "2026-10-23.1"
+CHECK_RULES_VERSION = "2026-10-23.2"
 
 
 @dataclass(frozen=True)
@@ -32,6 +32,7 @@ class CheckContext:
     lexicon: SkillLexicon
     reference_date: date
     target_company: str | None
+    gap_terms: frozenset[str] = frozenset()
 
 
 def check_sentence(
@@ -216,6 +217,17 @@ def check_sentence(
                         outcome="fail",
                     )
                 )
+
+    for gap_term in ctx.gap_terms:
+        if gap_term in skills_in_claim or gap_term.lower() in claim_text.lower():
+            failures.append(
+                CheckFailure(
+                    check="skill",
+                    token=gap_term,
+                    detail="Claim uses a gap term not supported by evidence",
+                    outcome="fail",
+                )
+            )
 
     for skill in skills_in_claim:
         if not _skill_in_citations(skill, cited, ctx.lexicon):

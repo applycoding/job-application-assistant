@@ -55,14 +55,18 @@ class MockProvider:
                 req_for_chunk = next((r for r in req.requirements if r.id == rid), None)
                 if req_for_chunk is not None:
                     terms = _matched_terms(chunk, [req_for_chunk])
+                if terms:
+                    rationale = (
+                        f"Addresses {rid} using {chunk.id} (matched: {', '.join(terms)})."
+                    )
+                else:
+                    rationale = f"Addresses {rid} using {chunk.id}."
                 sentences.append(
                     SentenceOut(
                         text=LEAD_INS[(lead_idx - 1) % 3].format(text=text),
                         citations=[chunk.id],
                         requirement_ids=[rid] if rid and terms else [],
-                        rationale=(
-                            f"Addresses {rid} using {chunk.id} (matched: {', '.join(terms)})."
-                        ),
+                        rationale=rationale,
                     )
                 )
                 if len(sentences) >= 3:
