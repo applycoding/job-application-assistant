@@ -71,7 +71,7 @@ jobs:
           version: "0.13.5"
           enable-cache: true
       - run: uv sync --all-extras
-      - uses: actions/cache@1bd1e32a3bdc45325e4d366eb3b341e3dc23884a # v4.2.0
+      - uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
         id: playwright-cache
         with:
           path: ~/.cache/ms-playwright
