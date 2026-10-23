@@ -333,9 +333,7 @@ class Repository:
     def list_runs(self, job_id: str) -> list[Run]:
         with Session(self._engine) as session:
             rows = session.exec(
-                select(RunRow)
-                .where(RunRow.job_id == job_id)
-                .order_by(RunRow.seq)  # type: ignore[arg-type]
+                select(RunRow).where(RunRow.job_id == job_id).order_by(RunRow.seq)  # type: ignore[arg-type]
             ).all()
             return [Run.model_validate_json(r.payload_json) for r in rows]
 
