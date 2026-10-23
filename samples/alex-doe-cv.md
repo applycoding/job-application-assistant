@@ -1,6 +1,6 @@
 # Alex Doe
 
-FICTIONAL SAMPLE DATA — Alex Doe is not a real person.
+FICTIONAL SAMPLE DATA - Alex Doe is not a real person.
 
 ## Contact
 
