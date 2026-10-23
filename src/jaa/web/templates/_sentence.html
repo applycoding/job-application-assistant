@@ -25,7 +25,7 @@
     {% if check and check.failures %}
     <ul class="failures">
       {% for f in check.failures %}
-      <li>{{ f.check }}{% if f.token %}:{{ f.token }}{% endif %} — {{ f.detail }}</li>
+      <li>{{ f.check }}{% if f.token %}:{{ f.token }}{% endif %} - {{ f.detail }}</li>
       {% endfor %}
     </ul>
     {% endif %}

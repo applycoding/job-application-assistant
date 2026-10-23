@@ -1,5 +1,5 @@
 /**
- * UI helpers — no innerHTML; highlights use text nodes only.
+ * UI helpers - no innerHTML; highlights use text nodes only.
  */
 (function () {
   "use strict";

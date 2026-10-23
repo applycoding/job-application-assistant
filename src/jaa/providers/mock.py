@@ -37,6 +37,7 @@ class MockProvider:
         must_reqs = [r for r in req.requirements if r.priority == "must"]
         must_text = " ".join(r.text for r in must_reqs)
         used_claims: set[str] = set()
+        used_cover_chunks: set[str] = set()
 
         answers: list[AnswerOut] = []
         for question in req.questions:
@@ -45,7 +46,7 @@ class MockProvider:
             sentences: list[SentenceOut] = []
             lead_idx = 0
             for chunk in ranked:
-                text = _unique_claim_text(chunk, lex, used_claims, lead_idx)
+                text = _unique_claim_text(chunk, lex, used_claims)
                 if text is None:
                     continue
                 lead_idx += 1
@@ -86,12 +87,15 @@ class MockProvider:
                 continue
             if not _matched_terms(cover_chunk, [req_item]):
                 continue
-            body = _unique_claim_text(cover_chunk, lex, used_claims, 0) or _format_evidence_body(
-                cover_chunk, lex
-            )
+            if cover_chunk.id in used_cover_chunks:
+                continue
+            used_cover_chunks.add(cover_chunk.id)
+            cover_body = _unique_claim_text(cover_chunk, lex, used_claims)
+            if cover_body is None:
+                continue
             cover_claims.append(
                 SentenceOut(
-                    text=f"My background includes: {body}.",
+                    text=f"My background includes: {cover_body}.",
                     citations=[cover_chunk.id],
                     requirement_ids=[req_item.id],
                     rationale=f"Highlights {req_item.id} via {cover_chunk.id}.",
@@ -176,16 +180,13 @@ def _unique_claim_text(
     chunk: _PoolChunk,
     lexicon: SkillLexicon,
     used: set[str],
-    lead_idx: int,
 ) -> str | None:
     body = _format_evidence_body(chunk, lexicon)
     key = body.lower()
     if key in used:
         return None
     used.add(key)
-    if lead_idx == 0:
-        return body
-    return body[0].lower() + body[1:] if body else body
+    return body
 
 
 def _best_requirement(chunk: _PoolChunk, requirements: Sequence[OutboundRequirement]) -> str:

@@ -10,6 +10,8 @@ from importlib import resources
 from pathlib import Path
 
 CASE_SENSITIVE_SKILLS = frozenset({"Go", "R"})
+# Allow a sentence-ending '.' after a skill token, but not '.' continuing the token (e.g. Node.js).
+_SKILL_TERM_TRAIL = r"(?![A-Za-z0-9+#])"
 _TOKEN_RE = re.compile(r"[a-z0-9][a-z0-9+#.]*", re.IGNORECASE)
 
 
@@ -60,10 +62,10 @@ class SkillLexicon:
         for name, aliases in skills.items():
             for term in [name, *aliases]:
                 if name in CASE_SENSITIVE_SKILLS:
-                    pat = re.compile(rf"(?<![A-Za-z0-9+#.]){re.escape(term)}(?![A-Za-z0-9+#.])")
+                    pat = re.compile(rf"(?<![A-Za-z0-9+#.]){re.escape(term)}{_SKILL_TERM_TRAIL}")
                 else:
                     pat = re.compile(
-                        rf"(?<![a-z0-9+#.]){re.escape(term)}(?![a-z0-9+#.])",
+                        rf"(?<![a-z0-9+#.]){re.escape(term)}{_SKILL_TERM_TRAIL}",
                         re.IGNORECASE,
                     )
                 self._patterns.append((name, pat))

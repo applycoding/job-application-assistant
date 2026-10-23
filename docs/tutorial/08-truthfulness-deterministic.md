@@ -26,9 +26,22 @@ Framing sentences (`kind="framing"`) short-circuit to `checks_passed` because th
 
 ## Code walkthrough
 
-Start at `check_sentence()`: gather cited chunks, run each extractor, and compare claim tokens to evidence text via helpers like `number_in_text()` and `negated_terms()`.
+Skill tokens allow a sentence-ending period without swallowing `Node.js`:
 
-Read `extract_durations()` and `month_bounds()` together to see how overlapping employment spans are validated against claimed years of experience.
+```python
+_SKILL_TERM_TRAIL = r"(?![A-Za-z0-9+#])"
+```
+
+Duration extraction treats `over` / `more than` as strict lower bounds:
+
+```python
+_DURATION_RE = re.compile(
+    r"\b(over|more than)\s+(\d+)\+?\s*years?\b|\b(\d+)\+?\s*years?\b",
+    re.IGNORECASE,
+)
+```
+
+Read `check_sentence()` and `_check_duration()` together to see how explicit year counts and employment spans interact.
 
 ## Checkpoint
 

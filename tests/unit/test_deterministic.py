@@ -117,11 +117,65 @@ def test_skill_version_mismatch_fails() -> None:
 
 
 def test_duration_year_only_not_verified() -> None:
-    c = _chunk("c1", "Python (2020–2026)")
+    c = _chunk("c1", "Python (2020-2026)")
     s = _claim("6 years of Python experience", ["c1"])
     r = check_sentence(s, {"c1": c}, CTX)
     assert r.status == "not_verified"
     assert any(f.check == "duration" for f in r.failures)
+
+
+def test_year_match_passes() -> None:
+    c = _chunk("c1", "Graduated in 2014.")
+    s = _claim("I graduated in 2014.", ["c1"])
+    assert check_sentence(s, {"c1": c}, CTX).status == "checks_passed"
+
+
+def test_employer_match_passes() -> None:
+    c = _chunk("c1", "Worked at Contoso Retail.")
+    s = _claim("I worked at Contoso Retail.", ["c1"])
+    assert check_sentence(s, {"c1": c}, CTX).status == "checks_passed"
+
+
+def test_ownership_match_passes() -> None:
+    c = _chunk("c1", "I led the migration.")
+    s = _claim("I led the migration.", ["c1"])
+    assert check_sentence(s, {"c1": c}, CTX).status == "checks_passed"
+
+
+def test_negation_aligned_passes() -> None:
+    c = _chunk("c1", "No production Kubernetes experience.")
+    s = _claim("I have no production Kubernetes experience.", ["c1"])
+    assert check_sentence(s, {"c1": c}, CTX).status == "checks_passed"
+
+
+def test_mixed_citations_single_chunk_passes() -> None:
+    c = _chunk("c1", "Led a team of 15 analysts.")
+    s = _claim("I led a team of 15 analysts.", ["c1"])
+    assert check_sentence(s, {"c1": c}, CTX).status == "checks_passed"
+
+
+def test_skill_match_passes() -> None:
+    c = _chunk("c1", "Built SQL and Python reports.")
+    s = _claim("I used Python daily.", ["c1"])
+    assert check_sentence(s, {"c1": c}, CTX).status == "checks_passed"
+
+
+def test_skill_version_match_passes() -> None:
+    c = _chunk("c1", "Python 3.12 in production.")
+    s = _claim("Shipped on Python 3.12.", ["c1"])
+    assert check_sentence(s, {"c1": c}, CTX).status == "checks_passed"
+
+
+def test_duration_explicit_years_passes() -> None:
+    c = _chunk("c1", "Over 6 years of Python delivery.")
+    s = _claim("6 years of Python experience.", ["c1"])
+    assert check_sentence(s, {"c1": c}, CTX).status == "checks_passed"
+
+
+def test_valid_citation_passes() -> None:
+    c = _chunk("c1", "General experience.")
+    s = _claim("General experience noted.", ["c1"])
+    assert check_sentence(s, {"c1": c}, CTX).status == "checks_passed"
 
 
 def test_framing_skips_checks() -> None:

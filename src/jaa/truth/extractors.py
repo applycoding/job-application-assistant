@@ -163,14 +163,19 @@ def extract_years(text: str) -> list[int]:
 def extract_durations(text: str) -> list[DurationMention]:
     out: list[DurationMention] = []
     for m in _DURATION_RE.finditer(text):
-        if m.group(1) in ("over", "more than"):
+        if m.group(2) is not None:
             years = int(m.group(2))
+            prefix = (m.group(1) or "").casefold()
+            strict_more = prefix in ("over", "more than")
             out.append(
                 DurationMention(
-                    years=years, raw=m.group(0), strict_more=True, plus="+" in m.group(0)
+                    years=years,
+                    raw=m.group(0),
+                    strict_more=strict_more,
+                    plus="+" in m.group(0),
                 )
             )
-        else:
+        elif m.group(3) is not None:
             years = int(m.group(3))
             plus = "+" in m.group(0)
             out.append(DurationMention(years=years, raw=m.group(0), plus=plus))
@@ -181,11 +186,15 @@ def _strip_token(tok: str) -> str:
     return tok.strip().rstrip(".,;:!?\"'()[]")
 
 
-def _is_skill_name(name: str, skills: set[str]) -> bool:
+def _is_skill_name(name: str, skills: set[str], lexicon: SkillLexicon) -> bool:
     bare = _strip_token(name)
     if bare in skills:
         return True
-    return any(_strip_token(s) == bare for s in skills)
+    if any(_strip_token(s) == bare for s in skills):
+        return True
+    if bare in {s.casefold() for s in lexicon.skill_names}:
+        return True
+    return bare in {s.casefold() for s in skills}
 
 
 def extract_orgs(text: str, lexicon: SkillLexicon) -> list[str]:
@@ -193,12 +202,12 @@ def extract_orgs(text: str, lexicon: SkillLexicon) -> list[str]:
     orgs: list[str] = []
     for m in _ORG_RE.finditer(text):
         name = m.group(1).strip().rstrip(".,;:")
-        if _is_skill_name(name, skills):
+        if _is_skill_name(name, skills, lexicon):
             continue
         orgs.append(name)
     for m in _COMPANY_SUFFIX_RE.finditer(text):
         name = m.group(1).strip().rstrip(".,;:")
-        if _is_skill_name(name, skills):
+        if _is_skill_name(name, skills, lexicon):
             continue
         orgs.append(name)
     return orgs

@@ -26,9 +26,21 @@ HTML routes should never interpolate raw job or draft text into script contexts;
 
 ## Code walkthrough
 
-Read `HostAndHeadersMiddleware.dispatch()`: host check runs first, security headers attach to every response, and CSRF logic gates POST-like API calls.
+Claims render through Jinja autoescape in `_sentence.html`:
 
-Compare `_origin_urls()` with `Settings.public_port` when running behind Docker port publishing so Origin checks still match what the browser sends.
+```html
+<span class="claim-text">{{ sentence.text }}</span>
+```
+
+Export paths escape user text before writing Markdown:
+
+```python
+from html import escape
+
+text = escape(sent.text)
+```
+
+Read `HostAndHeadersMiddleware.dispatch()` for host checks, security headers, and CSRF gating on mutating API calls.
 
 ## Checkpoint
 

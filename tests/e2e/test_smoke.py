@@ -104,15 +104,24 @@ def test_smoke_flow(server_url: str) -> None:
         context.route("**/*", route_handler)
         page = context.new_page()
         page.on("console", lambda msg: errors.append(msg.text) if msg.type == "error" else None)
+        shot_dir = ROOT / "docs" / "screenshots"
+        update_shots = os.environ.get("JAA_UPDATE_SCREENSHOTS") == "1"
         page.goto(server_url + "/")
+        if update_shots:
+            shot_dir.mkdir(parents=True, exist_ok=True)
+            page.screenshot(path=str(shot_dir / "home.png"), full_page=True)
         page.get_by_test_id("load-samples").click()
         page.get_by_test_id("job-link").first.click()
+        if update_shots:
+            page.screenshot(path=str(shot_dir / "job.png"), full_page=True)
         assert page.get_by_test_id("outbound-preview").count() == 0
         page.get_by_test_id("generate-button").click()
         page.wait_for_url("**/runs/**")
         assert page.locator("[data-testid=claim][data-status=unsupported]").count() == 1
         badge = page.get_by_test_id("truth-badge").inner_text()
         assert "1 unsupported" in badge
+        if update_shots:
+            page.screenshot(path=str(shot_dir / "run-unsupported.png"), full_page=True)
         page.locator("[data-testid=claim][data-status=unsupported] summary").click()
         reasons = page.locator("[data-testid=claim][data-status=unsupported]").inner_text()
         assert "Initech" in reasons and "15" in reasons
@@ -120,9 +129,7 @@ def test_smoke_flow(server_url: str) -> None:
         page.wait_for_url("**/runs/**")
         assert page.locator("[data-testid=claim][data-status=unsupported]").count() == 0
         assert "No deterministic issues found" in page.get_by_test_id("truth-badge").inner_text()
-        if os.environ.get("JAA_UPDATE_SCREENSHOTS") == "1":
-            shot_dir = ROOT / "docs" / "screenshots"
-            shot_dir.mkdir(parents=True, exist_ok=True)
+        if update_shots:
             page.screenshot(path=str(shot_dir / "run-pruned.png"), full_page=True)
         browser.close()
     assert aborted == 0

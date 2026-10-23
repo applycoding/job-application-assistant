@@ -435,9 +435,13 @@ def _check_duration(
         ev_durations = extract_durations(ev)
         for ed in ev_durations:
             months = ed.years * 12
-            if ed.strict_more and months > required_months:
-                return None
-            if not ed.strict_more and months >= required_months:
+            if ed.strict_more:
+                if dur.strict_more:
+                    if months > required_months:
+                        return None
+                elif months >= required_months:
+                    return None
+            elif months >= required_months:
                 return None
     return CheckFailure(
         check="duration",

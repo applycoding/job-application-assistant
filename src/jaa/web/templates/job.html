@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ job.title }} — Job{% endblock %}
+{% block title %}{{ job.title }} - Job{% endblock %}
 {% block content %}
 <p><a href="/">← Home</a></p>
 <h1>{{ job.title }}</h1>
@@ -52,7 +52,7 @@
   <h2>Previous runs</h2>
   <ul>
     {% for run in runs %}
-    <li><a href="/runs/{{ run.id }}">{{ run.id }}</a> — {{ run.created_at }}</li>
+    <li><a href="/runs/{{ run.id }}">{{ run.id }}</a> - {{ run.created_at }}</li>
     {% endfor %}
   </ul>
 </section>

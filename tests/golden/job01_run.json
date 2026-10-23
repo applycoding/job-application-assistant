@@ -61,7 +61,7 @@
               "R1"
             ],
             "template_id": null,
-            "text": "I can also point to this: senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
+            "text": "I can also point to this: Senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
           },
           {
             "citations": [
@@ -88,7 +88,7 @@
               "R4"
             ],
             "template_id": null,
-            "text": "In addition: aWS."
+            "text": "In addition: AWS."
           }
         ]
       },
@@ -101,7 +101,14 @@
               "00000000-0000-4000-8000-000000000002:20720e3bf1862661"
             ],
             "explanation": {
-              "matches": [],
+              "matches": [
+                {
+                  "chunk_id": "00000000-0000-4000-8000-000000000002:20720e3bf1862661",
+                  "terms": [
+                    "Kafka"
+                  ]
+                }
+              ],
               "model_rationale": "Addresses R5 using 00000000-0000-4000-8000-000000000002:20720e3bf1862661 (matched: kafka, streaming).",
               "requirement_ids": [
                 "R5"
@@ -114,7 +121,7 @@
               "R5"
             ],
             "template_id": null,
-            "text": "A relevant example from my CV: Apache Spark."
+            "text": "A relevant example from my CV: Apache Spark, Kafka."
           },
           {
             "citations": [
@@ -142,7 +149,7 @@
               "R1"
             ],
             "template_id": null,
-            "text": "I can also point to this: data Engineering Specialty - Example Board 2023."
+            "text": "I can also point to this: Data Engineering Specialty - Example Board 2023."
           },
           {
             "citations": [
@@ -182,117 +189,6 @@
         },
         {
           "citations": [
-            "00000000-0000-4000-8000-000000000003:80bba84915a1e528"
-          ],
-          "explanation": {
-            "matches": [
-              {
-                "chunk_id": "00000000-0000-4000-8000-000000000003:80bba84915a1e528",
-                "terms": [
-                  "data",
-                  "engineering"
-                ]
-              }
-            ],
-            "model_rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000003:80bba84915a1e528.",
-            "requirement_ids": [
-              "R1"
-            ]
-          },
-          "id": "C.S1",
-          "kind": "claim",
-          "rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000003:80bba84915a1e528.",
-          "requirement_ids": [
-            "R1"
-          ],
-          "template_id": null,
-          "text": "My background includes: Data Engineering Specialty - Example Board 2023."
-        },
-        {
-          "citations": [
-            "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
-          ],
-          "explanation": {
-            "matches": [
-              {
-                "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
-                "terms": [
-                  "Python",
-                  "SQL"
-                ]
-              }
-            ],
-            "model_rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
-            "requirement_ids": [
-              "R2"
-            ]
-          },
-          "id": "C.S2",
-          "kind": "claim",
-          "rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
-          "requirement_ids": [
-            "R2"
-          ],
-          "template_id": null,
-          "text": "My background includes: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
-        },
-        {
-          "citations": [
-            "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
-          ],
-          "explanation": {
-            "matches": [
-              {
-                "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
-                "terms": [
-                  "Airflow",
-                  "Apache Spark"
-                ]
-              }
-            ],
-            "model_rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
-            "requirement_ids": [
-              "R3"
-            ]
-          },
-          "id": "C.S3",
-          "kind": "claim",
-          "rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
-          "requirement_ids": [
-            "R3"
-          ],
-          "template_id": null,
-          "text": "My background includes: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
-        },
-        {
-          "citations": [
-            "00000000-0000-4000-8000-000000000001:0cd9550510734099"
-          ],
-          "explanation": {
-            "matches": [
-              {
-                "chunk_id": "00000000-0000-4000-8000-000000000001:0cd9550510734099",
-                "terms": [
-                  "AWS"
-                ]
-              }
-            ],
-            "model_rationale": "Highlights R4 via 00000000-0000-4000-8000-000000000001:0cd9550510734099.",
-            "requirement_ids": [
-              "R4"
-            ]
-          },
-          "id": "C.S4",
-          "kind": "claim",
-          "rationale": "Highlights R4 via 00000000-0000-4000-8000-000000000001:0cd9550510734099.",
-          "requirement_ids": [
-            "R4"
-          ],
-          "template_id": null,
-          "text": "My background includes: AWS."
-        },
-        {
-          "citations": [
             "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
           ],
           "explanation": {
@@ -300,7 +196,7 @@
             "model_rationale": "Synthetic unsupported claim for demo.",
             "requirement_ids": []
           },
-          "id": "C.S5",
+          "id": "C.S1",
           "kind": "claim",
           "rationale": "Synthetic unsupported claim for demo.",
           "requirement_ids": [],
@@ -444,6 +340,62 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
+        "evidence_text": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)\nSupported a migration led by another team to containerize batch workloads on Kubernetes.",
+        "id": "00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d",
+        "kind": "bullet",
+        "line_no": 32,
+        "section": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)",
+        "text": "Supported a migration led by another team to containerize batch workloads on Kubernetes."
+      },
+      "matched_terms": [
+        "Kubernetes"
+      ],
+      "requirement_ids": [
+        "R7"
+      ],
+      "score": 21.026529
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000002",
+        "evidence_text": "\nUsed scikit-learn and scheduled retraining via Airflow.",
+        "id": "00000000-0000-4000-8000-000000000002:acfd511e3ea6604c",
+        "kind": "bullet",
+        "line_no": 7,
+        "section": "",
+        "text": "Used scikit-learn and scheduled retraining via Airflow."
+      },
+      "matched_terms": [
+        "Airflow"
+      ],
+      "requirement_ids": [
+        "R3"
+      ],
+      "score": 17.724472
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000002",
+        "evidence_text": "\nSpark streaming job joining web clicks with inventory snapshots in Kafka.",
+        "id": "00000000-0000-4000-8000-000000000002:20720e3bf1862661",
+        "kind": "bullet",
+        "line_no": 10,
+        "section": "",
+        "text": "Spark streaming job joining web clicks with inventory snapshots in Kafka."
+      },
+      "matched_terms": [
+        "Apache Spark",
+        "Kafka"
+      ],
+      "requirement_ids": [
+        "R3",
+        "R5"
+      ],
+      "score": 17.262798
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000001",
         "evidence_text": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)\nPartnered with analytics on dbt models serving finance and operations dashboards.",
         "id": "00000000-0000-4000-8000-000000000001:5721b756171c09d8",
         "kind": "bullet",
@@ -460,24 +412,6 @@
         "R8"
       ],
       "score": 17.189075
-    },
-    {
-      "chunk": {
-        "doc_id": "00000000-0000-4000-8000-000000000002",
-        "evidence_text": "\nSpark streaming job joining web clicks with inventory snapshots in Kafka.",
-        "id": "00000000-0000-4000-8000-000000000002:20720e3bf1862661",
-        "kind": "bullet",
-        "line_no": 10,
-        "section": "",
-        "text": "Spark streaming job joining web clicks with inventory snapshots in Kafka."
-      },
-      "matched_terms": [
-        "Apache Spark"
-      ],
-      "requirement_ids": [
-        "R3"
-      ],
-      "score": 17.115253
     },
     {
       "chunk": {
@@ -679,10 +613,10 @@
   "parent_run_id": null,
   "provider": "mock",
   "report": {
-    "badge_text": "1 unsupported, 0 not verified (of 11 claims)",
-    "claims": 11,
+    "badge_text": "1 unsupported, 0 not verified (of 7 claims)",
+    "claims": 7,
     "flagged_ids": [
-      "C.S5"
+      "C.S1"
     ],
     "judge_enabled": false,
     "not_verified": 0,
@@ -737,34 +671,6 @@
         "status": "checks_passed"
       },
       {
-        "checks_run": [],
-        "failures": [],
-        "judge": null,
-        "sentence_id": "C.S1",
-        "status": "checks_passed"
-      },
-      {
-        "checks_run": [],
-        "failures": [],
-        "judge": null,
-        "sentence_id": "C.S2",
-        "status": "checks_passed"
-      },
-      {
-        "checks_run": [],
-        "failures": [],
-        "judge": null,
-        "sentence_id": "C.S3",
-        "status": "checks_passed"
-      },
-      {
-        "checks_run": [],
-        "failures": [],
-        "judge": null,
-        "sentence_id": "C.S4",
-        "status": "checks_passed"
-      },
-      {
         "checks_run": [
           "employer",
           "number"
@@ -784,7 +690,7 @@
           }
         ],
         "judge": null,
-        "sentence_id": "C.S5",
+        "sentence_id": "C.S1",
         "status": "unsupported"
       },
       {

@@ -17,6 +17,7 @@
                 {
                   "chunk_id": "00000000-0000-4000-8000-000000000002:13508608df1dff4c",
                   "terms": [
+                    "FastAPI",
                     "Python"
                   ]
                 }
@@ -33,7 +34,7 @@
               "R1"
             ],
             "template_id": null,
-            "text": "A relevant example from my CV: Python."
+            "text": "A relevant example from my CV: FastAPI, Python."
           },
           {
             "citations": [
@@ -60,7 +61,7 @@
               "R1"
             ],
             "template_id": null,
-            "text": "I can also point to this: airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
+            "text": "I can also point to this: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
           },
           {
             "citations": [
@@ -88,7 +89,7 @@
               "R5"
             ],
             "template_id": null,
-            "text": "In addition: mentored two junior engineers on code review and incident response."
+            "text": "In addition: Mentored two junior engineers on code review and incident response."
           }
         ]
       },
@@ -141,7 +142,7 @@
               "R3"
             ],
             "template_id": null,
-            "text": "I can also point to this: introduced Great Expectations checks; reduced bad loads reaching production."
+            "text": "I can also point to this: Introduced Great Expectations checks; reduced bad loads reaching production."
           },
           {
             "citations": [
@@ -157,7 +158,7 @@
             "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279 (matched: ).",
             "requirement_ids": [],
             "template_id": null,
-            "text": "In addition: sQL."
+            "text": "In addition: SQL."
           }
         ]
       }
@@ -180,85 +181,11 @@
             "00000000-0000-4000-8000-000000000002:13508608df1dff4c"
           ],
           "explanation": {
-            "matches": [
-              {
-                "chunk_id": "00000000-0000-4000-8000-000000000002:13508608df1dff4c",
-                "terms": [
-                  "Python"
-                ]
-              }
-            ],
-            "model_rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000002:13508608df1dff4c.",
-            "requirement_ids": [
-              "R1"
-            ]
-          },
-          "id": "C.S1",
-          "kind": "claim",
-          "rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000002:13508608df1dff4c.",
-          "requirement_ids": [
-            "R1"
-          ],
-          "template_id": null,
-          "text": "My background includes: Python."
-        },
-        {
-          "citations": [
-            "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
-          ],
-          "explanation": {
-            "matches": [
-              {
-                "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
-                "terms": [
-                  "SQL"
-                ]
-              }
-            ],
-            "model_rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
-            "requirement_ids": [
-              "R2"
-            ]
-          },
-          "id": "C.S2",
-          "kind": "claim",
-          "rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
-          "requirement_ids": [
-            "R2"
-          ],
-          "template_id": null,
-          "text": "My background includes: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
-        },
-        {
-          "citations": [
-            "00000000-0000-4000-8000-000000000001:656379b86d3f7421"
-          ],
-          "explanation": {
-            "matches": [],
-            "model_rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:656379b86d3f7421.",
-            "requirement_ids": [
-              "R3"
-            ]
-          },
-          "id": "C.S3",
-          "kind": "claim",
-          "rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:656379b86d3f7421.",
-          "requirement_ids": [
-            "R3"
-          ],
-          "template_id": null,
-          "text": "My background includes: Introduced Great Expectations checks; reduced bad loads reaching production."
-        },
-        {
-          "citations": [
-            "00000000-0000-4000-8000-000000000002:13508608df1dff4c"
-          ],
-          "explanation": {
             "matches": [],
             "model_rationale": "Synthetic unsupported claim for demo.",
             "requirement_ids": []
           },
-          "id": "C.S4",
+          "id": "C.S1",
           "kind": "claim",
           "rationale": "Synthetic unsupported claim for demo.",
           "requirement_ids": [],
@@ -291,6 +218,7 @@
         "text": "Python service predicting delivery windows from historical routes; deployed on ECS with FastAPI."
       },
       "matched_terms": [
+        "FastAPI",
         "Python"
       ],
       "requirement_ids": [
@@ -417,10 +345,6 @@
   ],
   "gaps": [
     {
-      "requirement_id": "R1",
-      "term": "FastAPI"
-    },
-    {
       "requirement_id": "R3",
       "term": "Go"
     },
@@ -477,10 +401,10 @@
   "parent_run_id": null,
   "provider": "mock",
   "report": {
-    "badge_text": "1 unsupported, 0 not verified (of 10 claims)",
-    "claims": 10,
+    "badge_text": "1 unsupported, 0 not verified (of 7 claims)",
+    "claims": 7,
     "flagged_ids": [
-      "C.S4"
+      "C.S1"
     ],
     "judge_enabled": false,
     "not_verified": 0,
@@ -535,27 +459,6 @@
         "status": "checks_passed"
       },
       {
-        "checks_run": [],
-        "failures": [],
-        "judge": null,
-        "sentence_id": "C.S1",
-        "status": "checks_passed"
-      },
-      {
-        "checks_run": [],
-        "failures": [],
-        "judge": null,
-        "sentence_id": "C.S2",
-        "status": "checks_passed"
-      },
-      {
-        "checks_run": [],
-        "failures": [],
-        "judge": null,
-        "sentence_id": "C.S3",
-        "status": "checks_passed"
-      },
-      {
         "checks_run": [
           "employer",
           "number"
@@ -575,7 +478,7 @@
           }
         ],
         "judge": null,
-        "sentence_id": "C.S4",
+        "sentence_id": "C.S1",
         "status": "unsupported"
       },
       {

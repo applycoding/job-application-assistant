@@ -26,7 +26,26 @@ Providers expose async `draft()` and `judge()` methods. The pipeline never sends
 
 ## Code walkthrough
 
-Trace `MockProvider.draft()`: tokenize the question plus must-have requirements, `_rank_pool()` orders chunks, `_unique_claim_text()` avoids duplicate claims, and each `SentenceOut` carries `citations` and `requirement_ids`.
+`MockProvider` keeps cover-note chunks unique and injects a demo unsupported claim:
+
+```python
+INJECTED_CLAIM = "At Initech, I was part of a 15-person platform team."
+
+LEAD_INS = (
+    "A relevant example from my CV: {text}.",
+    "I can also point to this: {text}.",
+    "In addition: {text}.",
+)
+```
+
+Outbound evidence is redacted before any provider sees it:
+
+```python
+from jaa.privacy.redact import redact
+
+section = (redact(item.chunk.section),)
+text = (redact(item.chunk.text),)
+```
 
 For judge mode, read `MockProvider.judge()` and how `apply_judge()` in `truth/judge.py` merges verdicts back into `SentenceCheck` records.
 

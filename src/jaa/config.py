@@ -57,6 +57,7 @@ class Settings(BaseModel):
     request_timeout_s: float = 60.0
     run_deadline_s: float = 120.0
     instance_nonce: str | None = None
+    log_leak_sentinel: str | None = None
 
     @field_validator("db_path", "samples_dir", "skills_file", mode="before")
     @classmethod
@@ -132,6 +133,7 @@ class Settings(BaseModel):
             "request_timeout_s": float(get("JAA_REQUEST_TIMEOUT_S") or "60.0"),
             "run_deadline_s": float(get("JAA_RUN_DEADLINE_S") or "120.0"),
             "instance_nonce": get("JAA_INSTANCE_NONCE"),
+            "log_leak_sentinel": get("JAA_LOG_LEAK_SENTINEL"),
         }
         return cls.model_validate(data)
 

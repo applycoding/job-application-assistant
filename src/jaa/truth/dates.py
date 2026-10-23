@@ -35,7 +35,7 @@ _MONTHS = {
 
 _SPAN_RE = re.compile(
     r"(?P<s_m>\d{1,2}/\d{4}|[A-Za-z]{3,9}\s+\d{4}|\d{4})"
-    r"\s*[\u2013\u2014\-–—]\s*"
+    r"\s*(?:[\u2013\u2014\-–—]|to)\s*"
     r"(?P<e_m>\d{1,2}/\d{4}|[A-Za-z]{3,9}\s+\d{4}|\d{4}|present)",
     re.IGNORECASE,
 )
