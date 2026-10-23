@@ -5,9 +5,9 @@ COPY --from=ghcr.io/astral-sh/uv:0.13.5 /uv /bin/uv
 WORKDIR /app
 
 COPY pyproject.toml uv.lock README.md ./
+COPY src/ ./src/
 RUN uv sync --locked --no-dev --extra llm
 
-COPY src/ ./src/
 COPY samples/ ./samples/
 
 RUN useradd --uid 10001 --create-home app && mkdir -p /data && chown 10001:10001 /data
