@@ -7,19 +7,27 @@ checkpoint: uv run pytest tests/unit/test_config.py
 
 ## Goal
 
-Learn setup and config in the job-application-assistant codebase.
+Configure JAA through environment variables and an optional `.env` file, and see why injectable clocks matter for reproducible tests.
 
 ## Files
 
-See front matter `modules`.
+- `src/jaa/config.py` defines `Settings` and merges OS env with parsed `.env` lines.
+- `src/jaa/clock.py` provides `SystemClock` and `FixedClock` behind a small `Clock` protocol.
+- `src/jaa/resources/providers.toml` lists default models and API key env var names for real providers.
 
 ## Concepts
 
-This chapter maps to the final implementation (no historical stages).
+`Settings` is a Pydantic model. Important fields include `provider` (`mock` by default), `db_path`, `judge` (enable LLM judge), `reference_date` (freeze "today" for date checks), and upload or timeout limits.
+
+`from_env()` reads `JAA_*` variables (see tests for the exact mapping). Paths like `db_path` accept strings and become `Path` objects via a validator.
+
+`FixedClock` lets unit tests assert job parsing or retention logic against a known UTC instant without flaking on the calendar date.
 
 ## Code walkthrough
 
-Walk through the listed modules in `src/jaa`.
+Open `Settings.from_env()` and trace `_coalesce`: environment wins over `.env` for each key. `resolved_reference_date()` picks `reference_date` or falls back to the clock's current date, which downstream truth checks use for tenure math.
+
+`resolved_models()` combines `provider`, optional `model` / `judge_model` overrides, and entries from `providers.toml` so adapters always receive a concrete model id.
 
 ## Checkpoint
 
@@ -27,4 +35,4 @@ Run: `uv run pytest tests/unit/test_config.py`
 
 ## Exercise
 
-Extend tests or add a small feature, then re-run the checkpoint.
+Create a `.env` with `JAA_PROVIDER=mock` and `JAA_DB_PATH=var/tutorial.sqlite3`. Run `uv run jaa reset` (if available) or delete that file, then `uv run jaa seed` and confirm the database path matches your setting.
