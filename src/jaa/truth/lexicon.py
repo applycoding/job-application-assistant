@@ -101,10 +101,14 @@ def _load_toml_skills(path: Path) -> dict[str, list[str]]:
     out: dict[str, list[str]] = {}
     for entry in _skill_rows_from_toml(data):
         name = str(entry["name"]).strip()
-        aliases = entry.get("aliases", [])
-        if isinstance(aliases, str):
-            aliases = [aliases]
-        out[name] = [str(a).strip() for a in aliases if str(a).strip()]
+        aliases_raw = entry.get("aliases", [])
+        if isinstance(aliases_raw, str):
+            aliases_list: list[object] = [aliases_raw]
+        elif isinstance(aliases_raw, list):
+            aliases_list = aliases_raw
+        else:
+            aliases_list = []
+        out[name] = [str(a).strip() for a in aliases_list if str(a).strip()]
     return out
 
 

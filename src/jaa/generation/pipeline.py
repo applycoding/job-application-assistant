@@ -17,8 +17,11 @@ from jaa.retrieval.service import retrieve_for_job
 from jaa.storage.repo import Repository, RunData
 from jaa.truth.deterministic import CHECK_RULES_VERSION, CheckContext
 from jaa.truth.lexicon import SkillLexicon
+from jaa.export import is_stale
 from jaa.truth.prune import prune_flagged
 from jaa.truth.report import run_truth_check
+
+__all__ = ["Deps", "create_run", "prune_run", "is_stale", "RunDeadlineError"]
 
 
 @dataclass

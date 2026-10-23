@@ -196,6 +196,58 @@ class TruthReport(BaseModel):
     sentences: list[SentenceCheck]
     judge_enabled: bool
 
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def claims(self) -> int:
+        return sum(1 for s in self.sentences if _is_claim_sentence_id(s.sentence_id))
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def unsupported(self) -> int:
+        return sum(
+            1
+            for s in self.sentences
+            if _is_claim_sentence_id(s.sentence_id) and s.status == "unsupported"
+        )
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def not_verified(self) -> int:
+        return sum(
+            1
+            for s in self.sentences
+            if _is_claim_sentence_id(s.sentence_id) and s.status == "not_verified"
+        )
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def flagged_ids(self) -> list[str]:
+        return [
+            s.sentence_id
+            for s in self.sentences
+            if _is_claim_sentence_id(s.sentence_id)
+            and s.status in ("unsupported", "not_verified")
+        ]
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def badge_text(self) -> str:
+        n = self.claims
+        flagged = self.unsupported + self.not_verified
+        if flagged == 0 and not self.judge_enabled:
+            return "No deterministic issues found"
+        if flagged == 0 and self.judge_enabled:
+            return f"No deterministic issues found; judge agreed on all {n} claims"
+        return f"{self.unsupported} unsupported, {self.not_verified} not verified (of {n} claims)"
+
+
+def _is_claim_sentence_id(sentence_id: str) -> bool:
+    if sentence_id.startswith("C.F"):
+        return False
+    if sentence_id.startswith("C.S"):
+        return True
+    return sentence_id.startswith("Q") and ".S" in sentence_id
+
 
 class RunOptions(BaseModel):
     judge: bool | None = None

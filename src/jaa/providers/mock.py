@@ -155,12 +155,16 @@ def _lower_first(text: str) -> str:
     return text[0].lower() + text[1:]
 
 
+def _req_tokens(req: OutboundRequirement) -> list[str]:
+    return tokenize(req.text)
+
+
 def _best_requirement(chunk: _PoolChunk, requirements: Sequence[OutboundRequirement]) -> str:
     best_id = ""
     best_count = -1
     chunk_tokens = set(tokenize(chunk.evidence_text))
     for req in requirements:
-        overlap = sum(1 for t in req.terms if t.lower() in chunk_tokens or t in chunk_tokens)
+        overlap = sum(1 for t in _req_tokens(req) if t in chunk_tokens)
         if overlap > best_count or (overlap == best_count and req.id < best_id):
             best_count = overlap
             best_id = req.id
@@ -171,8 +175,8 @@ def _matched_terms(chunk: _PoolChunk, requirements: Sequence[OutboundRequirement
     chunk_tokens = set(tokenize(chunk.evidence_text))
     terms: set[str] = set()
     for req in requirements:
-        for t in req.terms:
-            if t.lower() in chunk_tokens or t in chunk_tokens:
+        for t in _req_tokens(req):
+            if t in chunk_tokens:
                 terms.add(t)
     return sorted(terms)
 
@@ -188,6 +192,7 @@ def _top_chunk_for_requirement(
         if _matched_terms(chunk, [req_item]):
             return chunk
     return ranked[0] if ranked else None
+
 
 
 def _fallback_cover(chunks: Sequence[_PoolChunk]) -> SentenceOut:

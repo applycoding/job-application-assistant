@@ -61,6 +61,6 @@ def _normalize_item(node: Any) -> Any:
 
 def _nullable_type(any_of: list[dict[str, Any]]) -> str:
     types = [item.get("type") for item in any_of if item.get("type") != "null"]
-    if len(types) == 1:
+    if len(types) == 1 and isinstance(types[0], str):
         return types[0]
     return "string"

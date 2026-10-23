@@ -56,15 +56,16 @@ def extract_spans(text: str, reference: date) -> list[MonthSpan]:
         start = _parse_endpoint(m.group("s_m"))
         end_raw = m.group("e_m")
         if end_raw.lower() == "present":
-            end = (reference.year, reference.month)
+            end_year = reference.year
             end_month: int | None = reference.month
         else:
-            end = _parse_endpoint(end_raw)
-            end_month = end[1]
+            end_parsed = _parse_endpoint(end_raw)
+            end_year = end_parsed[0]
+            end_month = end_parsed[1]
         spans.append(
             MonthSpan(
                 start_year=start[0],
-                end_year=end[0],
+                end_year=end_year,
                 start_month=start[1],
                 end_month=end_month,
                 raw=m.group(0),
