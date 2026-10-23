@@ -1,6 +1,6 @@
 {
-  "check_rules_version": "2026-10-23.3",
-  "corpus_version": "cf15c03612362bf28e29e8dc6542add2cd1e6acf11b77f56de252d0748442cc7",
+  "check_rules_version": "2026-10-24.1",
+  "corpus_version": "c6456cf0bf98a5d824954d3cdd876a82c33d68c65ebad765d459dbfe34720f14",
   "created_at": "2026-10-23T09:00:00+00:00",
   "drafts": {
     "answers": [
@@ -10,26 +10,26 @@
         "sentences": [
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000002:13508608df1dff4c"
+              "55e174d82da001e0"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000002:13508608df1dff4c",
+                  "chunk_id": "55e174d82da001e0",
                   "terms": [
                     "FastAPI",
                     "Python"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:13508608df1dff4c (matched: fastapi, python).",
+              "model_rationale": "Addresses R1 using 55e174d82da001e0 (matched: FastAPI, Python, fastapi, python).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q1.S1",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:13508608df1dff4c (matched: fastapi, python).",
+            "rationale": "Addresses R1 using 55e174d82da001e0 (matched: FastAPI, Python, fastapi, python).",
             "requirement_ids": [
               "R1"
             ],
@@ -38,25 +38,25 @@
           },
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
+              "698a247d52da85e7"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
+                  "chunk_id": "698a247d52da85e7",
                   "terms": [
                     "Python"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python).",
+              "model_rationale": "Addresses R1 using 698a247d52da85e7 (matched: Python, python).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q1.S2",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python).",
+            "rationale": "Addresses R1 using 698a247d52da85e7 (matched: Python, python).",
             "requirement_ids": [
               "R1"
             ],
@@ -65,26 +65,26 @@
           },
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:c0ec43deb954476f"
+              "6314bf3592cea2bd"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000001:c0ec43deb954476f",
+                  "chunk_id": "6314bf3592cea2bd",
                   "terms": [
                     "code",
                     "review"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R5 using 00000000-0000-4000-8000-000000000001:c0ec43deb954476f (matched: code, review).",
+              "model_rationale": "Addresses R5 using 6314bf3592cea2bd (matched: review).",
               "requirement_ids": [
                 "R5"
               ]
             },
             "id": "Q1.S3",
             "kind": "claim",
-            "rationale": "Addresses R5 using 00000000-0000-4000-8000-000000000001:c0ec43deb954476f (matched: code, review).",
+            "rationale": "Addresses R5 using 6314bf3592cea2bd (matched: review).",
             "requirement_ids": [
               "R5"
             ],
@@ -99,25 +99,25 @@
         "sentences": [
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4"
+              "ac06f583e4a0bd7f"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4",
+                  "chunk_id": "ac06f583e4a0bd7f",
                   "terms": [
                     "Python"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:e8a15de8c27940c4 (matched: python).",
+              "model_rationale": "Addresses R1 using ac06f583e4a0bd7f (matched: Python, python).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q2.S1",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:e8a15de8c27940c4 (matched: python).",
+            "rationale": "Addresses R1 using ac06f583e4a0bd7f (matched: Python, python).",
             "requirement_ids": [
               "R1"
             ],
@@ -126,18 +126,18 @@
           },
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:656379b86d3f7421"
+              "0e2df92c5fbd05ea"
             ],
             "explanation": {
               "matches": [],
-              "model_rationale": "Addresses R3 using 00000000-0000-4000-8000-000000000001:656379b86d3f7421 (matched: production).",
+              "model_rationale": "Addresses R3 using 0e2df92c5fbd05ea (matched: production).",
               "requirement_ids": [
                 "R3"
               ]
             },
             "id": "Q2.S2",
             "kind": "claim",
-            "rationale": "Addresses R3 using 00000000-0000-4000-8000-000000000001:656379b86d3f7421 (matched: production).",
+            "rationale": "Addresses R3 using 0e2df92c5fbd05ea (matched: production).",
             "requirement_ids": [
               "R3"
             ],
@@ -146,16 +146,16 @@
           },
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279"
+              "6696e00447258d27"
             ],
             "explanation": {
               "matches": [],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279.",
+              "model_rationale": "Addresses R1 using 6696e00447258d27.",
               "requirement_ids": []
             },
             "id": "Q2.S3",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279.",
+            "rationale": "Addresses R1 using 6696e00447258d27.",
             "requirement_ids": [],
             "template_id": null,
             "text": "In addition: SQL."
@@ -178,14 +178,89 @@
         },
         {
           "citations": [
-            "00000000-0000-4000-8000-000000000002:13508608df1dff4c"
+            "55e174d82da001e0"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "55e174d82da001e0",
+                "terms": [
+                  "FastAPI",
+                  "Python"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R1 via 55e174d82da001e0.",
+            "requirement_ids": [
+              "R1"
+            ]
+          },
+          "id": "C.S1",
+          "kind": "claim",
+          "rationale": "Highlights R1 via 55e174d82da001e0.",
+          "requirement_ids": [
+            "R1"
+          ],
+          "template_id": null,
+          "text": "My background includes: FastAPI, Python."
+        },
+        {
+          "citations": [
+            "698a247d52da85e7"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "698a247d52da85e7",
+                "terms": [
+                  "SQL"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R2 via 698a247d52da85e7.",
+            "requirement_ids": [
+              "R2"
+            ]
+          },
+          "id": "C.S2",
+          "kind": "claim",
+          "rationale": "Highlights R2 via 698a247d52da85e7.",
+          "requirement_ids": [
+            "R2"
+          ],
+          "template_id": null,
+          "text": "My background includes: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
+        },
+        {
+          "citations": [
+            "0e2df92c5fbd05ea"
+          ],
+          "explanation": {
+            "matches": [],
+            "model_rationale": "Highlights R3 via 0e2df92c5fbd05ea.",
+            "requirement_ids": [
+              "R3"
+            ]
+          },
+          "id": "C.S3",
+          "kind": "claim",
+          "rationale": "Highlights R3 via 0e2df92c5fbd05ea.",
+          "requirement_ids": [
+            "R3"
+          ],
+          "template_id": null,
+          "text": "My background includes: Introduced Great Expectations checks; reduced bad loads reaching production."
+        },
+        {
+          "citations": [
+            "55e174d82da001e0"
           ],
           "explanation": {
             "matches": [],
             "model_rationale": "Synthetic unsupported claim for demo.",
             "requirement_ids": []
           },
-          "id": "C.S1",
+          "id": "C.S4",
           "kind": "claim",
           "rationale": "Synthetic unsupported claim for demo.",
           "requirement_ids": [],
@@ -211,7 +286,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nPython service predicting delivery windows from historical routes; deployed on ECS with FastAPI.",
-        "id": "00000000-0000-4000-8000-000000000002:13508608df1dff4c",
+        "id": "55e174d82da001e0",
         "kind": "bullet",
         "line_no": 6,
         "section": "",
@@ -231,7 +306,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
         "evidence_text": "Skills\nPython, SQL, Spark, Airflow, Kubernetes, AWS",
-        "id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
+        "id": "698a247d52da85e7",
         "kind": "line",
         "line_no": 17,
         "section": "Skills",
@@ -251,11 +326,11 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
-        "evidence_text": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)\nWrote SQL reports and small Python utilities for clinical trial operations.",
-        "id": "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4",
+        "evidence_text": "Fabrikam Labs - Analyst Programmer (Aug 2014-May 2017)\nWrote SQL reports and small Python utilities for clinical trial operations.",
+        "id": "ac06f583e4a0bd7f",
         "kind": "bullet",
         "line_no": 36,
-        "section": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)",
+        "section": "Fabrikam Labs - Analyst Programmer (Aug 2014-May 2017)",
         "text": "Wrote SQL reports and small Python utilities for clinical trial operations."
       },
       "matched_terms": [
@@ -272,11 +347,11 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
-        "evidence_text": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)\nMentored two junior engineers on code review and incident response.",
-        "id": "00000000-0000-4000-8000-000000000001:c0ec43deb954476f",
+        "evidence_text": "Northwind Analytics - Senior Data Engineer (Mar 2021-present)\nMentored two junior engineers on code review and incident response.",
+        "id": "6314bf3592cea2bd",
         "kind": "bullet",
         "line_no": 26,
-        "section": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)",
+        "section": "Northwind Analytics - Senior Data Engineer (Mar 2021-present)",
         "text": "Mentored two junior engineers on code review and incident response."
       },
       "matched_terms": [
@@ -292,7 +367,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nHelped a food-bank charity consolidate CSV donations into Postgres and Metabase views.",
-        "id": "00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279",
+        "id": "6696e00447258d27",
         "kind": "bullet",
         "line_no": 14,
         "section": "",
@@ -310,7 +385,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000004",
         "evidence_text": "Volunteering - Alex Doe\nFood Bank of Example City (2019\u20132021): built a simple Postgres + Metabase dashboard for donation trends.",
-        "id": "00000000-0000-4000-8000-000000000004:675747372e441d9b",
+        "id": "b2b3e57bc1bb9ba4",
         "kind": "line",
         "line_no": 3,
         "section": "Volunteering - Alex Doe",
@@ -327,11 +402,11 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
-        "evidence_text": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)\nIntroduced Great Expectations checks; reduced bad loads reaching production.",
-        "id": "00000000-0000-4000-8000-000000000001:656379b86d3f7421",
+        "evidence_text": "Contoso Retail - Data Engineer (Jun 2017-Feb 2021)\nIntroduced Great Expectations checks; reduced bad loads reaching production.",
+        "id": "0e2df92c5fbd05ea",
         "kind": "bullet",
         "line_no": 31,
-        "section": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)",
+        "section": "Contoso Retail - Data Engineer (Jun 2017-Feb 2021)",
         "text": "Introduced Great Expectations checks; reduced bad loads reaching production."
       },
       "matched_terms": [
@@ -369,10 +444,12 @@
   "parent_run_id": null,
   "provider": "mock",
   "report": {
-    "badge_text": "1 unsupported, 0 not verified (of 7 claims)",
-    "claims": 7,
+    "badge_text": "3 unsupported, 0 not verified (of 10 claims)",
+    "claims": 10,
     "flagged_ids": [
-      "C.S1"
+      "Q2.S2",
+      "C.S3",
+      "C.S4"
     ],
     "judge_enabled": false,
     "not_verified": 0,
@@ -406,11 +483,20 @@
         "status": "checks_passed"
       },
       {
-        "checks_run": [],
-        "failures": [],
+        "checks_run": [
+          "requirement"
+        ],
+        "failures": [
+          {
+            "check": "requirement",
+            "detail": "Cited evidence does not support linked requirements",
+            "outcome": "fail",
+            "token": "R3"
+          }
+        ],
         "judge": null,
         "sentence_id": "Q2.S2",
-        "status": "checks_passed"
+        "status": "unsupported"
       },
       {
         "checks_run": [],
@@ -425,6 +511,36 @@
         "judge": null,
         "sentence_id": "C.F1",
         "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S2",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [
+          "requirement"
+        ],
+        "failures": [
+          {
+            "check": "requirement",
+            "detail": "Cited evidence does not support linked requirements",
+            "outcome": "fail",
+            "token": "R3"
+          }
+        ],
+        "judge": null,
+        "sentence_id": "C.S3",
+        "status": "unsupported"
       },
       {
         "checks_run": [
@@ -446,7 +562,7 @@
           }
         ],
         "judge": null,
-        "sentence_id": "C.S1",
+        "sentence_id": "C.S4",
         "status": "unsupported"
       },
       {
@@ -457,7 +573,7 @@
         "status": "checks_passed"
       }
     ],
-    "unsupported": 1
+    "unsupported": 3
   },
   "requirements": [
     {

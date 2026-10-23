@@ -112,7 +112,7 @@ class Repository:
                 other_count = len(
                     [c for c in session.exec(select(ChunkRow)).all() if c.doc_id != doc_id]
                 )
-                new_chunks = chunk_document(doc_id, filtered)
+                new_chunks = chunk_document(doc_id, filtered, content_sha256=sha256)
                 if other_count + len(new_chunks) > MAX_CORPUS_CHUNKS:
                     raise IngestError(f"Corpus exceeds {MAX_CORPUS_CHUNKS} chunks")
                 for chunk_row in old_chunks:
@@ -134,7 +134,7 @@ class Repository:
 
             other_chunks = len(session.exec(select(ChunkRow)).all())
             doc_id = self._ids.new_doc_id()
-            new_chunks = chunk_document(doc_id, filtered)
+            new_chunks = chunk_document(doc_id, filtered, content_sha256=sha256)
             if other_chunks + len(new_chunks) > MAX_CORPUS_CHUNKS:
                 raise IngestError(f"Corpus exceeds {MAX_CORPUS_CHUNKS} chunks")
             created = self._clock.now()

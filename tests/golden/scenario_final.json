@@ -1,6 +1,6 @@
 {
-  "check_rules_version": "2026-10-23.3",
-  "corpus_version": "c5d087f045eebb6fe8287fbf2592e2097911b63514d73668709c3c73081f027e",
+  "check_rules_version": "2026-10-24.1",
+  "corpus_version": "e8b2ab7b7a2393bf7a00e194dd361f9f7e8a6229c1d6fcb8ee323370603b48e5",
   "created_at": "2026-10-23T09:00:00Z",
   "drafts": {
     "answers": [
@@ -10,26 +10,26 @@
         "sentences": [
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
+              "ee92bbdb0644ec3e"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
+                  "chunk_id": "ee92bbdb0644ec3e",
                   "terms": [
                     "Python",
                     "SQL"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R2 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python, skills, sql).",
+              "model_rationale": "Addresses R2 using ee92bbdb0644ec3e (matched: Python, SQL, python, skills).",
               "requirement_ids": [
                 "R2"
               ]
             },
             "id": "Q1.S1",
             "kind": "claim",
-            "rationale": "Addresses R2 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python, skills, sql).",
+            "rationale": "Addresses R2 using ee92bbdb0644ec3e (matched: Python, SQL, python, skills).",
             "requirement_ids": [
               "R2"
             ],
@@ -38,25 +38,25 @@
           },
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1"
+              "e82988b69f23a21b"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1",
+                  "chunk_id": "e82988b69f23a21b",
                   "terms": [
                     "data"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1 (matched: data, years).",
+              "model_rationale": "Addresses R1 using e82988b69f23a21b (matched: years).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q1.S2",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1 (matched: data, years).",
+            "rationale": "Addresses R1 using e82988b69f23a21b (matched: years).",
             "requirement_ids": [
               "R1"
             ],
@@ -65,25 +65,25 @@
           },
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5"
+              "e5cc390be9431197"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5",
+                  "chunk_id": "e5cc390be9431197",
                   "terms": [
                     "AWS"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R4 using 00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5 (matched: aws, emr, glue, s3).",
+              "model_rationale": "Addresses R4 using e5cc390be9431197 (matched: AWS).",
               "requirement_ids": [
                 "R4"
               ]
             },
             "id": "Q1.S3",
             "kind": "claim",
-            "rationale": "Addresses R4 using 00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5 (matched: aws, emr, glue, s3).",
+            "rationale": "Addresses R4 using e5cc390be9431197 (matched: AWS).",
             "requirement_ids": [
               "R4"
             ],
@@ -98,25 +98,25 @@
         "sentences": [
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000002:20720e3bf1862661"
+              "fe0b61a3cd3858c4"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000002:20720e3bf1862661",
+                  "chunk_id": "fe0b61a3cd3858c4",
                   "terms": [
                     "Kafka"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R5 using 00000000-0000-4000-8000-000000000002:20720e3bf1862661 (matched: kafka, streaming).",
+              "model_rationale": "Addresses R5 using fe0b61a3cd3858c4 (matched: Kafka, kafka, streaming).",
               "requirement_ids": [
                 "R5"
               ]
             },
             "id": "Q2.S1",
             "kind": "claim",
-            "rationale": "Addresses R5 using 00000000-0000-4000-8000-000000000002:20720e3bf1862661 (matched: kafka, streaming).",
+            "rationale": "Addresses R5 using fe0b61a3cd3858c4 (matched: Kafka, kafka, streaming).",
             "requirement_ids": [
               "R5"
             ],
@@ -125,26 +125,26 @@
           },
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000003:80bba84915a1e528"
+              "993e6d3d45c4bace"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000003:80bba84915a1e528",
+                  "chunk_id": "993e6d3d45c4bace",
                   "terms": [
                     "data",
                     "engineering"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000003:80bba84915a1e528 (matched: data, engineering).",
+              "model_rationale": "Addresses R1 using 993e6d3d45c4bace (matched: engineering).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q2.S2",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000003:80bba84915a1e528 (matched: data, engineering).",
+            "rationale": "Addresses R1 using 993e6d3d45c4bace (matched: engineering).",
             "requirement_ids": [
               "R1"
             ],
@@ -153,23 +153,19 @@
           },
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:5721b756171c09d8"
+              "97b798af26b2d0e7"
             ],
             "explanation": {
               "matches": [],
-              "model_rationale": "Addresses R2 using 00000000-0000-4000-8000-000000000001:5721b756171c09d8 (matched: data, models).",
-              "requirement_ids": [
-                "R2"
-              ]
+              "model_rationale": "Addresses R2 using 97b798af26b2d0e7.",
+              "requirement_ids": []
             },
             "id": "Q2.S3",
             "kind": "claim",
-            "rationale": "Addresses R2 using 00000000-0000-4000-8000-000000000001:5721b756171c09d8 (matched: data, models).",
-            "requirement_ids": [
-              "R2"
-            ],
+            "rationale": "Addresses R2 using 97b798af26b2d0e7.",
+            "requirement_ids": [],
             "template_id": null,
-            "text": "In addition: dbt."
+            "text": "In addition: Mentored two junior engineers on code review and incident response."
           }
         ]
       }
@@ -186,6 +182,89 @@
           "requirement_ids": [],
           "template_id": "open",
           "text": "I am applying for the Senior Data Engineer role at Acme Logistics."
+        },
+        {
+          "citations": [
+            "993e6d3d45c4bace"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "993e6d3d45c4bace",
+                "terms": [
+                  "data",
+                  "engineering"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R1 via 993e6d3d45c4bace.",
+            "requirement_ids": [
+              "R1"
+            ]
+          },
+          "id": "C.S1",
+          "kind": "claim",
+          "rationale": "Highlights R1 via 993e6d3d45c4bace.",
+          "requirement_ids": [
+            "R1"
+          ],
+          "template_id": null,
+          "text": "My background includes: Data Engineering Specialty - Example Board 2023."
+        },
+        {
+          "citations": [
+            "ee92bbdb0644ec3e"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "ee92bbdb0644ec3e",
+                "terms": [
+                  "Python",
+                  "SQL"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R2 via ee92bbdb0644ec3e.",
+            "requirement_ids": [
+              "R2"
+            ]
+          },
+          "id": "C.S2",
+          "kind": "claim",
+          "rationale": "Highlights R2 via ee92bbdb0644ec3e.",
+          "requirement_ids": [
+            "R2"
+          ],
+          "template_id": null,
+          "text": "My background includes: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
+        },
+        {
+          "citations": [
+            "e5cc390be9431197"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "e5cc390be9431197",
+                "terms": [
+                  "AWS"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R4 via e5cc390be9431197.",
+            "requirement_ids": [
+              "R4"
+            ]
+          },
+          "id": "C.S3",
+          "kind": "claim",
+          "rationale": "Highlights R4 via e5cc390be9431197.",
+          "requirement_ids": [
+            "R4"
+          ],
+          "template_id": null,
+          "text": "My background includes: AWS."
         },
         {
           "citations": [],
@@ -206,7 +285,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
         "evidence_text": "Skills\nPython, SQL, Spark, Airflow, Kubernetes, AWS",
-        "id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
+        "id": "ee92bbdb0644ec3e",
         "kind": "line",
         "line_no": 17,
         "section": "Skills",
@@ -231,11 +310,11 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
-        "evidence_text": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)\nLed migration of nightly ETL from on-prem Hadoop to AWS (S3, Glue, EMR); cut runtime by 41%.",
-        "id": "00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5",
+        "evidence_text": "Northwind Analytics - Senior Data Engineer (Mar 2021-present)\nLed migration of nightly ETL from on-prem Hadoop to AWS (S3, Glue, EMR); cut runtime by 41%.",
+        "id": "e5cc390be9431197",
         "kind": "bullet",
         "line_no": 23,
-        "section": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)",
+        "section": "Northwind Analytics - Senior Data Engineer (Mar 2021-present)",
         "text": "Led migration of nightly ETL from on-prem Hadoop to AWS (S3, Glue, EMR); cut runtime by 41%."
       },
       "matched_terms": [
@@ -251,11 +330,11 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
-        "evidence_text": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)\nWrote SQL reports and small Python utilities for clinical trial operations.",
-        "id": "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4",
+        "evidence_text": "Fabrikam Labs - Analyst Programmer (Aug 2014-May 2017)\nWrote SQL reports and small Python utilities for clinical trial operations.",
+        "id": "dd36ae82728f957c",
         "kind": "bullet",
         "line_no": 36,
-        "section": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)",
+        "section": "Fabrikam Labs - Analyst Programmer (Aug 2014-May 2017)",
         "text": "Wrote SQL reports and small Python utilities for clinical trial operations."
       },
       "matched_terms": [
@@ -271,7 +350,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nPython service predicting delivery windows from historical routes; deployed on ECS with FastAPI.",
-        "id": "00000000-0000-4000-8000-000000000002:13508608df1dff4c",
+        "id": "55e174d82da001e0",
         "kind": "bullet",
         "line_no": 6,
         "section": "",
@@ -289,7 +368,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nHelped a food-bank charity consolidate CSV donations into Postgres and Metabase views.",
-        "id": "00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279",
+        "id": "6696e00447258d27",
         "kind": "bullet",
         "line_no": 14,
         "section": "",
@@ -306,11 +385,11 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
-        "evidence_text": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)\nSupported a migration led by another team to containerize batch workloads on Kubernetes.",
-        "id": "00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d",
+        "evidence_text": "Contoso Retail - Data Engineer (Jun 2017-Feb 2021)\nSupported a migration led by another team to containerize batch workloads on Kubernetes.",
+        "id": "cb179b59d1992c94",
         "kind": "bullet",
         "line_no": 32,
-        "section": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)",
+        "section": "Contoso Retail - Data Engineer (Jun 2017-Feb 2021)",
         "text": "Supported a migration led by another team to containerize batch workloads on Kubernetes."
       },
       "matched_terms": [
@@ -325,7 +404,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nUsed scikit-learn and scheduled retraining via Airflow.",
-        "id": "00000000-0000-4000-8000-000000000002:acfd511e3ea6604c",
+        "id": "7b06d8404f1c5df9",
         "kind": "bullet",
         "line_no": 7,
         "section": "",
@@ -343,7 +422,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nSpark streaming job joining web clicks with inventory snapshots in Kafka.",
-        "id": "00000000-0000-4000-8000-000000000002:20720e3bf1862661",
+        "id": "fe0b61a3cd3858c4",
         "kind": "bullet",
         "line_no": 10,
         "section": "",
@@ -362,11 +441,11 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
-        "evidence_text": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)\nPartnered with analytics on dbt models serving finance and operations dashboards.",
-        "id": "00000000-0000-4000-8000-000000000001:5721b756171c09d8",
+        "evidence_text": "Northwind Analytics - Senior Data Engineer (Mar 2021-present)\nPartnered with analytics on dbt models serving finance and operations dashboards.",
+        "id": "b050526481e697e6",
         "kind": "bullet",
         "line_no": 25,
-        "section": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)",
+        "section": "Northwind Analytics - Senior Data Engineer (Mar 2021-present)",
         "text": "Partnered with analytics on dbt models serving finance and operations dashboards."
       },
       "matched_terms": [
@@ -383,7 +462,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000003",
         "evidence_text": "\nData Engineering Specialty - Example Board 2023",
-        "id": "00000000-0000-4000-8000-000000000003:80bba84915a1e528",
+        "id": "993e6d3d45c4bace",
         "kind": "line",
         "line_no": 4,
         "section": "",
@@ -401,11 +480,11 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
-        "evidence_text": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)\nBuilt Kafka-based ingestion for product telemetry; 2M events/day with idempotent consumers.",
-        "id": "00000000-0000-4000-8000-000000000001:bc621ae870a57ec5",
+        "evidence_text": "Northwind Analytics - Senior Data Engineer (Mar 2021-present)\nBuilt Kafka-based ingestion for product telemetry; 2M events/day with idempotent consumers.",
+        "id": "3c867a3280134f14",
         "kind": "bullet",
         "line_no": 24,
-        "section": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)",
+        "section": "Northwind Analytics - Senior Data Engineer (Mar 2021-present)",
         "text": "Built Kafka-based ingestion for product telemetry; 2M events/day with idempotent consumers."
       },
       "matched_terms": [
@@ -421,11 +500,11 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
-        "evidence_text": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)\nDeveloped PySpark jobs loading POS and inventory feeds into Snowflake.",
-        "id": "00000000-0000-4000-8000-000000000001:02479add7f67b222",
+        "evidence_text": "Contoso Retail - Data Engineer (Jun 2017-Feb 2021)\nDeveloped PySpark jobs loading POS and inventory feeds into Snowflake.",
+        "id": "623bd913830951ec",
         "kind": "bullet",
         "line_no": 30,
-        "section": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)",
+        "section": "Contoso Retail - Data Engineer (Jun 2017-Feb 2021)",
         "text": "Developed PySpark jobs loading POS and inventory feeds into Snowflake."
       },
       "matched_terms": [
@@ -440,7 +519,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
         "evidence_text": "Summary\nSenior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call.",
-        "id": "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1",
+        "id": "e82988b69f23a21b",
         "kind": "line",
         "line_no": 13,
         "section": "Summary",
@@ -458,7 +537,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nOpen Logistics ETA (2023)",
-        "id": "00000000-0000-4000-8000-000000000002:662f8ec0736e7350",
+        "id": "393c3f638a216904",
         "kind": "line",
         "line_no": 5,
         "section": "",
@@ -476,7 +555,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nFICTIONAL SAMPLE DATA - Alex Doe is not a real person.",
-        "id": "00000000-0000-4000-8000-000000000002:20173e60281c4aeb",
+        "id": "0961a6b26b482265",
         "kind": "line",
         "line_no": 1,
         "section": "",
@@ -494,7 +573,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000003",
         "evidence_text": "\nFICTIONAL SAMPLE DATA - Alex Doe is not a real person.",
-        "id": "00000000-0000-4000-8000-000000000003:20173e60281c4aeb",
+        "id": "ba2ef389791e8b4b",
         "kind": "line",
         "line_no": 1,
         "section": "",
@@ -512,7 +591,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
         "evidence_text": "Alex Doe\nFICTIONAL SAMPLE DATA - Alex Doe is not a real person.",
-        "id": "00000000-0000-4000-8000-000000000001:e9a21f9e7c50911a",
+        "id": "c416edbe2e5fa4a5",
         "kind": "line",
         "line_no": 3,
         "section": "Alex Doe",
@@ -529,11 +608,11 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
-        "evidence_text": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)\nMentored two junior engineers on code review and incident response.",
-        "id": "00000000-0000-4000-8000-000000000001:c0ec43deb954476f",
+        "evidence_text": "Northwind Analytics - Senior Data Engineer (Mar 2021-present)\nMentored two junior engineers on code review and incident response.",
+        "id": "97b798af26b2d0e7",
         "kind": "bullet",
         "line_no": 26,
-        "section": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)",
+        "section": "Northwind Analytics - Senior Data Engineer (Mar 2021-present)",
         "text": "Mentored two junior engineers on code review and incident response."
       },
       "matched_terms": [
@@ -555,7 +634,7 @@
   "provider": "mock",
   "report": {
     "badge_text": "No deterministic issues found",
-    "claims": 6,
+    "claims": 9,
     "flagged_ids": [],
     "judge_enabled": false,
     "not_verified": 0,
@@ -607,6 +686,27 @@
         "failures": [],
         "judge": null,
         "sentence_id": "C.F1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S2",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S3",
         "status": "checks_passed"
       },
       {
@@ -725,7 +825,5 @@
       "text": "Prior work in logistics or supply chain analytics."
     }
   ],
-  "warnings": [
-    "Cover note has no supported claims - add manually"
-  ]
+  "warnings": []
 }

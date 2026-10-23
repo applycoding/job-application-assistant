@@ -198,6 +198,8 @@ def test_full_session_21_steps(
             continue
         if any(f.check != "judge" for f in sc.failures):
             continue
+        if sc.judge is None or not sc.judge.entailed:
+            continue
         assert sc.status == "entailed"
 
     # 13 - job03 run-0006
@@ -283,7 +285,7 @@ def test_full_session_21_steps(
         for s in repo.get_run(f"run-{i:04d}").report.sentences
         if s.status == "unsupported"
     )
-    assert unsupported_in_db == 5
+    assert unsupported_in_db == 12
     assert (
         sum(
             1

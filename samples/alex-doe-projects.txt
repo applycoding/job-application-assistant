@@ -1,6 +1,6 @@
 FICTIONAL SAMPLE DATA - Alex Doe is not a real person.
 
-Alex Doe — Selected projects
+Alex Doe - Selected projects
 
 Open Logistics ETA (2023)
 - Python service predicting delivery windows from historical routes; deployed on ECS with FastAPI.

@@ -2,7 +2,8 @@
 
 from datetime import date
 
-from jaa.models import Chunk, Sentence
+from jaa.models import Chunk, Requirement, Sentence
+from jaa.providers.mock import INJECTED_CLAIM
 from jaa.truth.deterministic import CheckContext, check_sentence
 from jaa.truth.lexicon import SkillLexicon
 
@@ -186,5 +187,54 @@ def test_framing_skips_checks() -> None:
         citations=[],
         requirement_ids=[],
         rationale="",
+        template_id="open",
     )
     assert check_sentence(s, {}, CTX).status == "checks_passed"
+
+
+def test_framing_labeled_claim_still_checked() -> None:
+    pool = {
+        "c1": _chunk("c1", "Worked at Northwind Analytics on Spark."),
+    }
+    s = Sentence(
+        id="C.S9",
+        kind="framing",
+        text=INJECTED_CLAIM,
+        citations=["c1"],
+        requirement_ids=[],
+        rationale="",
+    )
+    r = check_sentence(s, pool, CTX)
+    assert r.status == "unsupported"
+    assert any(f.check == "employer" for f in r.failures)
+
+
+def test_requirement_link_needs_eligible_evidence() -> None:
+    req = Requirement(
+        id="R2",
+        text="Strong Python and SQL skills.",
+        priority="must",
+        skills=["Python", "SQL"],
+        terms=["Python", "SQL"],
+        min_years=None,
+    )
+    ctx = CheckContext(
+        lexicon=LEX,
+        reference_date=REF,
+        target_company=None,
+        requirements={"R2": req},
+    )
+    pool = {
+        "c1": _chunk("c1", "Partnered with analytics on dbt models serving finance dashboards."),
+    }
+    s = Sentence(
+        id="Q2.S3",
+        kind="claim",
+        text="In addition: dbt.",
+        citations=["c1"],
+        requirement_ids=["R2"],
+        rationale="",
+    )
+    r = check_sentence(s, pool, ctx)
+    assert r.status == "unsupported"
+    assert any(f.check == "requirement" for f in r.failures)

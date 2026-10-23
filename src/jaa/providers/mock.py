@@ -36,7 +36,8 @@ class MockProvider:
         chunks = _chunks_from_outbound(req)
         must_reqs = [r for r in req.requirements if r.priority == "must"]
         must_text = " ".join(r.text for r in must_reqs)
-        used_claims: set[str] = set()
+        used_answer_bodies: set[str] = set()
+        used_cover_bodies: set[str] = set()
         used_cover_chunks: set[str] = set()
 
         answers: list[AnswerOut] = []
@@ -46,15 +47,15 @@ class MockProvider:
             sentences: list[SentenceOut] = []
             lead_idx = 0
             for chunk in ranked:
-                text = _unique_claim_text(chunk, lex, used_claims)
+                text = _unique_claim_text(chunk, lex, used_answer_bodies)
                 if text is None:
                     continue
                 lead_idx += 1
                 rid = _best_requirement(chunk, req.requirements)
-                terms = _matched_terms(chunk, req.requirements)
+                terms = _matched_terms(chunk, req.requirements, lex)
                 req_for_chunk = next((r for r in req.requirements if r.id == rid), None)
                 if req_for_chunk is not None:
-                    terms = _matched_terms(chunk, [req_for_chunk])
+                    terms = _matched_terms(chunk, [req_for_chunk], lex)
                 if terms:
                     rationale = f"Addresses {rid} using {chunk.id} (matched: {', '.join(terms)})."
                 else:
@@ -82,17 +83,20 @@ class MockProvider:
                 )
             answers.append(AnswerOut(question_id=question.id, sentences=sentences))
 
+        cover_reqs = must_reqs if must_reqs else list(req.requirements)
         cover_claims: list[SentenceOut] = []
-        for req_item in must_reqs[:4]:
-            cover_chunk = _top_chunk_for_requirement(chunks, req_item, req.requirements)
+        for req_item in cover_reqs:
+            if len(cover_claims) >= 3:
+                break
+            cover_chunk = _top_chunk_for_requirement(chunks, req_item, req.requirements, lex)
             if cover_chunk is None:
                 continue
-            if not _matched_terms(cover_chunk, [req_item]):
+            if not _matched_terms(cover_chunk, [req_item], lex):
                 continue
             if cover_chunk.id in used_cover_chunks:
                 continue
             used_cover_chunks.add(cover_chunk.id)
-            cover_body = _unique_claim_text(cover_chunk, lex, used_claims)
+            cover_body = _unique_claim_text(cover_chunk, lex, used_cover_bodies)
             if cover_body is None:
                 continue
             cover_claims.append(
@@ -203,13 +207,23 @@ def _best_requirement(chunk: _PoolChunk, requirements: Sequence[OutboundRequirem
     return best_id
 
 
-def _matched_terms(chunk: _PoolChunk, requirements: Sequence[OutboundRequirement]) -> list[str]:
+def _matched_terms(
+    chunk: _PoolChunk,
+    requirements: Sequence[OutboundRequirement],
+    lexicon: SkillLexicon,
+) -> list[str]:
     chunk_tokens = set(tokenize(chunk.evidence_text))
+    chunk_skills = set(lexicon.find(chunk.evidence_text))
     terms: set[str] = set()
     for req in requirements:
-        for t in _req_tokens(req):
-            if t in chunk_tokens:
-                terms.add(t)
+        for skill in lexicon.find(req.text):
+            if skill in chunk_skills:
+                terms.add(skill)
+        for term in tokenize(req.text):
+            if term in lexicon.skill_names:
+                continue
+            if len(term) >= 5 and term.lower() in chunk_tokens:
+                terms.add(term)
     return sorted(terms)
 
 
@@ -221,11 +235,12 @@ def _top_chunk_for_requirement(
     chunks: Sequence[_PoolChunk],
     req_item: OutboundRequirement,
     all_reqs: Sequence[OutboundRequirement],
+    lexicon: SkillLexicon,
 ) -> _PoolChunk | None:
     query = tokenize(req_item.text)
     ranked = _rank_pool(chunks, query)
     for chunk in ranked:
-        if _matched_terms(chunk, [req_item]):
+        if _matched_terms(chunk, [req_item], lexicon):
             return chunk
     return ranked[0] if ranked else None
 

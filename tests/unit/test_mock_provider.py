@@ -47,6 +47,40 @@ async def test_injected_claim_present() -> None:
 
 
 @pytest.mark.asyncio
+async def test_cover_includes_supported_cv_claims(app, settings, repo, fixed_clock, seq_ids) -> None:
+    from jaa.generation.pipeline import Deps, create_run
+    from jaa.models import RunOptions
+    from jaa.samples import seed
+    from tests.support.jobs import job_with_marker
+
+    seed(repo, settings, fixed_clock, seq_ids, app.state.lexicon)
+    job = job_with_marker(repo.list_jobs(), "Acme")
+    deps = Deps(
+        repo=repo,
+        provider=app.state.provider,
+        settings=settings,
+        lexicon=app.state.lexicon,
+        clock=fixed_clock,
+        ids=seq_ids,
+    )
+    run = await create_run(deps, job.id, RunOptions(judge=False))
+    cover_claim_ids = [
+        s.id for s in run.drafts.cover_note.sentences if s.kind == "claim"
+    ]
+    assert len(cover_claim_ids) >= 3
+    by_id = {sc.sentence_id: sc for sc in run.report.sentences}
+    passed = [sid for sid in cover_claim_ids if by_id[sid].status == "checks_passed"]
+    failed = [sid for sid in cover_claim_ids if by_id[sid].status == "unsupported"]
+    assert len(passed) >= 2
+    assert len(failed) >= 1
+    assert any(
+        INJECTED_CLAIM in s.text
+        for s in run.drafts.cover_note.sentences
+        if s.kind == "claim"
+    )
+
+
+@pytest.mark.asyncio
 async def test_inject_unsupported_false() -> None:
     out = await MockProvider(inject_unsupported=False).draft(_minimal_outbound())
     assert INJECTED_CLAIM not in [s.text for s in out.cover_note]

@@ -18,20 +18,20 @@ Python, SQL, Spark, Airflow, Kubernetes, AWS
 
 ## Experience
 
-### Northwind Analytics — Senior Data Engineer (Mar 2021–present)
+### Northwind Analytics - Senior Data Engineer (Mar 2021-present)
 
 - Led migration of nightly ETL from on-prem Hadoop to AWS (S3, Glue, EMR); cut runtime by 40%.
 - Built Kafka-based ingestion for product telemetry; 2M events/day with idempotent consumers.
 - Partnered with analytics on dbt models serving finance and operations dashboards.
 - Mentored two junior engineers on code review and incident response.
 
-### Contoso Retail — Data Engineer (Jun 2017–Feb 2021)
+### Contoso Retail - Data Engineer (Jun 2017-Feb 2021)
 
 - Developed PySpark jobs loading POS and inventory feeds into Snowflake.
 - Introduced Great Expectations checks; reduced bad loads reaching production.
 - Supported a migration led by another team to containerize batch workloads on Kubernetes.
 
-### Fabrikam Labs — Analyst Programmer (Aug 2014–May 2017)
+### Fabrikam Labs - Analyst Programmer (Aug 2014-May 2017)
 
 - Wrote SQL reports and small Python utilities for clinical trial operations.
 - Maintained SSIS packages and documented data dictionaries for auditors.

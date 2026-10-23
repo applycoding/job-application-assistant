@@ -72,6 +72,7 @@ async def create_run(deps: Deps, job_id: str, opts: RunOptions) -> Run:
         reference_date=ref_date,
         target_company=job.company,
         gap_terms=_skill_gap_terms(result.gaps, deps.lexicon),
+        requirements=req_map,
     )
     report = await run_truth_check(
         drafts,
@@ -115,6 +116,7 @@ async def prune_run(deps: Deps, run_id: str) -> Run:
         reference_date=ref_date,
         target_company=job.company,
         gap_terms=_skill_gap_terms(parent.gaps, deps.lexicon),
+        requirements=req_map,
     )
     outbound = build_outbound_draft(
         job,
