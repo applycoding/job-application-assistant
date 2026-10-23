@@ -36,3 +36,5 @@ Run: `uv run pytest tests/unit/test_job_parser.py tests/unit/test_requirements.p
 ## Exercise
 
 Paste a job with two must-have bullets and one nice-to-have skill into the UI parser endpoint or a unit test fixture. Assert that priorities and extracted `terms` match what you expect from `SkillLexicon`.
+
+Add a numbered question line (`1. Why this role?`) and confirm it lands in `JobPost.questions` with a stable `question_id`.

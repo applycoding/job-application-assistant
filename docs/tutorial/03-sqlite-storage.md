@@ -36,3 +36,5 @@ Run: `uv run pytest tests/unit/test_repo.py tests/integration/test_concurrency.p
 ## Exercise
 
 After seeding, query `SELECT id, filename_key FROM document` in your DB file. Delete one document through the API or CLI and verify related chunks disappeared via foreign keys or explicit deletes in `repo.py`.
+
+Load a saved run through the repository API used in tests and locate where citation rows join chunk ids for export.

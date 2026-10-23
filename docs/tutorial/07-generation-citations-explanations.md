@@ -37,3 +37,5 @@ Run: `uv run pytest tests/unit/test_prompts.py tests/integration/test_pipeline.p
 ## Exercise
 
 Enable judge in settings and run an integration test with `MockProvider`. Compare `report.flagged_ids` before and after `prune_run()` to see which sentences survive.
+
+Open `export.is_stale()` and note which two version strings must match for the UI to treat an old run as still valid.

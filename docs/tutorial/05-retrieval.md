@@ -37,3 +37,5 @@ Run: `uv run pytest tests/unit/test_eligibility.py tests/unit/test_bm25.py tests
 ## Exercise
 
 Write a short test that builds two chunks, one mentioning "Kubernetes" and one not. Parse a job requiring Kubernetes and assert the gap list is empty only when the matching chunk is present.
+
+Log `POOL_MAX` and `K_PER_REQ` from `jaa/limits.py` and explain in one sentence how they interact in `retrieve_for_job()`.

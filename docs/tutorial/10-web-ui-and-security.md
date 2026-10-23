@@ -37,3 +37,5 @@ Run: `uv run pytest tests/integration/test_html.py tests/integration/test_securi
 ## Exercise
 
 Start `uv run jaa serve` and confirm form posts include the CSRF token from the HTML template. Attempt a curl POST without the token and observe the rejected response status documented in tests.
+
+Browse `routes_api.py` and name one read-only GET endpoint that does not require CSRF but still benefits from security headers.

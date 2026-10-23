@@ -36,3 +36,5 @@ You should see subcommands for serving the UI and managing documents. If imports
 ## Exercise
 
 Start the app with `uv run jaa serve`, open the UI, and upload one sample from `samples/`. Note which tables change by inspecting `var/jaa.sqlite3` with any SQLite browser after a successful ingest.
+
+Skim `src/jaa/models.py` once so later chapters can refer to `Chunk`, `Run`, and `TruthReport` without surprise.

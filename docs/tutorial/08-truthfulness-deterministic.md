@@ -37,3 +37,5 @@ Run: `uv run pytest tests/unit/test_extractors.py tests/unit/test_dates.py tests
 ## Exercise
 
 Craft a one-sentence claim that cites a chunk but states a team size not present in the chunk text. Unit-test `check_sentence()` and confirm the appropriate `CheckFailure` check name appears.
+
+Find where `target_company` from the job post influences org-related failures in `deterministic.py`.

@@ -37,3 +37,5 @@ Run: `uv run pytest tests/unit/test_outbound.py tests/unit/test_validate.py test
 ## Exercise
 
 Run a full mock pipeline integration test mentally: flip `inject_unsupported` off in a unit test and confirm the truth report has fewer unsupported sentences for the same fixture job.
+
+Inspect `build_outbound_draft()` and list which fields are redacted before they ever reach `MockProvider.draft()`.

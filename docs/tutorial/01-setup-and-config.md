@@ -36,3 +36,5 @@ Run: `uv run pytest tests/unit/test_config.py`
 ## Exercise
 
 Create a `.env` with `JAA_PROVIDER=mock` and `JAA_DB_PATH=var/tutorial.sqlite3`. Run `uv run jaa reset` (if available) or delete that file, then `uv run jaa seed` and confirm the database path matches your setting.
+
+In a REPL, construct `Settings.from_env(env={"JAA_JUDGE": "true"})` and verify `judge` becomes true without touching unrelated fields.

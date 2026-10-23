@@ -37,3 +37,5 @@ Run: `uv run pytest tests/unit/test_verdict.py tests/unit/test_judge.py tests/un
 ## Exercise
 
 Simulate a run where one answer sentence fails deterministic checks and another fails only the judge. After `prune_flagged()`, count remaining sentences per answer and match them to your expectations.
+
+Read `status_from_checks()` in `verdict.py` and write down the status order when both deterministic failures and judge failures exist.
