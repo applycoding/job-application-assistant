@@ -1,6 +1,6 @@
 {
   "check_rules_version": "2026-10-23.1",
-  "corpus_version": "0d5d8f174b79e9f7b3a6e3bcef7d442b9f56df95d4ff5cff3aac1c9997101e02",
+  "corpus_version": "4e0238f3f7ad8e9deedf79e54665f5c179d37b38cd266eb1c13c104b927a72ba",
   "created_at": "2026-10-23T09:00:00+00:00",
   "drafts": {
     "answers": [
@@ -360,7 +360,7 @@
         "R4",
         "R7"
       ],
-      "score": 36.236839
+      "score": 37.453494
     },
     {
       "chunk": {
@@ -368,7 +368,7 @@
         "evidence_text": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)\nLed migration of nightly ETL from on-prem Hadoop to AWS (S3, Glue, EMR); cut runtime by 40%.",
         "id": "00000000-0000-4000-8000-000000000001:0cd9550510734099",
         "kind": "bullet",
-        "line_no": 24,
+        "line_no": 23,
         "section": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)",
         "text": "Led migration of nightly ETL from on-prem Hadoop to AWS (S3, Glue, EMR); cut runtime by 40%."
       },
@@ -380,7 +380,7 @@
         "R4",
         "R8"
       ],
-      "score": 30.338177
+      "score": 30.222878
     },
     {
       "chunk": {
@@ -388,7 +388,7 @@
         "evidence_text": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)\nWrote SQL reports and small Python utilities for clinical trial operations.",
         "id": "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4",
         "kind": "bullet",
-        "line_no": 37,
+        "line_no": 36,
         "section": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)",
         "text": "Wrote SQL reports and small Python utilities for clinical trial operations."
       },
@@ -399,7 +399,7 @@
       "requirement_ids": [
         "R2"
       ],
-      "score": 29.163767
+      "score": 29.630967
     },
     {
       "chunk": {
@@ -417,7 +417,7 @@
       "requirement_ids": [
         "R2"
       ],
-      "score": 25.776379
+      "score": 26.216081
     },
     {
       "chunk": {
@@ -435,7 +435,7 @@
       "requirement_ids": [
         "R2"
       ],
-      "score": 20.987344
+      "score": 21.434318
     },
     {
       "chunk": {
@@ -453,7 +453,7 @@
       "requirement_ids": [
         "R2"
       ],
-      "score": 20.987344
+      "score": 21.434318
     },
     {
       "chunk": {
@@ -461,7 +461,7 @@
         "evidence_text": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)\nPartnered with analytics on dbt models serving finance and operations dashboards.",
         "id": "00000000-0000-4000-8000-000000000001:5721b756171c09d8",
         "kind": "bullet",
-        "line_no": 26,
+        "line_no": 25,
         "section": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)",
         "text": "Partnered with analytics on dbt models serving finance and operations dashboards."
       },
@@ -473,7 +473,7 @@
         "R6",
         "R8"
       ],
-      "score": 17.123561
+      "score": 17.052244
     },
     {
       "chunk": {
@@ -491,7 +491,7 @@
       "requirement_ids": [
         "R3"
       ],
-      "score": 17.076559
+      "score": 16.951713
     },
     {
       "chunk": {
@@ -510,7 +510,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 13.001651
+      "score": 12.877395
     },
     {
       "chunk": {
@@ -518,7 +518,7 @@
         "evidence_text": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)\nBuilt Kafka-based ingestion for product telemetry; 2M events/day with idempotent consumers.",
         "id": "00000000-0000-4000-8000-000000000001:bc621ae870a57ec5",
         "kind": "bullet",
-        "line_no": 25,
+        "line_no": 24,
         "section": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)",
         "text": "Built Kafka-based ingestion for product telemetry; 2M events/day with idempotent consumers."
       },
@@ -530,7 +530,7 @@
         "R5",
         "R8"
       ],
-      "score": 12.393032
+      "score": 12.31827
     },
     {
       "chunk": {
@@ -538,7 +538,7 @@
         "evidence_text": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)\nDeveloped PySpark jobs loading POS and inventory feeds into Snowflake.",
         "id": "00000000-0000-4000-8000-000000000001:02479add7f67b222",
         "kind": "bullet",
-        "line_no": 31,
+        "line_no": 30,
         "section": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)",
         "text": "Developed PySpark jobs loading POS and inventory feeds into Snowflake."
       },
@@ -548,7 +548,7 @@
       "requirement_ids": [
         "R3"
       ],
-      "score": 11.213442
+      "score": 11.090355
     },
     {
       "chunk": {
@@ -566,7 +566,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 10.825463
+      "score": 10.736096
     },
     {
       "chunk": {
@@ -584,7 +584,7 @@
       "requirement_ids": [
         "R8"
       ],
-      "score": 10.392758
+      "score": 10.318752
     },
     {
       "chunk": {
@@ -602,7 +602,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 8.742014
+      "score": 8.619932
     },
     {
       "chunk": {
@@ -620,7 +620,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 8.691945
+      "score": 8.572196
     },
     {
       "chunk": {
@@ -638,7 +638,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 8.691945
+      "score": 8.572196
     },
     {
       "chunk": {
@@ -646,7 +646,7 @@
         "evidence_text": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)\nMentored two junior engineers on code review and incident response.",
         "id": "00000000-0000-4000-8000-000000000001:c0ec43deb954476f",
         "kind": "bullet",
-        "line_no": 27,
+        "line_no": 26,
         "section": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)",
         "text": "Mentored two junior engineers on code review and incident response."
       },
@@ -656,7 +656,7 @@
       "requirement_ids": [
         "R8"
       ],
-      "score": 7.265358
+      "score": 7.203291
     }
   ],
   "gaps": [

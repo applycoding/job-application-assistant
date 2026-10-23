@@ -120,6 +120,10 @@ def test_smoke_flow(server_url: str) -> None:
         page.wait_for_url("**/runs/**")
         assert page.locator("[data-testid=claim][data-status=unsupported]").count() == 0
         assert "No deterministic issues found" in page.get_by_test_id("truth-badge").inner_text()
+        if os.environ.get("JAA_UPDATE_SCREENSHOTS") == "1":
+            shot_dir = ROOT / "docs" / "screenshots"
+            shot_dir.mkdir(parents=True, exist_ok=True)
+            page.screenshot(path=str(shot_dir / "run-pruned.png"), full_page=True)
         browser.close()
     assert aborted == 0
     assert errors == []

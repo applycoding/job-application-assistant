@@ -10,12 +10,21 @@ from tests.support.golden import assert_golden_run
 
 
 @pytest.mark.asyncio
-async def test_job01_golden(app, settings, fixed_clock, seq_ids):
+@pytest.mark.parametrize(
+    ("title_part", "golden_name"),
+    [
+        ("Acme", "job01_run.json"),
+        ("Globex", "job02_run.json"),
+        ("Vandelay", "job03_run.json"),
+    ],
+)
+async def test_job_golden_run(
+    app, settings, fixed_clock, seq_ids, title_part: str, golden_name: str
+):
     repo = app.state.repo
     lex = app.state.lexicon
     seed(repo, settings, fixed_clock, seq_ids, lex)
-    jobs = repo.list_jobs()
-    job01 = next(j for j in jobs if "Acme" in j.title)
+    job = next(j for j in repo.list_jobs() if title_part in j.title)
     deps = Deps(
         repo=repo,
         provider=app.state.provider,
@@ -24,6 +33,6 @@ async def test_job01_golden(app, settings, fixed_clock, seq_ids):
         clock=fixed_clock,
         ids=seq_ids,
     )
-    run = await create_run(deps, job01.id, RunOptions(judge=False))
-    golden = Path("tests/golden/job01_run.json")
-    assert_golden_run(run, str(golden), update=os.environ.get("JAA_UPDATE_GOLDEN") == "1")
+    run = await create_run(deps, job.id, RunOptions(judge=False))
+    update = os.environ.get("JAA_UPDATE_GOLDEN") == "1"
+    assert_golden_run(run, str(Path("tests/golden") / golden_name), update=update)

@@ -12,7 +12,7 @@ from jaa.generation.assemble import assemble_drafts
 from jaa.ids import IdFactory
 from jaa.models import RetrievalResult, Run, RunOptions
 from jaa.privacy.outbound import build_outbound_draft
-from jaa.providers.base import CallBudget, LLMProvider, ProviderError
+from jaa.providers.base import CallBudget, LLMProvider
 from jaa.retrieval.service import retrieve_for_job
 from jaa.storage.repo import Repository, RunData
 from jaa.truth.deterministic import CHECK_RULES_VERSION, CheckContext
@@ -41,7 +41,7 @@ async def create_run(deps: Deps, job_id: str, opts: RunOptions) -> Run:
     ref_date = deps.settings.resolved_reference_date(deps.clock.now().date())
     corpus_version, chunks = deps.repo.corpus_snapshot(ref_date)
     if not chunks:
-        raise ProviderError("Upload documents first")
+        raise ValueError("upload documents first")
 
     job = deps.repo.get_job(job_id)
     result = retrieve_for_job(job, chunks, deps.lexicon)

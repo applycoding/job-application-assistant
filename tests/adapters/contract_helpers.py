@@ -38,8 +38,7 @@ PROVIDER_URLS = {
     "openai": "https://api.openai.com/v1/responses",
     "xai": "https://api.x.ai/v1/responses",
     "google": (
-        "https://generativelanguage.googleapis.com/v1beta/models/"
-        "gemini-3.8-flash:generateContent"
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent"
     ),
 }
 
@@ -218,9 +217,7 @@ def assert_provider_request(
     if judge:
         cfg = load_provider_config(provider)
         expected_judge = cfg["judge_model"]
-        if provider == "anthropic":
-            assert body["model"] == expected_judge
-        elif provider in ("openai", "xai"):
+        if provider == "anthropic" or provider in ("openai", "xai"):
             assert body["model"] == expected_judge
         elif provider == "google":
             assert expected_judge in url or body  # model is in URL for Gemini

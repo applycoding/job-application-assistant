@@ -83,9 +83,24 @@ module = ["rank_bm25.*", "pypdf.*", "docx.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
-module = ["tests.conftest"]
-disable_error_code = ["arg-type", "misc", "no-untyped-def"]
+module = ["tests.*"]
+disallow_untyped_defs = false
+disallow_untyped_decorators = false
+check_untyped_defs = false
+disable_error_code = [
+    "no-any-return",
+    "no-untyped-def",
+    "misc",
+    "unused-ignore",
+    "union-attr",
+    "arg-type",
+    "type-arg",
+]
 
 [[tool.mypy.overrides]]
-module = ["tests.support.*", "tests.unit.test_socket_guard"]
-disallow_untyped_defs = false
+module = ["tests.conftest"]
+disable_error_code = ["arg-type", "misc"]
+
+[[tool.mypy.overrides]]
+module = ["tests.e2e.*"]
+disable_error_code = ["no-any-return", "misc"]

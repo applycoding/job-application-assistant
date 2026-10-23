@@ -3,14 +3,14 @@ import pytest
 
 from tests.adapters.contract_helpers import (
     PROVIDER_URLS,
+    VALID_DRAFT_JSON,
+    assert_missing_api_key,
     make_provider,
     outbound_draft,
     request_json,
     run_contract_suite,
-    success_handler,
-    assert_missing_api_key,
     run_model_override,
-    VALID_DRAFT_JSON,
+    success_handler,
 )
 
 PROVIDER = "xai"

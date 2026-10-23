@@ -19,4 +19,5 @@ def test_gap_go():
     res = retrieve_for_job(
         job, [c for c in chunks if c.kind not in ("heading", "contact")], SkillLexicon.load(None)
     )
-    assert any(g.term == "FastAPI" for g in res.gaps if g.term)
+    r3 = next(r for r in job.requirements if "Go" in r.skills and "Python" in r.skills)
+    assert any(g.requirement_id == r3.id and g.term == "Go" for g in res.gaps)

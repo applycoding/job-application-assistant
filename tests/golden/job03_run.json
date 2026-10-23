@@ -1,6 +1,6 @@
 {
   "check_rules_version": "2026-10-23.1",
-  "corpus_version": "0d5d8f174b79e9f7b3a6e3bcef7d442b9f56df95d4ff5cff3aac1c9997101e02",
+  "corpus_version": "4e0238f3f7ad8e9deedf79e54665f5c179d37b38cd266eb1c13c104b927a72ba",
   "created_at": "2026-10-23T09:00:00+00:00",
   "drafts": {
     "answers": [
@@ -250,30 +250,23 @@
         },
         {
           "citations": [
-            "00000000-0000-4000-8000-000000000001:f8aa1d973425168a"
+            "00000000-0000-4000-8000-000000000001:656379b86d3f7421"
           ],
           "explanation": {
-            "matches": [
-              {
-                "chunk_id": "00000000-0000-4000-8000-000000000001:f8aa1d973425168a",
-                "terms": [
-                  "Go"
-                ]
-              }
-            ],
-            "model_rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:f8aa1d973425168a.",
+            "matches": [],
+            "model_rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:656379b86d3f7421.",
             "requirement_ids": [
               "R3"
             ]
           },
           "id": "C.S3",
           "kind": "claim",
-          "rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:f8aa1d973425168a.",
+          "rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:656379b86d3f7421.",
           "requirement_ids": [
             "R3"
           ],
           "template_id": null,
-          "text": "My background includes: Go."
+          "text": "My background includes: Introduced Great Expectations checks; reduced bad loads reaching production."
         },
         {
           "citations": [
@@ -323,25 +316,7 @@
         "R1",
         "R3"
       ],
-      "score": 27.057512
-    },
-    {
-      "chunk": {
-        "doc_id": "00000000-0000-4000-8000-000000000001",
-        "evidence_text": "Skills\nGo",
-        "id": "00000000-0000-4000-8000-000000000001:f8aa1d973425168a",
-        "kind": "line",
-        "line_no": 18,
-        "section": "Skills",
-        "text": "Go"
-      },
-      "matched_terms": [
-        "Go"
-      ],
-      "requirement_ids": [
-        "R3"
-      ],
-      "score": 26.207085
+      "score": 26.914259
     },
     {
       "chunk": {
@@ -362,7 +337,7 @@
         "R2",
         "R3"
       ],
-      "score": 20.823258
+      "score": 20.648942
     },
     {
       "chunk": {
@@ -370,7 +345,7 @@
         "evidence_text": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)\nWrote SQL reports and small Python utilities for clinical trial operations.",
         "id": "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4",
         "kind": "bullet",
-        "line_no": 37,
+        "line_no": 36,
         "section": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)",
         "text": "Wrote SQL reports and small Python utilities for clinical trial operations."
       },
@@ -383,7 +358,7 @@
         "R2",
         "R3"
       ],
-      "score": 19.054827
+      "score": 18.906468
     },
     {
       "chunk": {
@@ -391,7 +366,7 @@
         "evidence_text": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)\nMentored two junior engineers on code review and incident response.",
         "id": "00000000-0000-4000-8000-000000000001:c0ec43deb954476f",
         "kind": "bullet",
-        "line_no": 27,
+        "line_no": 26,
         "section": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)",
         "text": "Mentored two junior engineers on code review and incident response."
       },
@@ -402,7 +377,7 @@
       "requirement_ids": [
         "R5"
       ],
-      "score": 12.489558
+      "score": 12.458516
     },
     {
       "chunk": {
@@ -420,7 +395,7 @@
       "requirement_ids": [
         "R2"
       ],
-      "score": 9.103228
+      "score": 9.010913
     },
     {
       "chunk": {
@@ -438,7 +413,7 @@
       "requirement_ids": [
         "R2"
       ],
-      "score": 9.103228
+      "score": 9.010913
     },
     {
       "chunk": {
@@ -446,7 +421,7 @@
         "evidence_text": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)\nIntroduced Great Expectations checks; reduced bad loads reaching production.",
         "id": "00000000-0000-4000-8000-000000000001:656379b86d3f7421",
         "kind": "bullet",
-        "line_no": 32,
+        "line_no": 31,
         "section": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)",
         "text": "Introduced Great Expectations checks; reduced bad loads reaching production."
       },
@@ -456,13 +431,17 @@
       "requirement_ids": [
         "R8"
       ],
-      "score": 6.150608
+      "score": 6.135574
     }
   ],
   "gaps": [
     {
       "requirement_id": "R1",
       "term": "FastAPI"
+    },
+    {
+      "requirement_id": "R3",
+      "term": "Go"
     },
     {
       "requirement_id": "R4",

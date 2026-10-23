@@ -1,6 +1,6 @@
 {
   "check_rules_version": "2026-10-23.1",
-  "corpus_version": "0d5d8f174b79e9f7b3a6e3bcef7d442b9f56df95d4ff5cff3aac1c9997101e02",
+  "corpus_version": "4e0238f3f7ad8e9deedf79e54665f5c179d37b38cd266eb1c13c104b927a72ba",
   "created_at": "2026-10-23T09:00:00+00:00",
   "drafts": {
     "answers": [
@@ -297,7 +297,7 @@
         "R1",
         "R2"
       ],
-      "score": 19.074103
+      "score": 18.939227
     },
     {
       "chunk": {
@@ -319,7 +319,7 @@
         "R1",
         "R5"
       ],
-      "score": 15.707237
+      "score": 15.603534
     },
     {
       "chunk": {
@@ -337,7 +337,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 12.573885
+      "score": 12.447163
     },
     {
       "chunk": {
@@ -345,7 +345,7 @@
         "evidence_text": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)\nWrote SQL reports and small Python utilities for clinical trial operations.",
         "id": "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4",
         "kind": "bullet",
-        "line_no": 37,
+        "line_no": 36,
         "section": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)",
         "text": "Wrote SQL reports and small Python utilities for clinical trial operations."
       },
@@ -355,7 +355,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 12.064125
+      "score": 11.943788
     },
     {
       "chunk": {
@@ -373,7 +373,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 11.13991
+      "score": 10.987056
     },
     {
       "chunk": {
@@ -381,7 +381,7 @@
         "evidence_text": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)\nSupported a migration led by another team to containerize batch workloads on Kubernetes.",
         "id": "00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d",
         "kind": "bullet",
-        "line_no": 33,
+        "line_no": 32,
         "section": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)",
         "text": "Supported a migration led by another team to containerize batch workloads on Kubernetes."
       },
@@ -391,7 +391,7 @@
       "requirement_ids": [
         "R5"
       ],
-      "score": 8.42782
+      "score": 8.374195
     }
   ],
   "gaps": [
