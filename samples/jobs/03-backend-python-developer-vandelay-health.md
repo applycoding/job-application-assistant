@@ -1,6 +1,6 @@
 # Backend Python Developer — Vandelay Health
 
-FICTIONAL SAMPLE DATA — Alex Doe is not a real person.
+FICTIONAL SAMPLE DATA for portfolio demo only.
 
 **Company:** Vandelay Health  
 **Location:** Remote (US)

@@ -89,7 +89,11 @@ def assemble_drafts(
         )
     )
 
-    cover = CoverNote(salutation=salutation, sentences=cover_sentences)
+    cover = CoverNote(
+        salutation=salutation,
+        sentences=cover_sentences,
+        signoff="Kind regards,\nAlex Doe",
+    )
     return Drafts(answers=answers, cover_note=cover), warnings
 
 

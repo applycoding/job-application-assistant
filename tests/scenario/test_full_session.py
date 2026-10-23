@@ -79,15 +79,16 @@ def test_full_session_21_steps(
     doc_cv = _upload(client, "alex-doe-cv.md")
     chunks_cv = repo.get_chunks(doc_cv["id"])
     contact = [c for c in chunks_cv if c.kind == "contact"]
-    assert len(contact) >= 2
+    assert len(contact) == 2
     counts_path = GOLDEN / "scenario_cv_chunks.json"
-    if UPDATE or not counts_path.is_file():
+    if UPDATE:
         counts_path.write_text(
             json.dumps({"chunk_count": len(chunks_cv), "contact_chunks": len(contact)}, indent=2)
             + "\n",
             encoding="utf-8",
         )
     else:
+        assert counts_path.is_file(), "missing scenario_cv_chunks.json golden"
         expected = json.loads(counts_path.read_text(encoding="utf-8"))
         assert len(chunks_cv) == expected["chunk_count"]
         assert len(contact) == expected["contact_chunks"]
@@ -122,9 +123,11 @@ def test_full_session_21_steps(
         assert client.post("/api/jobs", json={"text": text}).status_code == 201
     jobs = repo.list_jobs()
     assert len(jobs) == 3
-    job01 = next(j for j in jobs if "Acme" in j.title)
-    job02 = next(j for j in jobs if "Globex" in j.title)
-    job03 = next(j for j in jobs if "Vandelay" in j.title)
+    from tests.support.jobs import job_with_marker
+
+    job01 = job_with_marker(jobs, "Acme")
+    job02 = job_with_marker(jobs, "Globex")
+    job03 = job_with_marker(jobs, "Vandelay")
 
     # 7 — gaps
     chunks = repo.get_chunks(retrievable_only=True)
@@ -194,9 +197,10 @@ def test_full_session_21_steps(
     run6 = repo.get_run("run-0006")
     pool_golden = GOLDEN / "job03_pool.json"
     pool_dump = [{"chunk_id": e.chunk.id, "score": round(e.score, 6)} for e in run6.evidence]
-    if UPDATE or not pool_golden.is_file():
+    if UPDATE:
         pool_golden.write_text(json.dumps(pool_dump, indent=2) + "\n", encoding="utf-8")
     else:
+        assert pool_golden.is_file(), "missing job03_pool.json golden"
         assert pool_dump == json.loads(pool_golden.read_text(encoding="utf-8"))
 
     # 14 — edit CV bullet, corpus version changes, runs 1-6 stale

@@ -24,7 +24,12 @@ _COMPANY_SUFFIX_RE = re.compile(
     r"\b(?:Inc\.?|LLC|Ltd\.?|Corp\.?|Corporation|Company|Co\.?|GmbH|PLC)\b",
     re.IGNORECASE,
 )
-_COMPANY_LABEL_RE = re.compile(r"^(?:company|employer|organization)\s*:\s*(.+)$", re.IGNORECASE)
+_COMPANY_LABEL_RE = re.compile(
+    r"^(?:\*\*)?(?:company|employer|organization)\s*:(?:\*\*)?\s*(.+)$",
+    re.IGNORECASE,
+)
+_FICTIONAL_BANNER_RE = re.compile(r"FICTIONAL\s+SAMPLE", re.IGNORECASE)
+_TITLE_COMPANY_SPLIT_RE = re.compile(r"^(.+?)\s*[—–-]\s*(.+)$")
 _AT_COMPANY_RE = re.compile(
     r"\b(?:at|@)\s+([A-Z][A-Za-z0-9&'.,\-\s]{1,80}?)(?:\s*[-–—|]|$)",
 )
@@ -88,6 +93,7 @@ def _split_sections(text: str) -> dict[str, list[str]]:
 
 def _extract_title_company(text: str) -> tuple[str, str | None]:
     lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+    lines = [ln for ln in lines if not _FICTIONAL_BANNER_RE.search(ln)]
     if not lines:
         return "Untitled role", None
 
@@ -96,6 +102,11 @@ def _extract_title_company(text: str) -> tuple[str, str | None]:
         title_line = _HEADING_RE.match(title_line).group(1).strip()  # type: ignore[union-attr]
 
     company: str | None = None
+    split = _TITLE_COMPANY_SPLIT_RE.match(title_line)
+    if split:
+        title_line = split.group(1).strip()
+        company = split.group(2).strip().rstrip(".")
+
     at_match = _AT_COMPANY_RE.search(title_line)
     if at_match:
         company = at_match.group(1).strip().rstrip("., ")
@@ -103,21 +114,13 @@ def _extract_title_company(text: str) -> tuple[str, str | None]:
 
     title = title_line.strip() or "Untitled role"
 
-    if company is None and len(lines) > 1:
-        second = lines[1]
-        if not _is_section_heading(second):
-            label = _COMPANY_LABEL_RE.match(second)
-            if label:
-                company = label.group(1).strip()
-            elif (
-                len(second) < 80
-                and not _BULLET_LIKE(second)
-                and (
-                    _COMPANY_SUFFIX_RE.search(second)
-                    or (second[0].isupper() and " " not in second[:3])
-                )
-            ):
-                company = second.strip()
+    for line in lines[1:]:
+        if _is_section_heading(line):
+            break
+        label = _COMPANY_LABEL_RE.match(line)
+        if label:
+            company = label.group(1).strip().rstrip(".")
+            break
 
     return title, company
 

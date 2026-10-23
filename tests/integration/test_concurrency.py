@@ -35,7 +35,9 @@ class BlockingMock(MockProvider):
 @pytest.mark.asyncio
 async def test_generate_holds_pre_call_corpus_version(app, settings, repo, fixed_clock, seq_ids):
     seed(repo, settings, fixed_clock, seq_ids, app.state.lexicon)
-    job = next(j for j in repo.list_jobs() if "Acme" in j.title)
+    from tests.support.jobs import job_with_marker
+
+    job = job_with_marker(repo.list_jobs(), "Acme")
     ref = settings.reference_date
     assert ref is not None
     version_before, _ = repo.corpus_snapshot(ref)

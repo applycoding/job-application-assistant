@@ -76,7 +76,9 @@ def test_create_run_requires_documents(client):
 
 def test_full_run_flow(client, app, settings, fixed_clock, seq_ids, repo):
     seed(repo, settings, fixed_clock, seq_ids, app.state.lexicon)
-    job = next(j for j in repo.list_jobs() if "Acme" in j.title)
+    from tests.support.jobs import job_with_marker
+
+    job = job_with_marker(repo.list_jobs(), "Acme")
     preview = client.get(f"/api/jobs/{job.id}/outbound-preview")
     assert preview.status_code == 200
     run = client.post(f"/api/jobs/{job.id}/runs", json={})

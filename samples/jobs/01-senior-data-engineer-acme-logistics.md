@@ -1,6 +1,6 @@
 # Senior Data Engineer — Acme Logistics
 
-FICTIONAL SAMPLE DATA — Alex Doe is not a real person.
+FICTIONAL SAMPLE DATA for portfolio demo only.
 
 **Company:** Acme Logistics  
 **Location:** Remote (EU)

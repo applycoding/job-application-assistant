@@ -10,6 +10,7 @@ from jaa.privacy.outbound import OutboundJudge, OutboundRequirement
 from jaa.providers.validate import validate_draft
 from jaa.retrieval.bm25 import BM25Ranker
 from jaa.retrieval.tokenize import tokenize
+from jaa.truth.lexicon import SkillLexicon
 
 INJECTED_CLAIM = "At Initech, I was part of a 15-person platform team."
 
@@ -31,18 +32,23 @@ class MockProvider:
         self._inject_unsupported = inject_unsupported
 
     async def draft(self, req: OutboundDraftModel) -> LLMDraftOut:
+        lex = SkillLexicon.load(None)
         chunks = _chunks_from_outbound(req)
         must_reqs = [r for r in req.requirements if r.priority == "must"]
         must_text = " ".join(r.text for r in must_reqs)
+        used_claims: set[str] = set()
 
         answers: list[AnswerOut] = []
         for question in req.questions:
             query = tokenize(f"{question.text} {must_text}")
             ranked = _rank_pool(chunks, query)
-            top = ranked[:3]
             sentences: list[SentenceOut] = []
-            for j, chunk in enumerate(top):
-                text = LEAD_INS[j % 3].format(text=_lower_first(_strip_period(chunk.text)))
+            lead_idx = 0
+            for chunk in ranked:
+                text = _unique_claim_text(chunk, lex, used_claims, lead_idx)
+                if text is None:
+                    continue
+                lead_idx += 1
                 rid = _best_requirement(chunk, req.requirements)
                 terms = _matched_terms(chunk, req.requirements)
                 req_for_chunk = next((r for r in req.requirements if r.id == rid), None)
@@ -50,12 +56,25 @@ class MockProvider:
                     terms = _matched_terms(chunk, [req_for_chunk])
                 sentences.append(
                     SentenceOut(
-                        text=text,
+                        text=LEAD_INS[(lead_idx - 1) % 3].format(text=text),
                         citations=[chunk.id],
                         requirement_ids=[rid] if rid and terms else [],
                         rationale=(
                             f"Addresses {rid} using {chunk.id} (matched: {', '.join(terms)})."
                         ),
+                    )
+                )
+                if len(sentences) >= 3:
+                    break
+            if not sentences and ranked:
+                chunk = ranked[0]
+                body = _format_evidence_body(chunk, lex)
+                sentences.append(
+                    SentenceOut(
+                        text=LEAD_INS[0].format(text=body),
+                        citations=[chunk.id],
+                        requirement_ids=[],
+                        rationale="Fallback sentence for mock draft.",
                     )
                 )
             answers.append(AnswerOut(question_id=question.id, sentences=sentences))
@@ -67,9 +86,12 @@ class MockProvider:
                 continue
             if not _matched_terms(cover_chunk, [req_item]):
                 continue
+            body = _unique_claim_text(cover_chunk, lex, used_claims, 0)
+            if body is None:
+                continue
             cover_claims.append(
                 SentenceOut(
-                    text=f"My background includes: {_strip_period(cover_chunk.text)}.",
+                    text=f"My background includes: {body}.",
                     citations=[cover_chunk.id],
                     requirement_ids=[req_item.id],
                     rationale=f"Highlights {req_item.id} via {cover_chunk.id}.",
@@ -143,18 +165,27 @@ def _rank_pool(chunks: Sequence[_PoolChunk], query: list[str]) -> list[_PoolChun
     return sorted(chunks, key=lambda c: (-scores[c.id], c.id))
 
 
-def _strip_period(text: str) -> str:
-    return text.rstrip(".")
+def _format_evidence_body(chunk: _PoolChunk, lexicon: SkillLexicon) -> str:
+    skills = lexicon.find(chunk.text)
+    if skills:
+        return ", ".join(sorted(skills, key=str.casefold))
+    return chunk.text.rstrip(".")
 
 
-def _lower_first(text: str) -> str:
-    if not text:
-        return text
-    return text[0].lower() + text[1:]
-
-
-def _req_tokens(req: OutboundRequirement) -> list[str]:
-    return tokenize(req.text)
+def _unique_claim_text(
+    chunk: _PoolChunk,
+    lexicon: SkillLexicon,
+    used: set[str],
+    lead_idx: int,
+) -> str | None:
+    body = _format_evidence_body(chunk, lexicon)
+    key = body.lower()
+    if key in used:
+        return None
+    used.add(key)
+    if lead_idx == 0:
+        return body
+    return body[0].lower() + body[1:] if body else body
 
 
 def _best_requirement(chunk: _PoolChunk, requirements: Sequence[OutboundRequirement]) -> str:
@@ -177,6 +208,10 @@ def _matched_terms(chunk: _PoolChunk, requirements: Sequence[OutboundRequirement
             if t in chunk_tokens:
                 terms.add(t)
     return sorted(terms)
+
+
+def _req_tokens(req: OutboundRequirement) -> list[str]:
+    return tokenize(req.text)
 
 
 def _top_chunk_for_requirement(

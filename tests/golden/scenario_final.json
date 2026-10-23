@@ -1,6 +1,6 @@
 {
   "check_rules_version": "2026-10-23.1",
-  "corpus_version": "380adb210e7644cfb467322297d61b40a6b5c2a40a001259d8988c4eab32009f",
+  "corpus_version": "86c34eb612faaf998fa921724593721d5b5442bd0cb7ef8860551f03fa879126",
   "created_at": "2026-10-23T09:00:00Z",
   "drafts": {
     "answers": [
@@ -34,7 +34,7 @@
               "R2"
             ],
             "template_id": null,
-            "text": "A relevant example from my CV: python, SQL, Spark, Airflow, Kubernetes, AWS."
+            "text": "A relevant example from my CV: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
           },
           {
             "citations": [
@@ -88,7 +88,7 @@
               "R4"
             ],
             "template_id": null,
-            "text": "In addition: led migration of nightly ETL from on-prem Hadoop to AWS (S3, Glue, EMR); cut runtime by 41%."
+            "text": "In addition: aWS."
           }
         ]
       },
@@ -98,91 +98,77 @@
         "sentences": [
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
+              "00000000-0000-4000-8000-000000000002:20720e3bf1862661"
             ],
             "explanation": {
-              "matches": [
-                {
-                  "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
-                  "terms": [
-                    "Python",
-                    "SQL"
-                  ]
-                }
-              ],
-              "model_rationale": "Addresses R2 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python, skills, sql).",
+              "matches": [],
+              "model_rationale": "Addresses R5 using 00000000-0000-4000-8000-000000000002:20720e3bf1862661 (matched: kafka, streaming).",
               "requirement_ids": [
-                "R2"
+                "R5"
               ]
             },
             "id": "Q2.S1",
             "kind": "claim",
-            "rationale": "Addresses R2 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python, skills, sql).",
+            "rationale": "Addresses R5 using 00000000-0000-4000-8000-000000000002:20720e3bf1862661 (matched: kafka, streaming).",
             "requirement_ids": [
-              "R2"
+              "R5"
             ],
             "template_id": null,
-            "text": "A relevant example from my CV: python, SQL, Spark, Airflow, Kubernetes, AWS."
+            "text": "A relevant example from my CV: Apache Spark."
           },
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5"
+              "00000000-0000-4000-8000-000000000003:80bba84915a1e528"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5",
+                  "chunk_id": "00000000-0000-4000-8000-000000000003:80bba84915a1e528",
                   "terms": [
-                    "AWS"
+                    "data",
+                    "engineering"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R4 using 00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5 (matched: aws, emr, glue, s3).",
-              "requirement_ids": [
-                "R4"
-              ]
-            },
-            "id": "Q2.S2",
-            "kind": "claim",
-            "rationale": "Addresses R4 using 00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5 (matched: aws, emr, glue, s3).",
-            "requirement_ids": [
-              "R4"
-            ],
-            "template_id": null,
-            "text": "I can also point to this: led migration of nightly ETL from on-prem Hadoop to AWS (S3, Glue, EMR); cut runtime by 41%."
-          },
-          {
-            "citations": [
-              "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1"
-            ],
-            "explanation": {
-              "matches": [
-                {
-                  "chunk_id": "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1",
-                  "terms": [
-                    "data"
-                  ]
-                }
-              ],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1 (matched: data, years).",
+              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000003:80bba84915a1e528 (matched: data, engineering).",
               "requirement_ids": [
                 "R1"
               ]
             },
-            "id": "Q2.S3",
+            "id": "Q2.S2",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1 (matched: data, years).",
+            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000003:80bba84915a1e528 (matched: data, engineering).",
             "requirement_ids": [
               "R1"
             ],
             "template_id": null,
-            "text": "In addition: senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
+            "text": "I can also point to this: data Engineering Specialty - Example Board 2023."
+          },
+          {
+            "citations": [
+              "00000000-0000-4000-8000-000000000001:5721b756171c09d8"
+            ],
+            "explanation": {
+              "matches": [],
+              "model_rationale": "Addresses R2 using 00000000-0000-4000-8000-000000000001:5721b756171c09d8 (matched: data, models).",
+              "requirement_ids": [
+                "R2"
+              ]
+            },
+            "id": "Q2.S3",
+            "kind": "claim",
+            "rationale": "Addresses R2 using 00000000-0000-4000-8000-000000000001:5721b756171c09d8 (matched: data, models).",
+            "requirement_ids": [
+              "R2"
+            ],
+            "template_id": null,
+            "text": "In addition: dbt."
           }
         ]
       }
     ],
     "cover_note": {
-      "salutation": "Dear FICTIONAL SAMPLE DATA \u2014 Alex Doe is not a real person. Team,",
+      "salutation": "Dear Acme Logistics Team,",
       "sentences": [
         {
           "citations": [],
@@ -192,118 +178,7 @@
           "rationale": "",
           "requirement_ids": [],
           "template_id": "open",
-          "text": "I am applying for the Senior Data Engineer \u2014 Acme Logistics role at FICTIONAL SAMPLE DATA \u2014 Alex Doe is not a real person.."
-        },
-        {
-          "citations": [
-            "00000000-0000-4000-8000-000000000003:80bba84915a1e528"
-          ],
-          "explanation": {
-            "matches": [
-              {
-                "chunk_id": "00000000-0000-4000-8000-000000000003:80bba84915a1e528",
-                "terms": [
-                  "data",
-                  "engineering"
-                ]
-              }
-            ],
-            "model_rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000003:80bba84915a1e528.",
-            "requirement_ids": [
-              "R1"
-            ]
-          },
-          "id": "C.S1",
-          "kind": "claim",
-          "rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000003:80bba84915a1e528.",
-          "requirement_ids": [
-            "R1"
-          ],
-          "template_id": null,
-          "text": "My background includes: Data Engineering Specialty - Example Board 2023."
-        },
-        {
-          "citations": [
-            "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
-          ],
-          "explanation": {
-            "matches": [
-              {
-                "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
-                "terms": [
-                  "Python",
-                  "SQL"
-                ]
-              }
-            ],
-            "model_rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
-            "requirement_ids": [
-              "R2"
-            ]
-          },
-          "id": "C.S2",
-          "kind": "claim",
-          "rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
-          "requirement_ids": [
-            "R2"
-          ],
-          "template_id": null,
-          "text": "My background includes: Python, SQL, Spark, Airflow, Kubernetes, AWS."
-        },
-        {
-          "citations": [
-            "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
-          ],
-          "explanation": {
-            "matches": [
-              {
-                "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
-                "terms": [
-                  "Airflow",
-                  "Apache Spark"
-                ]
-              }
-            ],
-            "model_rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
-            "requirement_ids": [
-              "R3"
-            ]
-          },
-          "id": "C.S3",
-          "kind": "claim",
-          "rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
-          "requirement_ids": [
-            "R3"
-          ],
-          "template_id": null,
-          "text": "My background includes: Python, SQL, Spark, Airflow, Kubernetes, AWS."
-        },
-        {
-          "citations": [
-            "00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5"
-          ],
-          "explanation": {
-            "matches": [
-              {
-                "chunk_id": "00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5",
-                "terms": [
-                  "AWS"
-                ]
-              }
-            ],
-            "model_rationale": "Highlights R4 via 00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5.",
-            "requirement_ids": [
-              "R4"
-            ]
-          },
-          "id": "C.S4",
-          "kind": "claim",
-          "rationale": "Highlights R4 via 00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5.",
-          "requirement_ids": [
-            "R4"
-          ],
-          "template_id": null,
-          "text": "My background includes: Led migration of nightly ETL from on-prem Hadoop to AWS (S3, Glue, EMR); cut runtime by 41%."
+          "text": "I am applying for the Senior Data Engineer role at Acme Logistics."
         },
         {
           "citations": [],
@@ -316,7 +191,7 @@
           "text": "I would welcome the chance to discuss how this experience fits your team."
         }
       ],
-      "signoff": "Kind regards,"
+      "signoff": "Kind regards,\nAlex Doe"
     }
   },
   "evidence": [
@@ -344,7 +219,7 @@
         "R4",
         "R7"
       ],
-      "score": 35.846307
+      "score": 36.229192
     },
     {
       "chunk": {
@@ -364,7 +239,7 @@
         "R4",
         "R8"
       ],
-      "score": 29.083376
+      "score": 29.290941
     },
     {
       "chunk": {
@@ -383,7 +258,7 @@
       "requirement_ids": [
         "R2"
       ],
-      "score": 28.356794
+      "score": 28.66758
     },
     {
       "chunk": {
@@ -401,7 +276,7 @@
       "requirement_ids": [
         "R2"
       ],
-      "score": 25.056456
+      "score": 25.370509
     },
     {
       "chunk": {
@@ -419,7 +294,7 @@
       "requirement_ids": [
         "R2"
       ],
-      "score": 20.509168
+      "score": 20.789898
     },
     {
       "chunk": {
@@ -439,7 +314,7 @@
         "R6",
         "R8"
       ],
-      "score": 16.347425
+      "score": 16.476361
     },
     {
       "chunk": {
@@ -457,7 +332,7 @@
       "requirement_ids": [
         "R3"
       ],
-      "score": 16.176351
+      "score": 16.347178
     },
     {
       "chunk": {
@@ -476,7 +351,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 12.496286
+      "score": 12.657237
     },
     {
       "chunk": {
@@ -496,7 +371,7 @@
         "R5",
         "R8"
       ],
-      "score": 11.765512
+      "score": 11.878289
     },
     {
       "chunk": {
@@ -514,7 +389,7 @@
       "requirement_ids": [
         "R3"
       ],
-      "score": 10.556229
+      "score": 10.696595
     },
     {
       "chunk": {
@@ -532,7 +407,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 10.420632
+      "score": 10.543033
     },
     {
       "chunk": {
@@ -550,7 +425,25 @@
       "requirement_ids": [
         "R8"
       ],
-      "score": 9.887268
+      "score": 9.985017
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000003",
+        "evidence_text": "\nFICTIONAL SAMPLE DATA for portfolio demo only.",
+        "id": "00000000-0000-4000-8000-000000000003:934541320895c72e",
+        "kind": "line",
+        "line_no": 1,
+        "section": "",
+        "text": "FICTIONAL SAMPLE DATA for portfolio demo only."
+      },
+      "matched_terms": [
+        "data"
+      ],
+      "requirement_ids": [
+        "R1"
+      ],
+      "score": 8.578568
     },
     {
       "chunk": {
@@ -568,25 +461,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 8.331492
-    },
-    {
-      "chunk": {
-        "doc_id": "00000000-0000-4000-8000-000000000003",
-        "evidence_text": "\nFICTIONAL SAMPLE DATA - Alex Doe is not a real person.",
-        "id": "00000000-0000-4000-8000-000000000003:20173e60281c4aeb",
-        "kind": "line",
-        "line_no": 1,
-        "section": "",
-        "text": "FICTIONAL SAMPLE DATA - Alex Doe is not a real person."
-      },
-      "matched_terms": [
-        "data"
-      ],
-      "requirement_ids": [
-        "R1"
-      ],
-      "score": 8.331492
+      "score": 8.471647
     },
     {
       "chunk": {
@@ -604,7 +479,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 8.248635
+      "score": 8.384633
     },
     {
       "chunk": {
@@ -622,7 +497,7 @@
       "requirement_ids": [
         "R8"
       ],
-      "score": 6.845103
+      "score": 6.926916
     }
   ],
   "gaps": [
@@ -652,7 +527,7 @@
     }
   ],
   "id": "run-0008",
-  "job_id": "job-7ded44ca49e37d37",
+  "job_id": "job-6280dd602d4eb59c",
   "judge_enabled": false,
   "judge_model": null,
   "model": "mock-1",
@@ -660,7 +535,7 @@
   "provider": "mock",
   "report": {
     "badge_text": "No deterministic issues found",
-    "claims": 10,
+    "claims": 6,
     "flagged_ids": [],
     "judge_enabled": false,
     "not_verified": 0,
@@ -712,34 +587,6 @@
         "failures": [],
         "judge": null,
         "sentence_id": "C.F1",
-        "status": "checks_passed"
-      },
-      {
-        "checks_run": [],
-        "failures": [],
-        "judge": null,
-        "sentence_id": "C.S1",
-        "status": "checks_passed"
-      },
-      {
-        "checks_run": [],
-        "failures": [],
-        "judge": null,
-        "sentence_id": "C.S2",
-        "status": "checks_passed"
-      },
-      {
-        "checks_run": [],
-        "failures": [],
-        "judge": null,
-        "sentence_id": "C.S3",
-        "status": "checks_passed"
-      },
-      {
-        "checks_run": [],
-        "failures": [],
-        "judge": null,
-        "sentence_id": "C.S4",
         "status": "checks_passed"
       },
       {
@@ -858,5 +705,7 @@
       "text": "Prior work in logistics or supply chain analytics."
     }
   ],
-  "warnings": []
+  "warnings": [
+    "Cover note has no supported claims \u2014 add manually"
+  ]
 }

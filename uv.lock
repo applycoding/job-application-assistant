@@ -489,8 +489,12 @@ llm = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "anthropic" },
+    { name = "google-genai" },
     { name = "httpx" },
+    { name = "httpx2" },
     { name = "mypy" },
+    { name = "openai" },
     { name = "playwright" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
@@ -518,8 +522,12 @@ provides-extras = ["llm"]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "anthropic", specifier = "==2.1.0" },
+    { name = "google-genai", specifier = "==2.33.0" },
     { name = "httpx", specifier = "==0.28.1" },
+    { name = "httpx2", specifier = "==2.16.0" },
     { name = "mypy", specifier = "==2.4.0" },
+    { name = "openai", specifier = "==3.37.0" },
     { name = "playwright", specifier = "==1.64.1" },
     { name = "pytest", specifier = "==9.1.1" },
     { name = "pytest-asyncio", specifier = "==1.4.0" },

@@ -24,7 +24,9 @@ async def test_job_golden_run(
     repo = app.state.repo
     lex = app.state.lexicon
     seed(repo, settings, fixed_clock, seq_ids, lex)
-    job = next(j for j in repo.list_jobs() if title_part in j.title)
+    from tests.support.jobs import job_with_marker
+
+    job = job_with_marker(repo.list_jobs(), title_part)
     deps = Deps(
         repo=repo,
         provider=app.state.provider,

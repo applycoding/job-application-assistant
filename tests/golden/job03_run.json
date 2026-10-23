@@ -1,6 +1,6 @@
 {
   "check_rules_version": "2026-10-23.1",
-  "corpus_version": "4e0238f3f7ad8e9deedf79e54665f5c179d37b38cd266eb1c13c104b927a72ba",
+  "corpus_version": "cd201b1d34daa6aaab6abd7aae5d00b4a0fdf24623b3d96bf785100fbd3d2a10",
   "created_at": "2026-10-23T09:00:00+00:00",
   "drafts": {
     "answers": [
@@ -33,7 +33,7 @@
               "R1"
             ],
             "template_id": null,
-            "text": "A relevant example from my CV: python service predicting delivery windows from historical routes; deployed on ECS with FastAPI."
+            "text": "A relevant example from my CV: Python."
           },
           {
             "citations": [
@@ -60,7 +60,7 @@
               "R1"
             ],
             "template_id": null,
-            "text": "I can also point to this: python, SQL, Spark, Airflow, Kubernetes, AWS."
+            "text": "I can also point to this: airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
           },
           {
             "citations": [
@@ -98,91 +98,72 @@
         "sentences": [
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000002:13508608df1dff4c"
+              "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000002:13508608df1dff4c",
+                  "chunk_id": "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4",
                   "terms": [
                     "Python"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:13508608df1dff4c (matched: fastapi, python).",
+              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:e8a15de8c27940c4 (matched: python).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q2.S1",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:13508608df1dff4c (matched: fastapi, python).",
+            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:e8a15de8c27940c4 (matched: python).",
             "requirement_ids": [
               "R1"
             ],
             "template_id": null,
-            "text": "A relevant example from my CV: python service predicting delivery windows from historical routes; deployed on ECS with FastAPI."
+            "text": "A relevant example from my CV: Python, SQL."
           },
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
+              "00000000-0000-4000-8000-000000000001:656379b86d3f7421"
             ],
             "explanation": {
-              "matches": [
-                {
-                  "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
-                  "terms": [
-                    "Python"
-                  ]
-                }
-              ],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python).",
+              "matches": [],
+              "model_rationale": "Addresses R3 using 00000000-0000-4000-8000-000000000001:656379b86d3f7421 (matched: production).",
               "requirement_ids": [
-                "R1"
+                "R3"
               ]
             },
             "id": "Q2.S2",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python).",
+            "rationale": "Addresses R3 using 00000000-0000-4000-8000-000000000001:656379b86d3f7421 (matched: production).",
             "requirement_ids": [
-              "R1"
+              "R3"
             ],
             "template_id": null,
-            "text": "I can also point to this: python, SQL, Spark, Airflow, Kubernetes, AWS."
+            "text": "I can also point to this: introduced Great Expectations checks; reduced bad loads reaching production."
           },
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:c0ec43deb954476f"
+              "00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279"
             ],
             "explanation": {
-              "matches": [
-                {
-                  "chunk_id": "00000000-0000-4000-8000-000000000001:c0ec43deb954476f",
-                  "terms": [
-                    "code",
-                    "review"
-                  ]
-                }
-              ],
-              "model_rationale": "Addresses R5 using 00000000-0000-4000-8000-000000000001:c0ec43deb954476f (matched: code, review).",
-              "requirement_ids": [
-                "R5"
-              ]
+              "matches": [],
+              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279 (matched: ).",
+              "requirement_ids": []
             },
             "id": "Q2.S3",
             "kind": "claim",
-            "rationale": "Addresses R5 using 00000000-0000-4000-8000-000000000001:c0ec43deb954476f (matched: code, review).",
-            "requirement_ids": [
-              "R5"
-            ],
+            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279 (matched: ).",
+            "requirement_ids": [],
             "template_id": null,
-            "text": "In addition: mentored two junior engineers on code review and incident response."
+            "text": "In addition: sQL."
           }
         ]
       }
     ],
     "cover_note": {
-      "salutation": "Dear FICTIONAL SAMPLE DATA \u2014 Alex Doe is not a real person. Team,",
+      "salutation": "Dear Vandelay Health Team,",
       "sentences": [
         {
           "citations": [],
@@ -192,81 +173,7 @@
           "rationale": "",
           "requirement_ids": [],
           "template_id": "open",
-          "text": "I am applying for the Backend Python Developer \u2014 Vandelay Health role at FICTIONAL SAMPLE DATA \u2014 Alex Doe is not a real person.."
-        },
-        {
-          "citations": [
-            "00000000-0000-4000-8000-000000000002:13508608df1dff4c"
-          ],
-          "explanation": {
-            "matches": [
-              {
-                "chunk_id": "00000000-0000-4000-8000-000000000002:13508608df1dff4c",
-                "terms": [
-                  "Python"
-                ]
-              }
-            ],
-            "model_rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000002:13508608df1dff4c.",
-            "requirement_ids": [
-              "R1"
-            ]
-          },
-          "id": "C.S1",
-          "kind": "claim",
-          "rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000002:13508608df1dff4c.",
-          "requirement_ids": [
-            "R1"
-          ],
-          "template_id": null,
-          "text": "My background includes: Python service predicting delivery windows from historical routes; deployed on ECS with FastAPI."
-        },
-        {
-          "citations": [
-            "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
-          ],
-          "explanation": {
-            "matches": [
-              {
-                "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
-                "terms": [
-                  "SQL"
-                ]
-              }
-            ],
-            "model_rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
-            "requirement_ids": [
-              "R2"
-            ]
-          },
-          "id": "C.S2",
-          "kind": "claim",
-          "rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
-          "requirement_ids": [
-            "R2"
-          ],
-          "template_id": null,
-          "text": "My background includes: Python, SQL, Spark, Airflow, Kubernetes, AWS."
-        },
-        {
-          "citations": [
-            "00000000-0000-4000-8000-000000000001:656379b86d3f7421"
-          ],
-          "explanation": {
-            "matches": [],
-            "model_rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:656379b86d3f7421.",
-            "requirement_ids": [
-              "R3"
-            ]
-          },
-          "id": "C.S3",
-          "kind": "claim",
-          "rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:656379b86d3f7421.",
-          "requirement_ids": [
-            "R3"
-          ],
-          "template_id": null,
-          "text": "My background includes: Introduced Great Expectations checks; reduced bad loads reaching production."
+          "text": "I am applying for the Backend Python Developer role at Vandelay Health."
         },
         {
           "citations": [
@@ -277,7 +184,7 @@
             "model_rationale": "Synthetic unsupported claim for demo.",
             "requirement_ids": []
           },
-          "id": "C.S4",
+          "id": "C.S1",
           "kind": "claim",
           "rationale": "Synthetic unsupported claim for demo.",
           "requirement_ids": [],
@@ -295,7 +202,7 @@
           "text": "I would welcome the chance to discuss how this experience fits your team."
         }
       ],
-      "signoff": "Kind regards,"
+      "signoff": "Kind regards,\nAlex Doe"
     }
   },
   "evidence": [
@@ -316,7 +223,7 @@
         "R1",
         "R3"
       ],
-      "score": 26.914259
+      "score": 27.107161
     },
     {
       "chunk": {
@@ -337,7 +244,7 @@
         "R2",
         "R3"
       ],
-      "score": 20.648942
+      "score": 20.842149
     },
     {
       "chunk": {
@@ -358,7 +265,7 @@
         "R2",
         "R3"
       ],
-      "score": 18.906468
+      "score": 19.07487
     },
     {
       "chunk": {
@@ -377,7 +284,7 @@
       "requirement_ids": [
         "R5"
       ],
-      "score": 12.458516
+      "score": 12.518784
     },
     {
       "chunk": {
@@ -395,7 +302,7 @@
       "requirement_ids": [
         "R2"
       ],
-      "score": 9.010913
+      "score": 9.103228
     },
     {
       "chunk": {
@@ -413,7 +320,7 @@
       "requirement_ids": [
         "R2"
       ],
-      "score": 9.010913
+      "score": 9.103228
     },
     {
       "chunk": {
@@ -431,7 +338,7 @@
       "requirement_ids": [
         "R8"
       ],
-      "score": 6.135574
+      "score": 6.165091
     }
   ],
   "gaps": [
@@ -489,17 +396,17 @@
     }
   ],
   "id": "run-0001",
-  "job_id": "job-3dff515571e139d4",
+  "job_id": "job-ab6b6923316ad663",
   "judge_enabled": false,
   "judge_model": null,
   "model": "mock-1",
   "parent_run_id": null,
   "provider": "mock",
   "report": {
-    "badge_text": "1 unsupported, 0 not verified (of 10 claims)",
-    "claims": 10,
+    "badge_text": "1 unsupported, 0 not verified (of 7 claims)",
+    "claims": 7,
     "flagged_ids": [
-      "C.S4"
+      "C.S1"
     ],
     "judge_enabled": false,
     "not_verified": 0,
@@ -554,27 +461,6 @@
         "status": "checks_passed"
       },
       {
-        "checks_run": [],
-        "failures": [],
-        "judge": null,
-        "sentence_id": "C.S1",
-        "status": "checks_passed"
-      },
-      {
-        "checks_run": [],
-        "failures": [],
-        "judge": null,
-        "sentence_id": "C.S2",
-        "status": "checks_passed"
-      },
-      {
-        "checks_run": [],
-        "failures": [],
-        "judge": null,
-        "sentence_id": "C.S3",
-        "status": "checks_passed"
-      },
-      {
         "checks_run": [
           "employer",
           "number"
@@ -594,7 +480,7 @@
           }
         ],
         "judge": null,
-        "sentence_id": "C.S4",
+        "sentence_id": "C.S1",
         "status": "unsupported"
       },
       {

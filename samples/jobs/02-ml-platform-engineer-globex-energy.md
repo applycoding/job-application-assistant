@@ -1,6 +1,6 @@
 # ML Platform Engineer — Globex Energy
 
-FICTIONAL SAMPLE DATA — Alex Doe is not a real person.
+FICTIONAL SAMPLE DATA for portfolio demo only.
 
 **Company:** Globex Energy  
 **Location:** Hybrid — Austin, TX

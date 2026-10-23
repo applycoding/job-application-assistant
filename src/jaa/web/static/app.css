@@ -59,14 +59,47 @@ input[type="file"] {
   margin-top: 0.35rem;
 }
 
-button {
+button,
+.btn-primary {
   margin-top: 0.75rem;
-  padding: 0.45rem 0.9rem;
+  padding: 0.65rem 1.1rem;
+  min-height: 2.75rem;
+  font-size: 1rem;
   background: var(--accent);
   color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+}
+
+.file-upload {
+  display: block;
+}
+
+.file-input {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  font-size: 0.95rem;
+}
+
+.failure-inline {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--danger);
+}
+
+.failure-chip {
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  background: #fde8e6;
 }
 
 .danger-zone button {

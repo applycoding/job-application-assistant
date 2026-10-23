@@ -37,7 +37,7 @@ def _is_contact_line(text: str) -> bool:
         return True
     if _PHONE_RE.search(text):
         return True
-    if _URL_RE.search(text) or _LINKEDIN_RE.search(lowered):
+    if _URL_RE.search(text) and not _LINKEDIN_RE.search(lowered):
         return True
     return bool(
         lowered.startswith("email:") or lowered.startswith("phone:") or lowered.startswith("tel:")

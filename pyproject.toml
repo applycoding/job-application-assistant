@@ -38,6 +38,10 @@ packages = ["src/jaa"]
 
 [dependency-groups]
 dev = [
+    "httpx2==2.16.0",
+    "openai==3.37.0",
+    "anthropic==2.1.0",
+    "google-genai==2.33.0",
     "httpx==0.28.1",
     "pytest==9.1.1",
     "pytest-asyncio==1.4.0",

@@ -37,3 +37,5 @@ Run: `uv run pytest tests/unit/test_loaders.py tests/unit/test_chunker.py tests/
 Add a tiny `.md` resume snippet under `samples/` with a new employer section. Ingest it via CLI or API and print chunk ids from the repository; re-upload the same bytes and confirm ids are unchanged.
 
 Read `jaa/limits.py` and list which constants bound PDF pages, DOCX zip entries, and total extracted characters for your file type.
+
+Compare `Uuid4Factory` and `SeqIdFactory` in `ids.py` and state which one the CLI uses when ingesting a new file.

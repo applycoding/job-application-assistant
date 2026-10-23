@@ -9,6 +9,13 @@
     <span class="status-label status-{{ status }}">
       {% if status == "unsupported" %}⚠ Unsupported{% elif status == "not_verified" %}? Not verified{% elif status == "entailed" %}✓ Entailed{% else %}✓ Checks passed{% endif %}
     </span>
+    {% if check and check.failures and status == "unsupported" %}
+    <span class="failure-inline" data-testid="failure-summary">
+      {% for f in check.failures %}
+      <span class="failure-chip">{{ f.check }}{% if f.token %}: {{ f.token }}{% endif %}</span>
+      {% endfor %}
+    </span>
+    {% endif %}
   </summary>
   {% if sentence.explanation %}
   <div class="explanation">

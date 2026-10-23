@@ -96,8 +96,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             "provider": cfg.provider,
             "db": db_status,
         }
-        if cfg.instance_nonce is not None:
-            body["instance"] = cfg.instance_nonce
+        body["instance"] = cfg.instance_nonce
         if db_status != "ok":
             return JSONResponse(status_code=503, content=body)
         return body

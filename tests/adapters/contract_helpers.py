@@ -220,7 +220,8 @@ def assert_provider_request(
         if provider == "anthropic" or provider in ("openai", "xai"):
             assert body["model"] == expected_judge
         elif provider == "google":
-            assert expected_judge in url or body  # model is in URL for Gemini
+            url_text = str(url)
+            assert expected_judge in url_text or body.get("model") == expected_judge
 
 
 async def run_contract_suite(provider: str) -> None:

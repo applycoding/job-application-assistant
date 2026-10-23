@@ -56,12 +56,34 @@ _COMPANY_SUFFIX_RE = re.compile(
 )
 
 _OWNERSHIP_LEMMAS = ("lead", "manage", "own", "build", "architect")
+_OWNERSHIP_WORD_TO_LEMMA: dict[str, str] = {
+    "lead": "lead",
+    "leads": "lead",
+    "leading": "lead",
+    "led": "lead",
+    "manage": "manage",
+    "manages": "manage",
+    "managed": "manage",
+    "managing": "manage",
+    "own": "own",
+    "owns": "own",
+    "owned": "own",
+    "owning": "own",
+    "build": "build",
+    "builds": "build",
+    "built": "build",
+    "building": "build",
+    "architect": "architect",
+    "architects": "architect",
+    "architected": "architect",
+    "architecting": "architect",
+}
 _OWNERSHIP_RE = re.compile(
     r"\b(led|leads|leading|manage|manages|managed|managing|own|owns|owned|owning|"
     r"build|builds|built|building|architect|architects|architected|architecting)\b",
     re.IGNORECASE,
 )
-_PASSIVE_BY_RE = re.compile(r"\b\w+ed\s+by\b", re.IGNORECASE)
+_PASSIVE_BY_AFTER_RE = re.compile(r"^\s+by\b", re.IGNORECASE)
 
 _NEGATION_RE = re.compile(r"\b(no|not|never|without|cannot|can't|none)\b", re.IGNORECASE)
 
@@ -155,43 +177,56 @@ def extract_durations(text: str) -> list[DurationMention]:
     return out
 
 
+def _strip_token(tok: str) -> str:
+    return tok.strip().rstrip(".,;:!?\"'()[]")
+
+
+def _is_skill_name(name: str, skills: set[str]) -> bool:
+    bare = _strip_token(name)
+    if bare in skills:
+        return True
+    return any(_strip_token(s) == bare for s in skills)
+
+
 def extract_orgs(text: str, lexicon: SkillLexicon) -> list[str]:
-    skills = lexicon.find(text)
+    skills = set(lexicon.find(text))
     orgs: list[str] = []
     for m in _ORG_RE.finditer(text):
-        name = m.group(1).strip()
-        if name in skills:
+        name = m.group(1).strip().rstrip(".,;:")
+        if _is_skill_name(name, skills):
             continue
         orgs.append(name)
     for m in _COMPANY_SUFFIX_RE.finditer(text):
-        name = m.group(1).strip()
-        if name in skills:
+        name = m.group(1).strip().rstrip(".,;:")
+        if _is_skill_name(name, skills):
             continue
         orgs.append(name)
     return orgs
 
 
 def extract_ownership(text: str) -> set[str]:
-    if _PASSIVE_BY_RE.search(text):
-        return set()
     found: set[str] = set()
     for m in _OWNERSHIP_RE.finditer(text):
         word = m.group(0).lower()
-        for lemma in _OWNERSHIP_LEMMAS:
-            if word.startswith(lemma):
-                found.add(lemma)
+        end = m.end()
+        if _PASSIVE_BY_AFTER_RE.match(text[end:]):
+            continue
+        lemma = _OWNERSHIP_WORD_TO_LEMMA.get(word)
+        if lemma:
+            found.add(lemma)
     return found
 
 
 def negated_terms(text: str, terms: Iterable[str]) -> set[str]:
     tokens = re.findall(r"[a-z0-9+#.]+", text.lower())
+    norm_tokens = [_strip_token(t) for t in tokens]
     negated: set[str] = set()
     for i, tok in enumerate(tokens):
         if not _NEGATION_RE.fullmatch(tok):
             continue
-        window = tokens[i + 1 : i + 5]
+        window = norm_tokens[i + 1 : i + 5]
         for term in terms:
-            t = term.lower()
+            t = _strip_token(term.lower())
             if t in window:
                 negated.add(term)
     return negated

@@ -39,7 +39,7 @@ Tailored job applications from *your* CV, where every claim is cited and checked
 
 ## Security
 
-Local-only by design: Host allowlist, Origin + CSRF on mutations, strict CSP, no CORS. Docker publishes on `127.0.0.1` only. There is no authentication—do not expose the app to a network. Prompt-injection defences (constant system prompts, JSON data boundaries, citation validation) are **mitigations, not immunity**.
+Local-only by design: Host allowlist, Origin + CSRF on mutations, strict CSP, no CORS. Docker publishes on `127.0.0.1` only. There is no authentication; do not expose the app to a network. Prompt-injection defences (constant system prompts, JSON data boundaries, citation validation) are **mitigations, not immunity**.
 
 ## Quickstart (local)
 
@@ -106,7 +106,7 @@ flowchart LR
 
 ## Truthfulness
 
-Each **claim** (not framing) is checked against cited evidence using deterministic rules (numbers, employers, skills, negation, mixed citations, durations, and more). Optional LLM judge runs only on claims that pass deterministic checks. `checks_passed` means no deterministic issue was found—not that the claim is guaranteed true.
+Each **claim** (not framing) is checked against cited evidence using deterministic rules (numbers, employers, skills, negation, mixed citations, durations, and more). Optional LLM judge runs only on claims that pass deterministic checks. `checks_passed` means no deterministic issue was found, not that the claim is guaranteed true.
 
 The mock provider injects one unsupported claim (`At Initech, I was part of a 15-person platform team.`) so you can see the checker in action.
 
@@ -130,11 +130,11 @@ Regenerate goldens: `JAA_UPDATE_GOLDEN=1 uv run pytest tests/integration/test_pi
 
 ## Tutorial
 
-Step-by-step chapters: [`docs/tutorial/`](docs/tutorial/) (00–12).
+Step-by-step chapters: [`docs/tutorial/`](docs/tutorial/) (00-12).
 
 ## Sample data
 
-Alex Doe and all employers in `samples/` are **fictional**. Markers: `FICTIONAL SAMPLE DATA — Alex Doe is not a real person.`
+Alex Doe and all employers in `samples/` are **fictional**. CV and project files use `FICTIONAL SAMPLE DATA` markers; job posts use a portfolio-demo banner.
 
 ## License
 

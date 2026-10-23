@@ -40,12 +40,22 @@ def assert_golden_run(run: Run, path: str, *, update: bool = False) -> None:
     from pathlib import Path
 
     p = Path(path)
-    expected = load_golden(str(p)) if p.is_file() else None
+    if not p.is_file():
+        if update:
+            actual = run_to_golden_dict(run)
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(
+                json.dumps(actual, indent=2, sort_keys=True, ensure_ascii=True) + "\n",
+                encoding="utf-8",
+            )
+            return
+        raise AssertionError(f"Missing golden file: {p} (set JAA_UPDATE_GOLDEN=1 to create)")
+    expected = load_golden(str(p))
     actual = run_to_golden_dict(run)
-    if update or expected is None:
-        p.parent.mkdir(parents=True, exist_ok=True)
+    if update:
         p.write_text(
-            json.dumps(actual, indent=2, sort_keys=True, ensure_ascii=True) + "\n", encoding="utf-8"
+            json.dumps(actual, indent=2, sort_keys=True, ensure_ascii=True) + "\n",
+            encoding="utf-8",
         )
         return
     assert actual == expected

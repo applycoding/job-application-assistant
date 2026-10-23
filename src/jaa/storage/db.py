@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from collections.abc import Generator
 from contextlib import contextmanager
 from pathlib import Path
@@ -39,6 +40,8 @@ def create_db_engine(db_path: Path) -> Engine:
             RunCitationRow.__table__,  # type: ignore[attr-defined]
         ],
     )
+    if db_path.exists():
+        os.chmod(db_path, 0o600)
     return engine
 
 

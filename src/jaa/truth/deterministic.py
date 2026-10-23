@@ -408,7 +408,15 @@ def _check_duration(
             continue
         spans = extract_spans(ev, ctx.reference_date)
         if spans:
-            low, high = month_bounds(spans[0])
+            span = spans[0]
+            if span.start_month is None or span.end_month is None:
+                return CheckFailure(
+                    check="duration",
+                    token=str(dur.years),
+                    detail="Year-only date span cannot verify duration",
+                    outcome="abstain",
+                )
+            low, high = month_bounds(span)
             if low >= required_months:
                 return None
             if high < required_months:
