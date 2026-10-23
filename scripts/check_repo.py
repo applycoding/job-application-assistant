@@ -13,6 +13,7 @@ SAMPLES = ROOT / "samples"
 FICTIONAL_MARKERS = (
     "FICTIONAL SAMPLE DATA — Alex Doe is not a real person.",
     "FICTIONAL SAMPLE DATA - Alex Doe is not a real person.",
+    "FICTIONAL SAMPLE DATA for portfolio demo only.",
 )
 EMAIL_RE = re.compile(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")
 PHONE_RE = re.compile(r"\b(?:\+?1[-.\s]?)?(?:\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}\b")

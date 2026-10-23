@@ -1,6 +1,6 @@
 {
   "check_rules_version": "2026-10-23.1",
-  "corpus_version": "cd201b1d34daa6aaab6abd7aae5d00b4a0fdf24623b3d96bf785100fbd3d2a10",
+  "corpus_version": "f915171bf498ed394d64c55745ecf01211b6f7a2d76dcd859ed60be5ba35f98f",
   "created_at": "2026-10-23T09:00:00+00:00",
   "drafts": {
     "answers": [
@@ -91,30 +91,30 @@
         "sentences": [
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000003:934541320895c72e"
+              "00000000-0000-4000-8000-000000000003:80bba84915a1e528"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000003:934541320895c72e",
+                  "chunk_id": "00000000-0000-4000-8000-000000000003:80bba84915a1e528",
                   "terms": [
                     "data"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000003:934541320895c72e (matched: data).",
+              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000003:80bba84915a1e528 (matched: data).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q2.S1",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000003:934541320895c72e (matched: data).",
+            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000003:80bba84915a1e528 (matched: data).",
             "requirement_ids": [
               "R1"
             ],
             "template_id": null,
-            "text": "A relevant example from my CV: FICTIONAL SAMPLE DATA for portfolio demo only."
+            "text": "A relevant example from my CV: Data Engineering Specialty - Example Board 2023."
           },
           {
             "citations": [
@@ -188,6 +188,74 @@
         },
         {
           "citations": [
+            "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1",
+                "terms": [
+                  "building",
+                  "data"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1.",
+            "requirement_ids": [
+              "R1"
+            ]
+          },
+          "id": "C.S1",
+          "kind": "claim",
+          "rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1.",
+          "requirement_ids": [
+            "R1"
+          ],
+          "template_id": null,
+          "text": "My background includes: Senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
+        },
+        {
+          "citations": [
+            "00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d"
+          ],
+          "explanation": {
+            "matches": [],
+            "model_rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d.",
+            "requirement_ids": [
+              "R2"
+            ]
+          },
+          "id": "C.S2",
+          "kind": "claim",
+          "rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d.",
+          "requirement_ids": [
+            "R2"
+          ],
+          "template_id": null,
+          "text": "My background includes: Supported a migration led by another team to containerize batch workloads on Kubernetes."
+        },
+        {
+          "citations": [
+            "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1"
+          ],
+          "explanation": {
+            "matches": [],
+            "model_rationale": "Highlights R4 via 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1.",
+            "requirement_ids": [
+              "R4"
+            ]
+          },
+          "id": "C.S3",
+          "kind": "claim",
+          "rationale": "Highlights R4 via 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1.",
+          "requirement_ids": [
+            "R4"
+          ],
+          "template_id": null,
+          "text": "My background includes: Senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
+        },
+        {
+          "citations": [
             "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
           ],
           "explanation": {
@@ -195,7 +263,7 @@
             "model_rationale": "Synthetic unsupported claim for demo.",
             "requirement_ids": []
           },
-          "id": "C.S1",
+          "id": "C.S4",
           "kind": "claim",
           "rationale": "Synthetic unsupported claim for demo.",
           "requirement_ids": [],
@@ -235,7 +303,7 @@
         "R1",
         "R2"
       ],
-      "score": 19.096188
+      "score": 19.110766
     },
     {
       "chunk": {
@@ -257,7 +325,7 @@
         "R1",
         "R5"
       ],
-      "score": 15.738796
+      "score": 15.759707
     },
     {
       "chunk": {
@@ -275,7 +343,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 12.583984
+      "score": 12.590659
     },
     {
       "chunk": {
@@ -293,17 +361,17 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 12.074146
+      "score": 12.080783
     },
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000003",
-        "evidence_text": "\nFICTIONAL SAMPLE DATA for portfolio demo only.",
-        "id": "00000000-0000-4000-8000-000000000003:934541320895c72e",
+        "evidence_text": "\nData Engineering Specialty - Example Board 2023",
+        "id": "00000000-0000-4000-8000-000000000003:80bba84915a1e528",
         "kind": "line",
-        "line_no": 1,
+        "line_no": 4,
         "section": "",
-        "text": "FICTIONAL SAMPLE DATA for portfolio demo only."
+        "text": "Data Engineering Specialty - Example Board 2023"
       },
       "matched_terms": [
         "data"
@@ -311,7 +379,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 11.19857
+      "score": 11.144826
     },
     {
       "chunk": {
@@ -329,7 +397,7 @@
       "requirement_ids": [
         "R5"
       ],
-      "score": 8.439432
+      "score": 8.447123
     }
   ],
   "gaps": [
@@ -394,10 +462,10 @@
   "parent_run_id": null,
   "provider": "mock",
   "report": {
-    "badge_text": "1 unsupported, 0 not verified (of 7 claims)",
-    "claims": 7,
+    "badge_text": "1 unsupported, 0 not verified (of 10 claims)",
+    "claims": 10,
     "flagged_ids": [
-      "C.S1"
+      "C.S4"
     ],
     "judge_enabled": false,
     "not_verified": 0,
@@ -452,6 +520,27 @@
         "status": "checks_passed"
       },
       {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S2",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S3",
+        "status": "checks_passed"
+      },
+      {
         "checks_run": [
           "employer",
           "number"
@@ -471,7 +560,7 @@
           }
         ],
         "judge": null,
-        "sentence_id": "C.S1",
+        "sentence_id": "C.S4",
         "status": "unsupported"
       },
       {

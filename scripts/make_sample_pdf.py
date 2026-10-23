@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Write ``samples/alex-doe-certificates.pdf`` with stable, valid PDF bytes."""
+"""Write ``samples/alex-doe-certificates.pdf`` with stable bytes."""
 
 from __future__ import annotations
 
+import io
 from pathlib import Path
 
 from pypdf import PdfWriter
@@ -13,7 +14,7 @@ OUT = Path(__file__).resolve().parent.parent / "samples" / "alex-doe-certificate
 _CONTENT = b"""BT
 /F1 11 Tf
 72 720 Td
-(FICTIONAL SAMPLE DATA for portfolio demo only.) Tj
+(FICTIONAL SAMPLE DATA - Alex Doe is not a real person.) Tj
 0 -18 Td
 (Alex Doe - Certificates) Tj
 0 -18 Td
@@ -24,7 +25,7 @@ ET
 """
 
 
-def main() -> None:
+def _build_pdf_bytes() -> bytes:
     writer = PdfWriter()
     page = writer.add_blank_page(width=612, height=792)
     font = DictionaryObject(
@@ -43,8 +44,16 @@ def main() -> None:
     stream[NameObject("/Length")] = NumberObject(len(_CONTENT))
     page[NameObject("/Resources")] = resources
     page[NameObject("/Contents")] = writer._add_object(stream)
-    with OUT.open("wb") as fh:
-        writer.write(fh)
+    buf = io.BytesIO()
+    writer.write(buf)
+    return buf.getvalue()
+
+
+_PDF = _build_pdf_bytes()
+
+
+def main() -> None:
+    OUT.write_bytes(_PDF)
 
 
 if __name__ == "__main__":

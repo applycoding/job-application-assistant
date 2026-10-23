@@ -17,6 +17,10 @@
 Dear Acme Logistics Team,
 
 * I am applying for the Senior Data Engineer role at Acme Logistics.
+- My background includes: Data Engineering Specialty - Example Board 2023. _(cites: 00000000-0000-4000-8000-000000000003:80bba84915a1e528)_ `[checks_passed]`
+- My background includes: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL. _(cites: 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465)_ `[checks_passed]`
+- My background includes: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL. _(cites: 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465)_ `[checks_passed]`
+- My background includes: AWS. _(cites: 00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5)_ `[checks_passed]`
 * I would welcome the chance to discuss how this experience fits your team.
 
 Kind regards,

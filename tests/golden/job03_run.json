@@ -1,6 +1,6 @@
 {
   "check_rules_version": "2026-10-23.1",
-  "corpus_version": "cd201b1d34daa6aaab6abd7aae5d00b4a0fdf24623b3d96bf785100fbd3d2a10",
+  "corpus_version": "f915171bf498ed394d64c55745ecf01211b6f7a2d76dcd859ed60be5ba35f98f",
   "created_at": "2026-10-23T09:00:00+00:00",
   "drafts": {
     "answers": [
@@ -180,11 +180,85 @@
             "00000000-0000-4000-8000-000000000002:13508608df1dff4c"
           ],
           "explanation": {
+            "matches": [
+              {
+                "chunk_id": "00000000-0000-4000-8000-000000000002:13508608df1dff4c",
+                "terms": [
+                  "Python"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000002:13508608df1dff4c.",
+            "requirement_ids": [
+              "R1"
+            ]
+          },
+          "id": "C.S1",
+          "kind": "claim",
+          "rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000002:13508608df1dff4c.",
+          "requirement_ids": [
+            "R1"
+          ],
+          "template_id": null,
+          "text": "My background includes: Python."
+        },
+        {
+          "citations": [
+            "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
+                "terms": [
+                  "SQL"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
+            "requirement_ids": [
+              "R2"
+            ]
+          },
+          "id": "C.S2",
+          "kind": "claim",
+          "rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
+          "requirement_ids": [
+            "R2"
+          ],
+          "template_id": null,
+          "text": "My background includes: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
+        },
+        {
+          "citations": [
+            "00000000-0000-4000-8000-000000000001:656379b86d3f7421"
+          ],
+          "explanation": {
+            "matches": [],
+            "model_rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:656379b86d3f7421.",
+            "requirement_ids": [
+              "R3"
+            ]
+          },
+          "id": "C.S3",
+          "kind": "claim",
+          "rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:656379b86d3f7421.",
+          "requirement_ids": [
+            "R3"
+          ],
+          "template_id": null,
+          "text": "My background includes: Introduced Great Expectations checks; reduced bad loads reaching production."
+        },
+        {
+          "citations": [
+            "00000000-0000-4000-8000-000000000002:13508608df1dff4c"
+          ],
+          "explanation": {
             "matches": [],
             "model_rationale": "Synthetic unsupported claim for demo.",
             "requirement_ids": []
           },
-          "id": "C.S1",
+          "id": "C.S4",
           "kind": "claim",
           "rationale": "Synthetic unsupported claim for demo.",
           "requirement_ids": [],
@@ -223,7 +297,7 @@
         "R1",
         "R3"
       ],
-      "score": 27.107161
+      "score": 27.139978
     },
     {
       "chunk": {
@@ -244,7 +318,7 @@
         "R2",
         "R3"
       ],
-      "score": 20.842149
+      "score": 20.854618
     },
     {
       "chunk": {
@@ -265,7 +339,7 @@
         "R2",
         "R3"
       ],
-      "score": 19.07487
+      "score": 19.088143
     },
     {
       "chunk": {
@@ -284,7 +358,7 @@
       "requirement_ids": [
         "R5"
       ],
-      "score": 12.518784
+      "score": 12.538137
     },
     {
       "chunk": {
@@ -338,7 +412,7 @@
       "requirement_ids": [
         "R8"
       ],
-      "score": 6.165091
+      "score": 6.174684
     }
   ],
   "gaps": [
@@ -403,10 +477,10 @@
   "parent_run_id": null,
   "provider": "mock",
   "report": {
-    "badge_text": "1 unsupported, 0 not verified (of 7 claims)",
-    "claims": 7,
+    "badge_text": "1 unsupported, 0 not verified (of 10 claims)",
+    "claims": 10,
     "flagged_ids": [
-      "C.S1"
+      "C.S4"
     ],
     "judge_enabled": false,
     "not_verified": 0,
@@ -461,6 +535,27 @@
         "status": "checks_passed"
       },
       {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S2",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S3",
+        "status": "checks_passed"
+      },
+      {
         "checks_run": [
           "employer",
           "number"
@@ -480,7 +575,7 @@
           }
         ],
         "judge": null,
-        "sentence_id": "C.S1",
+        "sentence_id": "C.S4",
         "status": "unsupported"
       },
       {

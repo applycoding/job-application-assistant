@@ -1,6 +1,6 @@
 {
   "check_rules_version": "2026-10-23.1",
-  "corpus_version": "86c34eb612faaf998fa921724593721d5b5442bd0cb7ef8860551f03fa879126",
+  "corpus_version": "909161fb823e1e69b22c0a7d988b161e0a10493c7d373c1d82ffb39918e53b15",
   "created_at": "2026-10-23T09:00:00Z",
   "drafts": {
     "answers": [
@@ -181,6 +181,117 @@
           "text": "I am applying for the Senior Data Engineer role at Acme Logistics."
         },
         {
+          "citations": [
+            "00000000-0000-4000-8000-000000000003:80bba84915a1e528"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "00000000-0000-4000-8000-000000000003:80bba84915a1e528",
+                "terms": [
+                  "data",
+                  "engineering"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000003:80bba84915a1e528.",
+            "requirement_ids": [
+              "R1"
+            ]
+          },
+          "id": "C.S1",
+          "kind": "claim",
+          "rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000003:80bba84915a1e528.",
+          "requirement_ids": [
+            "R1"
+          ],
+          "template_id": null,
+          "text": "My background includes: Data Engineering Specialty - Example Board 2023."
+        },
+        {
+          "citations": [
+            "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
+                "terms": [
+                  "Python",
+                  "SQL"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
+            "requirement_ids": [
+              "R2"
+            ]
+          },
+          "id": "C.S2",
+          "kind": "claim",
+          "rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
+          "requirement_ids": [
+            "R2"
+          ],
+          "template_id": null,
+          "text": "My background includes: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
+        },
+        {
+          "citations": [
+            "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
+                "terms": [
+                  "Airflow",
+                  "Apache Spark"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
+            "requirement_ids": [
+              "R3"
+            ]
+          },
+          "id": "C.S3",
+          "kind": "claim",
+          "rationale": "Highlights R3 via 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465.",
+          "requirement_ids": [
+            "R3"
+          ],
+          "template_id": null,
+          "text": "My background includes: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
+        },
+        {
+          "citations": [
+            "00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5",
+                "terms": [
+                  "AWS"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R4 via 00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5.",
+            "requirement_ids": [
+              "R4"
+            ]
+          },
+          "id": "C.S4",
+          "kind": "claim",
+          "rationale": "Highlights R4 via 00000000-0000-4000-8000-000000000001:f1d36bcdbee4c7b5.",
+          "requirement_ids": [
+            "R4"
+          ],
+          "template_id": null,
+          "text": "My background includes: AWS."
+        },
+        {
           "citations": [],
           "explanation": null,
           "id": "C.F2",
@@ -219,7 +330,7 @@
         "R4",
         "R7"
       ],
-      "score": 36.229192
+      "score": 36.267808
     },
     {
       "chunk": {
@@ -239,7 +350,7 @@
         "R4",
         "R8"
       ],
-      "score": 29.290941
+      "score": 29.336755
     },
     {
       "chunk": {
@@ -258,7 +369,7 @@
       "requirement_ids": [
         "R2"
       ],
-      "score": 28.66758
+      "score": 28.69843
     },
     {
       "chunk": {
@@ -276,7 +387,7 @@
       "requirement_ids": [
         "R2"
       ],
-      "score": 25.370509
+      "score": 25.3847
     },
     {
       "chunk": {
@@ -314,7 +425,7 @@
         "R6",
         "R8"
       ],
-      "score": 16.476361
+      "score": 16.50448
     },
     {
       "chunk": {
@@ -332,7 +443,7 @@
       "requirement_ids": [
         "R3"
       ],
-      "score": 16.347178
+      "score": 16.363665
     },
     {
       "chunk": {
@@ -351,7 +462,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 12.657237
+      "score": 12.668806
     },
     {
       "chunk": {
@@ -371,7 +482,7 @@
         "R5",
         "R8"
       ],
-      "score": 11.878289
+      "score": 11.894516
     },
     {
       "chunk": {
@@ -407,7 +518,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 10.543033
+      "score": 10.555684
     },
     {
       "chunk": {
@@ -425,25 +536,7 @@
       "requirement_ids": [
         "R8"
       ],
-      "score": 9.985017
-    },
-    {
-      "chunk": {
-        "doc_id": "00000000-0000-4000-8000-000000000003",
-        "evidence_text": "\nFICTIONAL SAMPLE DATA for portfolio demo only.",
-        "id": "00000000-0000-4000-8000-000000000003:934541320895c72e",
-        "kind": "line",
-        "line_no": 1,
-        "section": "",
-        "text": "FICTIONAL SAMPLE DATA for portfolio demo only."
-      },
-      "matched_terms": [
-        "data"
-      ],
-      "requirement_ids": [
-        "R1"
-      ],
-      "score": 8.578568
+      "score": 9.992843
     },
     {
       "chunk": {
@@ -461,7 +554,25 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 8.471647
+      "score": 8.473985
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000003",
+        "evidence_text": "\nFICTIONAL SAMPLE DATA - Alex Doe is not a real person.",
+        "id": "00000000-0000-4000-8000-000000000003:20173e60281c4aeb",
+        "kind": "line",
+        "line_no": 1,
+        "section": "",
+        "text": "FICTIONAL SAMPLE DATA - Alex Doe is not a real person."
+      },
+      "matched_terms": [
+        "data"
+      ],
+      "requirement_ids": [
+        "R1"
+      ],
+      "score": 8.473985
     },
     {
       "chunk": {
@@ -479,7 +590,7 @@
       "requirement_ids": [
         "R1"
       ],
-      "score": 8.384633
+      "score": 8.387107
     },
     {
       "chunk": {
@@ -497,7 +608,7 @@
       "requirement_ids": [
         "R8"
       ],
-      "score": 6.926916
+      "score": 6.933098
     }
   ],
   "gaps": [
@@ -535,7 +646,7 @@
   "provider": "mock",
   "report": {
     "badge_text": "No deterministic issues found",
-    "claims": 6,
+    "claims": 10,
     "flagged_ids": [],
     "judge_enabled": false,
     "not_verified": 0,
@@ -587,6 +698,34 @@
         "failures": [],
         "judge": null,
         "sentence_id": "C.F1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S2",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S3",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S4",
         "status": "checks_passed"
       },
       {
@@ -705,7 +844,5 @@
       "text": "Prior work in logistics or supply chain analytics."
     }
   ],
-  "warnings": [
-    "Cover note has no supported claims \u2014 add manually"
-  ]
+  "warnings": []
 }
