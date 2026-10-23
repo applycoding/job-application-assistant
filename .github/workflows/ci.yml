@@ -95,4 +95,6 @@ jobs:
       - run: test "$(docker exec jaa id -u)" = "10001"
       - run: docker exec jaa sh -c 'touch /data/.w && rm /data/.w'
       - run: test "$(docker port jaa 8000/tcp)" = "127.0.0.1:8000"
-      - run: test "$(curl -s -o /dev/null -w '%{http_code}' -H 'Host: evil.example' http://127.0.0.1:8000/healthz)" = "400"
+      - run: |
+          test "$(curl -s -o /dev/null -w '%{http_code}' \
+            -H 'Host: evil.example' http://127.0.0.1:8000/healthz)" = "400"
