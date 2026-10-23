@@ -9,7 +9,7 @@
 - In addition: AWS. _(cites: e5cc390be9431197)_ `[checks_passed]`
 
 ## Q2: How do you test and monitor data quality in production?
-- A relevant example from my CV: Apache Spark, Kafka. _(cites: fe0b61a3cd3858c4)_ `[checks_passed]`
+- A relevant example from my CV: Apache Spark, Kafka. _(cites: 95630d921b0fe522)_ `[checks_passed]`
 - I can also point to this: Data Engineering Specialty - Example Board 2023. _(cites: 993e6d3d45c4bace)_ `[checks_passed]`
 - In addition: Mentored two junior engineers on code review and incident response. _(cites: 97b798af26b2d0e7)_ `[checks_passed]`
 

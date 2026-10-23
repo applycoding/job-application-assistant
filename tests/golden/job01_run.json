@@ -1,6 +1,6 @@
 {
   "check_rules_version": "2026-10-24.1",
-  "corpus_version": "c6456cf0bf98a5d824954d3cdd876a82c33d68c65ebad765d459dbfe34720f14",
+  "corpus_version": "72c968afab2749543dbacdaeb624d57ea4936671aaa4a20b6b890c915fd24abe",
   "created_at": "2026-10-23T09:00:00+00:00",
   "drafts": {
     "answers": [
@@ -98,25 +98,25 @@
         "sentences": [
           {
             "citations": [
-              "fe0b61a3cd3858c4"
+              "95630d921b0fe522"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "fe0b61a3cd3858c4",
+                  "chunk_id": "95630d921b0fe522",
                   "terms": [
                     "Kafka"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R5 using fe0b61a3cd3858c4 (matched: Kafka, kafka, streaming).",
+              "model_rationale": "Addresses R5 using 95630d921b0fe522 (matched: Kafka, kafka, streaming).",
               "requirement_ids": [
                 "R5"
               ]
             },
             "id": "Q2.S1",
             "kind": "claim",
-            "rationale": "Addresses R5 using fe0b61a3cd3858c4 (matched: Kafka, kafka, streaming).",
+            "rationale": "Addresses R5 using 95630d921b0fe522 (matched: Kafka, kafka, streaming).",
             "requirement_ids": [
               "R5"
             ],
@@ -366,7 +366,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nPython service predicting delivery windows from historical routes; deployed on ECS with FastAPI.",
-        "id": "55e174d82da001e0",
+        "id": "23c0fce35130905a",
         "kind": "bullet",
         "line_no": 6,
         "section": "",
@@ -384,7 +384,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nHelped a food-bank charity consolidate CSV donations into Postgres and Metabase views.",
-        "id": "6696e00447258d27",
+        "id": "8ebfad1dd21499a6",
         "kind": "bullet",
         "line_no": 14,
         "section": "",
@@ -438,7 +438,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nUsed scikit-learn and scheduled retraining via Airflow.",
-        "id": "7b06d8404f1c5df9",
+        "id": "9cf46d567e34b266",
         "kind": "bullet",
         "line_no": 7,
         "section": "",
@@ -456,7 +456,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nSpark streaming job joining web clicks with inventory snapshots in Kafka.",
-        "id": "fe0b61a3cd3858c4",
+        "id": "95630d921b0fe522",
         "kind": "bullet",
         "line_no": 10,
         "section": "",
@@ -571,7 +571,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nOpen Logistics ETA (2023)",
-        "id": "393c3f638a216904",
+        "id": "fe0c20bcdc281271",
         "kind": "line",
         "line_no": 5,
         "section": "",
@@ -607,7 +607,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nFICTIONAL SAMPLE DATA - Alex Doe is not a real person.",
-        "id": "0961a6b26b482265",
+        "id": "59497a7fcc9ca5d3",
         "kind": "line",
         "line_no": 1,
         "section": "",
