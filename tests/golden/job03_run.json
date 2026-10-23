@@ -1,0 +1,573 @@
+{
+  "check_rules_version": "2026-10-23.3",
+  "corpus_version": "cf15c03612362bf28e29e8dc6542add2cd1e6acf11b77f56de252d0748442cc7",
+  "created_at": "2026-10-23T09:00:00+00:00",
+  "drafts": {
+    "answers": [
+      {
+        "question": "What relevant experience do you bring to this role?",
+        "question_id": "Q1",
+        "sentences": [
+          {
+            "citations": [
+              "00000000-0000-4000-8000-000000000002:13508608df1dff4c"
+            ],
+            "explanation": {
+              "matches": [
+                {
+                  "chunk_id": "00000000-0000-4000-8000-000000000002:13508608df1dff4c",
+                  "terms": [
+                    "FastAPI",
+                    "Python"
+                  ]
+                }
+              ],
+              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:13508608df1dff4c (matched: fastapi, python).",
+              "requirement_ids": [
+                "R1"
+              ]
+            },
+            "id": "Q1.S1",
+            "kind": "claim",
+            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:13508608df1dff4c (matched: fastapi, python).",
+            "requirement_ids": [
+              "R1"
+            ],
+            "template_id": null,
+            "text": "A relevant example from my CV: FastAPI, Python."
+          },
+          {
+            "citations": [
+              "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
+            ],
+            "explanation": {
+              "matches": [
+                {
+                  "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
+                  "terms": [
+                    "Python"
+                  ]
+                }
+              ],
+              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python).",
+              "requirement_ids": [
+                "R1"
+              ]
+            },
+            "id": "Q1.S2",
+            "kind": "claim",
+            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python).",
+            "requirement_ids": [
+              "R1"
+            ],
+            "template_id": null,
+            "text": "I can also point to this: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
+          },
+          {
+            "citations": [
+              "00000000-0000-4000-8000-000000000001:c0ec43deb954476f"
+            ],
+            "explanation": {
+              "matches": [
+                {
+                  "chunk_id": "00000000-0000-4000-8000-000000000001:c0ec43deb954476f",
+                  "terms": [
+                    "code",
+                    "review"
+                  ]
+                }
+              ],
+              "model_rationale": "Addresses R5 using 00000000-0000-4000-8000-000000000001:c0ec43deb954476f (matched: code, review).",
+              "requirement_ids": [
+                "R5"
+              ]
+            },
+            "id": "Q1.S3",
+            "kind": "claim",
+            "rationale": "Addresses R5 using 00000000-0000-4000-8000-000000000001:c0ec43deb954476f (matched: code, review).",
+            "requirement_ids": [
+              "R5"
+            ],
+            "template_id": null,
+            "text": "In addition: Mentored two junior engineers on code review and incident response."
+          }
+        ]
+      },
+      {
+        "question": "Describe how you design an API for a workflow with multiple approval steps.",
+        "question_id": "Q2",
+        "sentences": [
+          {
+            "citations": [
+              "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4"
+            ],
+            "explanation": {
+              "matches": [
+                {
+                  "chunk_id": "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4",
+                  "terms": [
+                    "Python"
+                  ]
+                }
+              ],
+              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:e8a15de8c27940c4 (matched: python).",
+              "requirement_ids": [
+                "R1"
+              ]
+            },
+            "id": "Q2.S1",
+            "kind": "claim",
+            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:e8a15de8c27940c4 (matched: python).",
+            "requirement_ids": [
+              "R1"
+            ],
+            "template_id": null,
+            "text": "A relevant example from my CV: Python, SQL."
+          },
+          {
+            "citations": [
+              "00000000-0000-4000-8000-000000000001:656379b86d3f7421"
+            ],
+            "explanation": {
+              "matches": [],
+              "model_rationale": "Addresses R3 using 00000000-0000-4000-8000-000000000001:656379b86d3f7421 (matched: production).",
+              "requirement_ids": [
+                "R3"
+              ]
+            },
+            "id": "Q2.S2",
+            "kind": "claim",
+            "rationale": "Addresses R3 using 00000000-0000-4000-8000-000000000001:656379b86d3f7421 (matched: production).",
+            "requirement_ids": [
+              "R3"
+            ],
+            "template_id": null,
+            "text": "I can also point to this: Introduced Great Expectations checks; reduced bad loads reaching production."
+          },
+          {
+            "citations": [
+              "00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279"
+            ],
+            "explanation": {
+              "matches": [],
+              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279.",
+              "requirement_ids": []
+            },
+            "id": "Q2.S3",
+            "kind": "claim",
+            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279.",
+            "requirement_ids": [],
+            "template_id": null,
+            "text": "In addition: SQL."
+          }
+        ]
+      }
+    ],
+    "cover_note": {
+      "salutation": "Dear Vandelay Health Team,",
+      "sentences": [
+        {
+          "citations": [],
+          "explanation": null,
+          "id": "C.F1",
+          "kind": "framing",
+          "rationale": "",
+          "requirement_ids": [],
+          "template_id": "open",
+          "text": "I am applying for the Backend Python Developer role at Vandelay Health."
+        },
+        {
+          "citations": [
+            "00000000-0000-4000-8000-000000000002:13508608df1dff4c"
+          ],
+          "explanation": {
+            "matches": [],
+            "model_rationale": "Synthetic unsupported claim for demo.",
+            "requirement_ids": []
+          },
+          "id": "C.S1",
+          "kind": "claim",
+          "rationale": "Synthetic unsupported claim for demo.",
+          "requirement_ids": [],
+          "template_id": null,
+          "text": "At Initech, I was part of a 15-person platform team."
+        },
+        {
+          "citations": [],
+          "explanation": null,
+          "id": "C.F2",
+          "kind": "framing",
+          "rationale": "",
+          "requirement_ids": [],
+          "template_id": "close",
+          "text": "I would welcome the chance to discuss how this experience fits your team."
+        }
+      ],
+      "signoff": "Kind regards,\nAlex Doe"
+    }
+  },
+  "evidence": [
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000002",
+        "evidence_text": "\nPython service predicting delivery windows from historical routes; deployed on ECS with FastAPI.",
+        "id": "00000000-0000-4000-8000-000000000002:13508608df1dff4c",
+        "kind": "bullet",
+        "line_no": 6,
+        "section": "",
+        "text": "Python service predicting delivery windows from historical routes; deployed on ECS with FastAPI."
+      },
+      "matched_terms": [
+        "FastAPI",
+        "Python"
+      ],
+      "requirement_ids": [
+        "R1",
+        "R3"
+      ],
+      "score": 27.139978
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000001",
+        "evidence_text": "Skills\nPython, SQL, Spark, Airflow, Kubernetes, AWS",
+        "id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
+        "kind": "line",
+        "line_no": 17,
+        "section": "Skills",
+        "text": "Python, SQL, Spark, Airflow, Kubernetes, AWS"
+      },
+      "matched_terms": [
+        "Python",
+        "SQL"
+      ],
+      "requirement_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "score": 20.854618
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000001",
+        "evidence_text": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)\nWrote SQL reports and small Python utilities for clinical trial operations.",
+        "id": "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4",
+        "kind": "bullet",
+        "line_no": 36,
+        "section": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)",
+        "text": "Wrote SQL reports and small Python utilities for clinical trial operations."
+      },
+      "matched_terms": [
+        "Python",
+        "SQL"
+      ],
+      "requirement_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "score": 19.088143
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000001",
+        "evidence_text": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)\nMentored two junior engineers on code review and incident response.",
+        "id": "00000000-0000-4000-8000-000000000001:c0ec43deb954476f",
+        "kind": "bullet",
+        "line_no": 26,
+        "section": "Northwind Analytics \u2014 Senior Data Engineer (Mar 2021\u2013present)",
+        "text": "Mentored two junior engineers on code review and incident response."
+      },
+      "matched_terms": [
+        "code",
+        "review"
+      ],
+      "requirement_ids": [
+        "R5"
+      ],
+      "score": 12.538137
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000002",
+        "evidence_text": "\nHelped a food-bank charity consolidate CSV donations into Postgres and Metabase views.",
+        "id": "00000000-0000-4000-8000-000000000002:fde8a5e2dd30b279",
+        "kind": "bullet",
+        "line_no": 14,
+        "section": "",
+        "text": "Helped a food-bank charity consolidate CSV donations into Postgres and Metabase views."
+      },
+      "matched_terms": [
+        "SQL"
+      ],
+      "requirement_ids": [
+        "R2"
+      ],
+      "score": 9.103228
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000004",
+        "evidence_text": "Volunteering - Alex Doe\nFood Bank of Example City (2019\u20132021): built a simple Postgres + Metabase dashboard for donation trends.",
+        "id": "00000000-0000-4000-8000-000000000004:675747372e441d9b",
+        "kind": "line",
+        "line_no": 3,
+        "section": "Volunteering - Alex Doe",
+        "text": "Food Bank of Example City (2019\u20132021): built a simple Postgres + Metabase dashboard for donation trends."
+      },
+      "matched_terms": [
+        "SQL"
+      ],
+      "requirement_ids": [
+        "R2"
+      ],
+      "score": 9.103228
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000001",
+        "evidence_text": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)\nIntroduced Great Expectations checks; reduced bad loads reaching production.",
+        "id": "00000000-0000-4000-8000-000000000001:656379b86d3f7421",
+        "kind": "bullet",
+        "line_no": 31,
+        "section": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)",
+        "text": "Introduced Great Expectations checks; reduced bad loads reaching production."
+      },
+      "matched_terms": [
+        "production"
+      ],
+      "requirement_ids": [
+        "R8"
+      ],
+      "score": 6.174684
+    }
+  ],
+  "gaps": [
+    {
+      "requirement_id": "R3",
+      "term": "Go"
+    },
+    {
+      "requirement_id": "R4",
+      "term": null
+    },
+    {
+      "requirement_id": "R6",
+      "term": null
+    },
+    {
+      "requirement_id": "R7",
+      "term": null
+    }
+  ],
+  "id": "run-0001",
+  "job_id": "job-ab6b6923316ad663",
+  "judge_enabled": false,
+  "judge_model": null,
+  "model": "mock-1",
+  "parent_run_id": null,
+  "provider": "mock",
+  "report": {
+    "badge_text": "1 unsupported, 0 not verified (of 7 claims)",
+    "claims": 7,
+    "flagged_ids": [
+      "C.S1"
+    ],
+    "judge_enabled": false,
+    "not_verified": 0,
+    "sentences": [
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "Q1.S1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "Q1.S2",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "Q1.S3",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "Q2.S1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "Q2.S2",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "Q2.S3",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.F1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [
+          "employer",
+          "number"
+        ],
+        "failures": [
+          {
+            "check": "number",
+            "detail": "Number 15 not in evidence",
+            "outcome": "fail",
+            "token": "15"
+          },
+          {
+            "check": "employer",
+            "detail": "Employer Initech not in evidence",
+            "outcome": "fail",
+            "token": "Initech"
+          }
+        ],
+        "judge": null,
+        "sentence_id": "C.S1",
+        "status": "unsupported"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.F2",
+        "status": "checks_passed"
+      }
+    ],
+    "unsupported": 1
+  },
+  "requirements": [
+    {
+      "id": "R1",
+      "min_years": 3,
+      "priority": "must",
+      "skills": [
+        "FastAPI",
+        "Python"
+      ],
+      "terms": [
+        "FastAPI",
+        "Python"
+      ],
+      "text": "3+ years of backend development in Python (FastAPI or Django REST)."
+    },
+    {
+      "id": "R2",
+      "min_years": null,
+      "priority": "must",
+      "skills": [
+        "SQL"
+      ],
+      "terms": [
+        "SQL"
+      ],
+      "text": "Strong SQL and relational schema design; PostgreSQL preferred."
+    },
+    {
+      "id": "R3",
+      "min_years": null,
+      "priority": "must",
+      "skills": [
+        "Go",
+        "Python"
+      ],
+      "terms": [
+        "Go",
+        "Python"
+      ],
+      "text": "Experience with Python and Go in production microservices."
+    },
+    {
+      "id": "R4",
+      "min_years": null,
+      "priority": "must",
+      "skills": [],
+      "terms": [
+        "familiarity",
+        "hipaa",
+        "aware",
+        "logging",
+        "access",
+        "controls"
+      ],
+      "text": "Familiarity with HIPAA-aware logging and access controls."
+    },
+    {
+      "id": "R5",
+      "min_years": null,
+      "priority": "must",
+      "skills": [],
+      "terms": [
+        "writing",
+        "automated",
+        "tests",
+        "pytest",
+        "participating",
+        "code",
+        "review"
+      ],
+      "text": "Writing automated tests (pytest) and participating in code review."
+    },
+    {
+      "id": "R6",
+      "min_years": null,
+      "priority": "nice",
+      "skills": [],
+      "terms": [
+        "healthcare",
+        "regulated",
+        "industry"
+      ],
+      "text": "Healthcare or regulated-industry experience."
+    },
+    {
+      "id": "R7",
+      "min_years": null,
+      "priority": "nice",
+      "skills": [
+        "Redis"
+      ],
+      "terms": [
+        "Redis"
+      ],
+      "text": "Redis for caching and rate limiting."
+    },
+    {
+      "id": "R8",
+      "min_years": null,
+      "priority": "nice",
+      "skills": [],
+      "terms": [
+        "opentelemetry",
+        "structured",
+        "logging",
+        "production"
+      ],
+      "text": "OpenTelemetry or structured logging in production."
+    }
+  ],
+  "warnings": []
+}

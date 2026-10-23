@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}{{ run.id }} - Run{% endblock %}
+{% block content %}
+<p><a href="/jobs/{{ run.job_id }}">← Job</a></p>
+<h1>Run {{ run.id }}</h1>
+<p class="meta">Provider {{ run.provider }} · {{ run.model }}{% if run.judge_enabled %} · judge on{% endif %}</p>
+
+{% if stale %}
+<div class="banner stale-banner" role="status">Sources changed since this run was generated. Evidence shown is from the run snapshot.</div>
+{% endif %}
+
+<p class="truth-badge" data-testid="truth-badge">{{ report.badge_text }}</p>
+
+<section class="card">
+  <h2>Answers</h2>
+  {% for answer in run.drafts.answers %}
+  <article class="answer">
+    <h3>{{ answer.question_id }}: {{ answer.question }}</h3>
+    {% for sentence in answer.sentences %}
+    {% include "_sentence.html" %}
+    {% endfor %}
+  </article>
+  {% endfor %}
+</section>
+
+<section class="card cover-note">
+  <h2>Cover note</h2>
+  <p class="salutation">{{ run.drafts.cover_note.salutation }}</p>
+  {% for sentence in run.drafts.cover_note.sentences %}
+  {% include "_sentence.html" %}
+  {% endfor %}
+  <p class="signoff">{{ run.drafts.cover_note.signoff }}</p>
+</section>
+
+{% if run.warnings %}
+<ul class="warnings">
+  {% for w in run.warnings %}
+  <li>{{ w }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<section class="card actions">
+  {% set flagged = report.sentences | selectattr('status', 'in', ['unsupported', 'not_verified']) | list %}
+  {% if flagged %}
+  <form method="post" action="/runs/{{ run.id }}/prune">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <button type="submit" data-testid="prune-button">Remove flagged claims</button>
+  </form>
+  {% endif %}
+  <p class="export-links">
+    <a href="/api/runs/{{ run.id }}/export?format=md">Download Markdown</a>
+    ·
+    <a href="/api/runs/{{ run.id }}/export?format=json">Download JSON</a>
+  </p>
+</section>
+{% endblock %}

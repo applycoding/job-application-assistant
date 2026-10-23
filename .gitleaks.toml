@@ -1,0 +1,11 @@
+title = "jaa gitleaks"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "expected example placeholders"
+paths = [
+  '''\.env\.example$''',
+  '''PLAN\.md$''',
+]

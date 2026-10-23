@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Home - Job Application Assistant{% endblock %}
+{% block content %}
+<h1>Your CV and job posts</h1>
+<p class="meta">Provider: {{ provider }} · v{{ version }}</p>
+
+{% if enable_samples %}
+<form method="post" action="/samples/load" class="card">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <button type="submit" data-testid="load-samples">Load sample data (Alex Doe)</button>
+</form>
+{% endif %}
+
+<section class="card">
+  <h2>Upload a document</h2>
+  <form method="post" action="/documents" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label class="file-upload">
+      File (.md, .txt, .pdf, .docx)
+      <input class="file-input" type="file" name="file" required accept=".md,.txt,.pdf,.docx">
+    </label>
+    <button class="btn-primary" type="submit">Upload</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>New job post</h2>
+  <form method="post" action="/jobs">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label>
+      Paste job description
+      <textarea name="text" rows="8" required></textarea>
+    </label>
+    <button type="submit">Parse job</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Documents ({{ documents|length }})</h2>
+  {% if documents %}
+  <ul>
+    {% for doc in documents %}
+    <li><a href="/documents/{{ doc.id }}">{{ doc.filename }}</a> ({{ doc.chunk_count }} chunks)</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No documents yet.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h2>Jobs ({{ jobs|length }})</h2>
+  {% if jobs %}
+  <ul>
+    {% for job in jobs %}
+    <li>
+      <a href="/jobs/{{ job.id }}" data-testid="job-link">{{ job.title }}</a>
+      {% if job.company %}<span class="muted">@ {{ job.company }}</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No jobs yet.</p>
+  {% endif %}
+</section>
+
+<form method="post" action="/data/delete" class="danger-zone">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <button type="submit">Delete all data</button>
+</form>
+{% endblock %}

@@ -1,0 +1,155 @@
+:root {
+  --bg: #f6f7f9;
+  --card: #fff;
+  --text: #1a1d21;
+  --muted: #5c6570;
+  --accent: #1f6feb;
+  --danger: #b42318;
+  --border: #d8dee4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.site-header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 1.25rem;
+}
+
+.brand {
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.content {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.meta,
+.muted {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+textarea,
+input[type="file"] {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+}
+
+button,
+.btn-primary {
+  margin-top: 0.75rem;
+  padding: 0.65rem 1.1rem;
+  min-height: 2.75rem;
+  font-size: 1rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.file-upload {
+  display: block;
+}
+
+.file-input {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  font-size: 0.95rem;
+}
+
+.failure-inline {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--danger);
+}
+
+.failure-chip {
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  background: #fde8e6;
+}
+
+.danger-zone button {
+  background: var(--danger);
+}
+
+.chunk-list pre {
+  white-space: pre-wrap;
+  font-size: 0.85rem;
+  background: var(--bg);
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.banner.stale-banner {
+  background: #fff8e6;
+  border: 1px solid #f0d78c;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.truth-badge {
+  font-weight: 600;
+  margin: 0.5rem 0 1rem;
+}
+
+.claim-details {
+  margin: 0.5rem 0;
+  border-left: 3px solid var(--border);
+  padding-left: 0.75rem;
+}
+
+.status-unsupported .status-label {
+  color: var(--danger);
+}
+
+.outbound-json {
+  max-height: 20rem;
+  overflow: auto;
+  font-size: 0.8rem;
+  background: var(--bg);
+  padding: 0.75rem;
+}
+
+.highlight {
+  background: #fff3bf;
+  font-weight: 600;
+}
+
+.warnings {
+  color: #8a4b00;
+}

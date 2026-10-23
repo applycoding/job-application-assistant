@@ -1,0 +1,14 @@
+FICTIONAL SAMPLE DATA - Alex Doe is not a real person.
+
+Alex Doe — Selected projects
+
+Open Logistics ETA (2023)
+- Python service predicting delivery windows from historical routes; deployed on ECS with FastAPI.
+- Used scikit-learn and scheduled retraining via Airflow.
+
+Retail demand signals (2020)
+- Spark streaming job joining web clicks with inventory snapshots in Kafka.
+- Documented runbooks and SLOs for the on-call rotation.
+
+Volunteer metrics dashboard (2019)
+- Helped a food-bank charity consolidate CSV donations into Postgres and Metabase views.
