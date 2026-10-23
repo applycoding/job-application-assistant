@@ -1,68 +1,96 @@
 name: ci
 on:
-  push: { branches: [main] }
+  push:
+    branches:
+      - main
   pull_request: {}
 permissions: { contents: read }
-concurrency: { group: "ci-${{ github.ref }}", cancel-in-progress: true }
-env: { JAA_PROVIDER: mock, UV_LOCKED: "1" }
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  JAA_PROVIDER: mock
+  UV_LOCKED: "1"
 jobs:
   lint:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with: { fetch-depth: 0, persist-credentials: false }
+        with:
+          fetch-depth: 0
+          persist-credentials: false
       - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
-        with: { version: "0.13.5", enable-cache: true }
+        with:
+          version: "0.13.5"
+          enable-cache: true
       - run: uv lock --check
       - run: uv sync --all-extras
       - run: uv run ruff check .
       - run: uv run ruff format --check .
       - run: uv run python scripts/check_repo.py
       - uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
-        env: { GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}" }   # automatic token, not user-configured
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   typecheck:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with: { persist-credentials: false }
+        with:
+          persist-credentials: false
       - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
-        with: { version: "0.13.5", enable-cache: true }
+        with:
+          version: "0.13.5"
+          enable-cache: true
       - run: uv sync --all-extras
       - run: uv run mypy src tests
   test:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with: { persist-credentials: false }
+        with:
+          persist-credentials: false
       - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
-        with: { version: "0.13.5", enable-cache: true }
+        with:
+          version: "0.13.5"
+          enable-cache: true
       - run: uv sync --all-extras
       - run: uv run pytest -m 'not e2e' -q
   e2e:
     runs-on: ubuntu-24.04
-    needs: [test]
+    needs:
+      - test
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with: { persist-credentials: false }
+        with:
+          persist-credentials: false
       - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
-        with: { version: "0.13.5", enable-cache: true }
+        with:
+          version: "0.13.5"
+          enable-cache: true
       - run: uv sync --all-extras
       - run: uv run playwright install --with-deps chromium
       - run: uv run pytest -m e2e -q
       - if: failure()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with: { name: e2e-artifacts, path: test-results/, retention-days: 7 }
+        with:
+          name: e2e-artifacts
+          path: test-results/
+          retention-days: 7
   docker:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with: { persist-credentials: false }
+        with:
+          persist-credentials: false
       - run: docker build -t jaa:ci .
       - run: docker run -d --name jaa -p 127.0.0.1:8000:8000 jaa:ci
       - run: |
           for i in $(seq 1 30); do
-            s=$(docker inspect -f '{{.State.Health.Status}}' jaa); [ "$s" = healthy ] && break; sleep 2
-          done; [ "$s" = healthy ] || { docker logs jaa; exit 1; }
+            s=$(docker inspect -f '{{.State.Health.Status}}' jaa)
+            [ "$s" = healthy ] && break
+            sleep 2
+          done
+          [ "$s" = healthy ] || { docker logs jaa; exit 1; }
       - run: curl -fsS http://127.0.0.1:8000/healthz | grep -q '"status":"ok"'
       - run: test "$(docker exec jaa id -u)" = "10001"
       - run: docker exec jaa sh -c 'touch /data/.w && rm /data/.w'
