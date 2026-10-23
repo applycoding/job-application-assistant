@@ -26,7 +26,17 @@ Follow a run from corpus snapshot through LLM drafting, assembly into user-facin
 
 ## Code walkthrough
 
-Step through `create_run()` in order: budget attachment on the provider, `CheckContext` creation with `target_company`, and `RunData` persistence through `repo.save_run()`.
+Provider prompts wrap outbound JSON in a digest-boundary block:
+
+```python
+def build_user_message(dto: BaseModel, *, judge: bool = False) -> str:
+    payload = json.dumps(dto.model_dump(), ensure_ascii=True, sort_keys=True)
+    digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()[:12]
+    boundary = f"DATA-{digest}"
+    ...
+```
+
+`create_run()` then persists `RunData` with drafts, evidence, and the truth report.
 
 Open `assemble_drafts()` to see how cover claims are capped by `max_cover_claims` from outbound settings and how missing questions still produce empty answer shells.
 

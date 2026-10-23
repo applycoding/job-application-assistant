@@ -37,6 +37,7 @@ def assert_data_block_well_formed(user_message: str) -> None:
     body = user_message.strip()
     m = _DATA_BLOCK_RE.search(body)
     assert m is not None, "user message missing BEGIN/END DATA block"
-    begin_tag = body.splitlines()[next(i for i, l in enumerate(body.splitlines()) if l.startswith("BEGIN DATA-"))]
-    end_tag = body.splitlines()[next(i for i, l in enumerate(body.splitlines()) if l.startswith("END DATA-"))]
+    split = body.splitlines()
+    begin_tag = split[next(i for i, line in enumerate(split) if line.startswith("BEGIN DATA-"))]
+    end_tag = split[next(i for i, line in enumerate(split) if line.startswith("END DATA-"))]
     assert begin_tag.replace("BEGIN ", "") == end_tag.replace("END ", "")

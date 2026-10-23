@@ -7,7 +7,6 @@ import logging
 import pytest
 
 from jaa.app import create_app
-from jaa.config import Settings
 from jaa.generation.pipeline import Deps, create_run
 from jaa.models import RunOptions
 from jaa.samples import seed
@@ -44,8 +43,7 @@ async def test_logs_exclude_provider_keys_and_evidence(
     await create_run(deps, job.id, RunOptions(judge=False))
     for record in caplog.records:
         msg = record.getMessage()
-        for name in KEY_ENVS:
-            assert SENTINEL not in msg
+        assert SENTINEL not in msg
         assert "api_key" not in msg.lower()
         for snippet in evidence_snippets:
             if snippet.strip():

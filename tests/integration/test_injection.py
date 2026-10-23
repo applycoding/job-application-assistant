@@ -2,22 +2,20 @@
 
 from __future__ import annotations
 
-import hashlib
 from pathlib import Path
 
 import pytest
 
 from jaa.generation.pipeline import Deps, create_run
-from jaa.ingest.loaders import detect_media_type, load_lines
 from jaa.models import RunOptions
 from jaa.privacy.outbound import build_outbound_draft
+from jaa.providers.base import ProviderError
 from jaa.providers.prompts import build_user_message
 from jaa.retrieval.service import retrieve_for_job
 from jaa.samples import seed
 from tests.support.draft_factory import minimal_draft
-from tests.support.prompt_boundary import assert_text_only_inside_data_block, split_user_message
-from jaa.providers.base import ProviderError
 from tests.support.invalid_draft_provider import InvalidDraftTwiceProvider
+from tests.support.prompt_boundary import assert_text_only_inside_data_block, split_user_message
 from tests.support.scripted_provider import ScriptedProvider
 
 CANARY = "INJECTION_CANARY_TOKEN"
@@ -28,8 +26,6 @@ INJECT_NEEDLE = "IGNORE PREVIOUS"
 def _upload_adversarial(client) -> str:
     payload = Path("tests/fixtures/adversarial/delimiter_escape.txt").read_text(encoding="utf-8")
     data = payload.encode()
-    lines, warnings = load_lines(data, detect_media_type("adv.txt", data[:64]))
-    sha = hashlib.sha256(data).hexdigest()
     client.post(
         "/api/documents",
         files={"file": ("adv.txt", data, "text/plain")},

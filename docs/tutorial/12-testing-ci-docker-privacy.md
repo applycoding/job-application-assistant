@@ -26,7 +26,15 @@ Docker builds should exclude credentials via `.dockerignore` entries validated b
 
 ## Code walkthrough
 
-Skim `check_repo.py` main: it runs git-aware checks locally and in CI before pytest. Open `redact()` to see regex replacements applied to chunk text and section titles in `OutboundEvidence`.
+CI runs the e2e job inside the official Playwright image (see `.github/workflows/ci.yml`).
+
+Outbound redaction strips contact-like patterns before any provider call:
+
+```python
+def redact(text: str) -> str:
+    out = _EMAIL_RE.sub("[email]", text)
+    ...
+```
 
 Read one scenario test module to see how `MockProvider` and `FixedClock` produce deterministic golden outputs.
 
