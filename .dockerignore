@@ -12,4 +12,5 @@ tests/
 docs/
 PLAN.md
 *.md
+!README.md
 !samples/README.md
