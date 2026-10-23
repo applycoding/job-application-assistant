@@ -1,7 +1,6 @@
 import pytest
 
-from jaa.models import AnswerOut, JudgeOut, JudgeVerdict, LLMDraftOut, SentenceOut
-from jaa.models import Question
+from jaa.models import AnswerOut, JudgeOut, JudgeVerdict, LLMDraftOut, Question, SentenceOut
 from jaa.privacy.outbound import JudgeItem, OutboundDraft, OutboundEvidence, OutboundJudge
 from jaa.providers.validate import DraftInvariantError, validate_draft, validate_judge
 

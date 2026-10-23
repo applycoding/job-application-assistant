@@ -35,7 +35,9 @@ def main() -> None:
         }
     )
     font_ref = writer._add_object(font)
-    resources = DictionaryObject({NameObject("/Font"): DictionaryObject({NameObject("/F1"): font_ref})})
+    resources = DictionaryObject(
+        {NameObject("/Font"): DictionaryObject({NameObject("/F1"): font_ref})}
+    )
     stream = DecodedStreamObject()
     stream.set_data(_CONTENT)
     stream[NameObject("/Length")] = NumberObject(len(_CONTENT))

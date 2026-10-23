@@ -2,8 +2,6 @@
 
 from datetime import date
 
-import pytest
-
 from jaa.models import Chunk, Sentence
 from jaa.truth.deterministic import CheckContext, check_sentence
 from jaa.truth.lexicon import SkillLexicon

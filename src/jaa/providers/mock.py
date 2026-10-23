@@ -86,9 +86,9 @@ class MockProvider:
                 continue
             if not _matched_terms(cover_chunk, [req_item]):
                 continue
-            body = _unique_claim_text(cover_chunk, lex, used_claims, 0)
-            if body is None:
-                continue
+            body = _unique_claim_text(cover_chunk, lex, used_claims, 0) or _format_evidence_body(
+                cover_chunk, lex
+            )
             cover_claims.append(
                 SentenceOut(
                     text=f"My background includes: {body}.",
