@@ -1,6 +1,6 @@
 {
-  "check_rules_version": "2026-10-23.2",
-  "corpus_version": "ba407888e7183c9b458fc5930ec7d2fd7ca1dfa2bf3cee3a33a9bad0588c3de9",
+  "check_rules_version": "2026-10-23.3",
+  "corpus_version": "c5d087f045eebb6fe8287fbf2592e2097911b63514d73668709c3c73081f027e",
   "created_at": "2026-10-23T09:00:00Z",
   "drafts": {
     "answers": [
@@ -545,32 +545,7 @@
       "score": 6.933098
     }
   ],
-  "gaps": [
-    {
-      "requirement_id": "R1",
-      "term": "5+"
-    },
-    {
-      "requirement_id": "R1",
-      "term": "professional"
-    },
-    {
-      "requirement_id": "R8",
-      "term": "prior"
-    },
-    {
-      "requirement_id": "R8",
-      "term": "work"
-    },
-    {
-      "requirement_id": "R8",
-      "term": "supply"
-    },
-    {
-      "requirement_id": "R8",
-      "term": "chain"
-    }
-  ],
+  "gaps": [],
   "id": "run-0008",
   "job_id": "job-6280dd602d4eb59c",
   "judge_enabled": false,

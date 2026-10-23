@@ -134,7 +134,7 @@ Step-by-step chapters: [`docs/tutorial/`](docs/tutorial/) (00-12).
 
 ## Sample data
 
-Alex Doe and all employers in `samples/` are **fictional**. CV and project files use `FICTIONAL SAMPLE DATA` markers; job posts use a portfolio-demo banner.
+Alex Doe and all employers in `samples/` are **fictional**. CV and project files use `FICTIONAL SAMPLE DATA` markers; job posts use a portfolio-demo banner. `PLAN.md` line 1309 shows an em dash in the Alex Doe marker text; tracked sample files use an ASCII hyphen instead (see `scripts/check_repo.py`).
 
 ## License
 

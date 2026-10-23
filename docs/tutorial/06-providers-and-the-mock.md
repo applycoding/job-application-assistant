@@ -40,11 +40,10 @@ LEAD_INS = (
 
 Outbound evidence is redacted before any provider sees it:
 
-```python
-from jaa.privacy.redact import redact
-
-section = (redact(item.chunk.section),)
-text = (redact(item.chunk.text),)
+```text
+# src/jaa/privacy/outbound.py (build_outbound_draft)
+section=redact(item.chunk.section),
+text=redact(item.chunk.text),
 ```
 
 For judge mode, read `MockProvider.judge()` and how `apply_judge()` in `truth/judge.py` merges verdicts back into `SentenceCheck` records.

@@ -104,7 +104,7 @@ aliases = ["node.js", "nodejs", "node"]
 
 [[skill]]
 name = ".NET"
-aliases = [".net", "dotnet", "asp.net"]
+aliases = [".net", "dotnet", "ASP.NET", "ASP.NET Core"]
 
 [[skill]]
 name = "Redis"

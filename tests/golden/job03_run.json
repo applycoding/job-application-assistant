@@ -1,6 +1,6 @@
 {
-  "check_rules_version": "2026-10-23.2",
-  "corpus_version": "64ce4672e14fd0eb57836ff1618423ad3acd949fd4ec641b6fa65be85ec5197a",
+  "check_rules_version": "2026-10-23.3",
+  "corpus_version": "cf15c03612362bf28e29e8dc6542add2cd1e6acf11b77f56de252d0748442cc7",
   "created_at": "2026-10-23T09:00:00+00:00",
   "drafts": {
     "answers": [
@@ -353,44 +353,12 @@
       "term": null
     },
     {
-      "requirement_id": "R5",
-      "term": "writing"
-    },
-    {
-      "requirement_id": "R5",
-      "term": "automated"
-    },
-    {
-      "requirement_id": "R5",
-      "term": "tests"
-    },
-    {
-      "requirement_id": "R5",
-      "term": "pytest"
-    },
-    {
-      "requirement_id": "R5",
-      "term": "participating"
-    },
-    {
       "requirement_id": "R6",
       "term": null
     },
     {
       "requirement_id": "R7",
       "term": null
-    },
-    {
-      "requirement_id": "R8",
-      "term": "opentelemetry"
-    },
-    {
-      "requirement_id": "R8",
-      "term": "structured"
-    },
-    {
-      "requirement_id": "R8",
-      "term": "logging"
     }
   ],
   "id": "run-0001",

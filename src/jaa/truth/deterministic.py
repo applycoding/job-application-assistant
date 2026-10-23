@@ -24,7 +24,7 @@ from jaa.truth.extractors import (
 from jaa.truth.lexicon import SkillLexicon
 from jaa.truth.verdict import status_from_checks
 
-CHECK_RULES_VERSION = "2026-10-23.2"
+CHECK_RULES_VERSION = "2026-10-23.3"
 
 
 @dataclass(frozen=True)
@@ -219,7 +219,7 @@ def check_sentence(
                 )
 
     for gap_term in ctx.gap_terms:
-        if gap_term in skills_in_claim or gap_term.lower() in claim_text.lower():
+        if gap_term in skills_in_claim:
             failures.append(
                 CheckFailure(
                     check="skill",

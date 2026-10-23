@@ -31,9 +31,19 @@ def _compute_gaps(
         if not covered:
             gaps.append(Gap(requirement_id=req.id, term=None))
             continue
+        skill_names = lexicon.skill_names
         for term in req.terms:
+            if term not in skill_names:
+                continue
             if term not in covered:
                 gaps.append(Gap(requirement_id=req.id, term=term))
+        for skill in req.skills:
+            if (
+                skill in skill_names
+                and skill not in covered
+                and not any(g.requirement_id == req.id and g.term == skill for g in gaps)
+            ):
+                gaps.append(Gap(requirement_id=req.id, term=skill))
     return gaps
 
 

@@ -61,7 +61,7 @@ jobs:
   e2e:
     runs-on: ubuntu-24.04
     container:
-      image: mcr.microsoft.com/playwright/python:v1.64.0-jammy
+      image: mcr.microsoft.com/playwright/python@sha256:22cf66fd9d3ec5c59359ef3ac648f2a3c149bdfaa606a13e064542596ed37401 # v1.64.1-jammy amd64
     needs:
       - test
     steps:

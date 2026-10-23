@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import re
 
 _DATA_BLOCK_RE = re.compile(
@@ -41,3 +42,12 @@ def assert_data_block_well_formed(user_message: str) -> None:
     begin_tag = split[next(i for i, line in enumerate(split) if line.startswith("BEGIN DATA-"))]
     end_tag = split[next(i for i, line in enumerate(split) if line.startswith("END DATA-"))]
     assert begin_tag.replace("BEGIN ", "") == end_tag.replace("END ", "")
+
+
+def assert_data_block_digest_matches_payload(user_message: str) -> None:
+    """BEGIN DATA-<digest> must be the first 12 hex chars of SHA-256 of the JSON payload."""
+    _, payload, _ = split_user_message(user_message)
+    begin = next(line for line in user_message.splitlines() if line.startswith("BEGIN DATA-"))
+    digest = begin.removeprefix("BEGIN DATA-")
+    expected = hashlib.sha256(payload.encode("utf-8")).hexdigest()[:12]
+    assert digest == expected, f"digest {digest!r} != payload hash {expected!r}"

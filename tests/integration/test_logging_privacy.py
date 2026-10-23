@@ -7,8 +7,10 @@ import logging
 import pytest
 
 from jaa.app import create_app
+from jaa.config import Settings
 from jaa.generation.pipeline import Deps, create_run
 from jaa.models import RunOptions
+from jaa.providers.registry import build_provider
 from jaa.samples import seed
 
 SENTINEL = "sk-sentinel-must-not-appear-in-logs-7f3a"
@@ -48,3 +50,14 @@ async def test_logs_exclude_provider_keys_and_evidence(
         for snippet in evidence_snippets:
             if snippet.strip():
                 assert snippet not in msg
+
+
+def test_registry_build_provider_does_not_log_keys(caplog, monkeypatch: pytest.MonkeyPatch) -> None:
+    for name in KEY_ENVS:
+        monkeypatch.setenv(name, SENTINEL)
+    caplog.set_level(logging.DEBUG)
+    settings = Settings(provider="openai", model="gpt-4o-mini")
+    provider = build_provider(settings, transport=object())
+    assert provider.model
+    for record in caplog.records:
+        assert SENTINEL not in record.getMessage()

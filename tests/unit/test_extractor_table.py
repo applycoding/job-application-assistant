@@ -1,4 +1,4 @@
-"""Table-driven extractor coverage (PLAN §7 — ≥60 cases)."""
+"""Table-driven extractor coverage (PLAN section 7, at least 60 cases)."""
 
 from __future__ import annotations
 

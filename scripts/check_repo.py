@@ -10,8 +10,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SAMPLES = ROOT / "samples"
+# PLAN.md line 1309 uses an em dash in the marker text; samples use ASCII hyphen (DOCX-safe).
 FICTIONAL_MARKERS = (
-    "FICTIONAL SAMPLE DATA - Alex Doe is not a real person.",
     "FICTIONAL SAMPLE DATA - Alex Doe is not a real person.",
     "FICTIONAL SAMPLE DATA for portfolio demo only.",
 )

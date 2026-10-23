@@ -10,7 +10,7 @@ from jaa.config import Settings
 from jaa.export import is_stale
 from jaa.generation.assemble import assemble_drafts
 from jaa.ids import IdFactory
-from jaa.models import RetrievalResult, Run, RunOptions
+from jaa.models import Gap, RetrievalResult, Run, RunOptions
 from jaa.privacy.outbound import build_outbound_draft
 from jaa.providers.base import CallBudget, LLMProvider
 from jaa.retrieval.service import retrieve_for_job
@@ -21,6 +21,11 @@ from jaa.truth.prune import prune_flagged
 from jaa.truth.report import run_truth_check
 
 __all__ = ["Deps", "create_run", "prune_run", "is_stale", "RunDeadlineError"]
+
+
+def _skill_gap_terms(gaps: list[Gap], lexicon: SkillLexicon) -> frozenset[str]:
+    names = lexicon.skill_names
+    return frozenset(g.term for g in gaps if g.term and g.term in names)
 
 
 @dataclass
@@ -66,7 +71,7 @@ async def create_run(deps: Deps, job_id: str, opts: RunOptions) -> Run:
         lexicon=deps.lexicon,
         reference_date=ref_date,
         target_company=job.company,
-        gap_terms=frozenset(g.term for g in result.gaps if g.term),
+        gap_terms=_skill_gap_terms(result.gaps, deps.lexicon),
     )
     report = await run_truth_check(
         drafts,
@@ -109,7 +114,7 @@ async def prune_run(deps: Deps, run_id: str) -> Run:
         lexicon=deps.lexicon,
         reference_date=ref_date,
         target_company=job.company,
-        gap_terms=frozenset(g.term for g in parent.gaps if g.term),
+        gap_terms=_skill_gap_terms(parent.gaps, deps.lexicon),
     )
     outbound = build_outbound_draft(
         job,

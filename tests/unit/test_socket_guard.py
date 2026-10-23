@@ -1,4 +1,4 @@
-"""Socket guard self-test (PLAN §7 — must run in CI)."""
+"""Socket guard self-test (PLAN section 7; must run in CI)."""
 
 import socket
 
