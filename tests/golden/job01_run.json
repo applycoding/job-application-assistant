@@ -1,6 +1,6 @@
 {
   "check_rules_version": "2026-10-23.2",
-  "corpus_version": "a873a3d3d4a83d3e98b12a799e499f0e20694f6968fc5c57e68834e3393ac695",
+  "corpus_version": "64ce4672e14fd0eb57836ff1618423ad3acd949fd4ec641b6fa65be85ec5197a",
   "created_at": "2026-10-23T09:00:00+00:00",
   "drafts": {
     "answers": [
@@ -322,11 +322,11 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000004",
-        "evidence_text": "Volunteering \u2014 Alex Doe\nFood Bank of Example City (2019\u20132021): built a simple Postgres + Metabase dashboard for donation trends.",
-        "id": "00000000-0000-4000-8000-000000000004:e9f5db8a786e7722",
+        "evidence_text": "Volunteering - Alex Doe\nFood Bank of Example City (2019\u20132021): built a simple Postgres + Metabase dashboard for donation trends.",
+        "id": "00000000-0000-4000-8000-000000000004:675747372e441d9b",
         "kind": "line",
         "line_no": 3,
-        "section": "Volunteering \u2014 Alex Doe",
+        "section": "Volunteering - Alex Doe",
         "text": "Food Bank of Example City (2019\u20132021): built a simple Postgres + Metabase dashboard for donation trends."
       },
       "matched_terms": [
@@ -509,11 +509,11 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000004",
-        "evidence_text": "Volunteering \u2014 Alex Doe\nRole | Data volunteer",
-        "id": "00000000-0000-4000-8000-000000000004:39a933b0066006e6",
+        "evidence_text": "Volunteering - Alex Doe\nRole | Data volunteer",
+        "id": "00000000-0000-4000-8000-000000000004:3ee70224c39dccb3",
         "kind": "table_row",
         "line_no": 4,
-        "section": "Volunteering \u2014 Alex Doe",
+        "section": "Volunteering - Alex Doe",
         "text": "Role | Data volunteer"
       },
       "matched_terms": [
@@ -527,12 +527,12 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
-        "evidence_text": "\nFICTIONAL SAMPLE DATA \u2014 Alex Doe is not a real person.",
-        "id": "00000000-0000-4000-8000-000000000002:31b53042b62ee5f6",
+        "evidence_text": "\nFICTIONAL SAMPLE DATA - Alex Doe is not a real person.",
+        "id": "00000000-0000-4000-8000-000000000002:20173e60281c4aeb",
         "kind": "line",
         "line_no": 1,
         "section": "",
-        "text": "FICTIONAL SAMPLE DATA \u2014 Alex Doe is not a real person."
+        "text": "FICTIONAL SAMPLE DATA - Alex Doe is not a real person."
       },
       "matched_terms": [
         "data"

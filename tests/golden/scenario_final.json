@@ -1,6 +1,6 @@
 {
   "check_rules_version": "2026-10-23.2",
-  "corpus_version": "7337f80461f84336a880a49adc0c8260310d6b59e2134f1f7cf7703e2861144b",
+  "corpus_version": "ba407888e7183c9b458fc5930ec7d2fd7ca1dfa2bf3cee3a33a9bad0588c3de9",
   "created_at": "2026-10-23T09:00:00Z",
   "drafts": {
     "answers": [
@@ -475,12 +475,12 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
-        "evidence_text": "\nFICTIONAL SAMPLE DATA \u2014 Alex Doe is not a real person.",
-        "id": "00000000-0000-4000-8000-000000000002:31b53042b62ee5f6",
+        "evidence_text": "\nFICTIONAL SAMPLE DATA - Alex Doe is not a real person.",
+        "id": "00000000-0000-4000-8000-000000000002:20173e60281c4aeb",
         "kind": "line",
         "line_no": 1,
         "section": "",
-        "text": "FICTIONAL SAMPLE DATA \u2014 Alex Doe is not a real person."
+        "text": "FICTIONAL SAMPLE DATA - Alex Doe is not a real person."
       },
       "matched_terms": [
         "data"
@@ -511,12 +511,12 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
-        "evidence_text": "Alex Doe\nFICTIONAL SAMPLE DATA \u2014 Alex Doe is not a real person.",
-        "id": "00000000-0000-4000-8000-000000000001:cda986b95a37081b",
+        "evidence_text": "Alex Doe\nFICTIONAL SAMPLE DATA - Alex Doe is not a real person.",
+        "id": "00000000-0000-4000-8000-000000000001:e9a21f9e7c50911a",
         "kind": "line",
         "line_no": 3,
         "section": "Alex Doe",
-        "text": "FICTIONAL SAMPLE DATA \u2014 Alex Doe is not a real person."
+        "text": "FICTIONAL SAMPLE DATA - Alex Doe is not a real person."
       },
       "matched_terms": [
         "data"
