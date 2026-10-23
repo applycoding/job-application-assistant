@@ -1,0 +1,38 @@
+# Built-in skill lexicon (fictional demo corpus)
+version = "1"
+
+[[skills]]
+name = "Python"
+aliases = ["python3", "py"]
+
+[[skills]]
+name = "Go"
+aliases = []
+
+[[skills]]
+name = "SQL"
+aliases = ["postgres", "postgresql"]
+
+[[skills]]
+name = "AWS"
+aliases = ["amazon web services"]
+
+[[skills]]
+name = "Kubernetes"
+aliases = ["k8s"]
+
+[[skills]]
+name = "Spark"
+aliases = ["apache spark"]
+
+[[skills]]
+name = "MLflow"
+aliases = []
+
+[[skills]]
+name = "Docker"
+aliases = []
+
+[[skills]]
+name = "R"
+aliases = []
