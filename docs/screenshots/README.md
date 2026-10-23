@@ -1,6 +1,6 @@
 # Screenshots
 
-Placeholder for tutorial and README screenshots (`home.png`, `job.png`, `run-unsupported.png`, `run-pruned.png`).
+README screenshots (`home.png`, `job.png`, `run-unsupported.png`, `run-pruned.png`) from the mock Acme demo flow (10 claims before prune).
 
 Regenerate with:
 
