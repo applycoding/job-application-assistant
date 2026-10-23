@@ -1,0 +1,28 @@
+{% if sentence.kind == "framing" %}
+<p class="sentence framing" data-testid="framing">{{ sentence.text }}</p>
+{% else %}
+{% set check = report.sentences | selectattr("sentence_id", "equalto", sentence.id) | list | first %}
+{% set status = check.status if check else "not_verified" %}
+<details class="claim-details" data-testid="claim" data-status="{{ status }}">
+  <summary>
+    <span class="claim-text">{{ sentence.text }}</span>
+    <span class="status-label status-{{ status }}">
+      {% if status == "unsupported" %}⚠ Unsupported{% elif status == "not_verified" %}? Not verified{% elif status == "entailed" %}✓ Entailed{% else %}✓ Checks passed{% endif %}
+    </span>
+  </summary>
+  {% if sentence.explanation %}
+  <div class="explanation">
+    <p><strong>Requirements:</strong> {{ sentence.requirement_ids | join(", ") }}</p>
+    <p><strong>Citations:</strong> {{ sentence.citations | join(", ") }}</p>
+    <p><strong>Rationale:</strong> {{ sentence.rationale }}</p>
+    {% if check and check.failures %}
+    <ul class="failures">
+      {% for f in check.failures %}
+      <li>{{ f.check }}{% if f.token %}:{{ f.token }}{% endif %} — {{ f.detail }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  {% endif %}
+</details>
+{% endif %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}{{ job.title }} — Job{% endblock %}
+{% block content %}
+<p><a href="/">← Home</a></p>
+<h1>{{ job.title }}</h1>
+{% if job.company %}<p class="meta">{{ job.company }}</p>{% endif %}
+
+{% if job.warnings %}
+<ul class="warnings">
+  {% for w in job.warnings %}
+  <li>{{ w }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<section class="card">
+  <h2>Requirements</h2>
+  <ul>
+    {% for req in job.requirements %}
+    <li><strong>{{ req.id }}</strong> ({{ req.priority }}) {{ req.text }}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="card">
+  <h2>Questions</h2>
+  <ul>
+    {% for q in job.questions %}
+    <li><strong>{{ q.id }}</strong> {{ q.text }}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+{% include "_outbound.html" %}
+
+<section class="card">
+  <h2>Generate application draft</h2>
+  <form method="post" action="/jobs/{{ job.id }}/runs">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label>
+      <input type="checkbox" name="judge" value="on" {% if judge_default %}checked{% endif %}>
+      Enable LLM judge (after deterministic checks)
+    </label>
+    <button type="submit" data-testid="generate-button">
+      {% if provider == "mock" %}Generate draft{% else %}Send to {{ provider }} and generate{% endif %}
+    </button>
+  </form>
+</section>
+
+{% if runs %}
+<section class="card">
+  <h2>Previous runs</h2>
+  <ul>
+    {% for run in runs %}
+    <li><a href="/runs/{{ run.id }}">{{ run.id }}</a> — {{ run.created_at }}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

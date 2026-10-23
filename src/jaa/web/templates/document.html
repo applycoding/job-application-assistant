@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ document.filename }} — Documents{% endblock %}
+{% block content %}
+<p><a href="/">← Home</a></p>
+<h1>{{ document.filename }}</h1>
+<p class="meta">{{ document.media_type }} · {{ document.chunk_count }} chunks</p>
+{% if document.warnings %}
+<ul class="warnings">
+  {% for w in document.warnings %}
+  <li>{{ w }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<section class="card">
+  <h2>Chunks</h2>
+  <ol class="chunk-list">
+    {% for chunk in chunks %}
+    <li>
+      <span class="chunk-kind">{{ chunk.kind }}</span>
+      <pre class="chunk-text">{{ chunk.section }}
+{{ chunk.text }}</pre>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+
+<form method="post" action="/documents/{{ document.id }}/delete" class="card danger-zone">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>
+    <input type="checkbox" name="delete_runs" value="true">
+    Also delete dependent runs
+  </label>
+  <button type="submit">Delete document</button>
+</form>
+{% endblock %}

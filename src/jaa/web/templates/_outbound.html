@@ -1,0 +1,7 @@
+{% if outbound_preview %}
+<section class="card outbound-panel" data-testid="outbound-preview">
+  <h2>What will be sent</h2>
+  <p class="muted">This is the exact JSON payload sent to the provider (redacted).</p>
+  <pre class="outbound-json">{{ outbound_preview }}</pre>
+</section>
+{% endif %}
