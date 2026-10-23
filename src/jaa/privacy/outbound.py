@@ -19,6 +19,8 @@ class OutboundRequirement(BaseModel):
     id: str
     text: str
     priority: Literal["must", "nice"]
+    skills: list[str] = []
+    terms: list[str] = []
 
 
 class OutboundDraft(BaseModel):
@@ -56,6 +58,8 @@ def build_outbound_draft(job: JobPost, result: RetrievalResult) -> OutboundDraft
             id=req.id,
             text=redact(req.text),
             priority=req.priority,
+            skills=list(req.skills),
+            terms=list(req.terms),
         )
         for req in job.requirements
     ]

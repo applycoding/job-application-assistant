@@ -1,6 +1,6 @@
 {
-  "check_rules_version": "2026-10-24.1",
-  "corpus_version": "72c968afab2749543dbacdaeb624d57ea4936671aaa4a20b6b890c915fd24abe",
+  "check_rules_version": "2026-10-24.2",
+  "corpus_version": "44e91b6a8de701b9006a40df7913ab825f85b4b064ae55bee927ac865d3c73e3",
   "created_at": "2026-10-23T09:00:00+00:00",
   "drafts": {
     "answers": [
@@ -13,17 +13,25 @@
               "b0ce57c46d920b2a"
             ],
             "explanation": {
-              "matches": [],
-              "model_rationale": "Addresses R1 using b0ce57c46d920b2a (matched: building, years).",
+              "matches": [
+                {
+                  "chunk_id": "b0ce57c46d920b2a",
+                  "terms": [
+                    "batch",
+                    "pipelines"
+                  ]
+                }
+              ],
+              "model_rationale": "Addresses R5 using b0ce57c46d920b2a (matched: batch, pipelines).",
               "requirement_ids": [
-                "R1"
+                "R5"
               ]
             },
             "id": "Q1.S1",
             "kind": "claim",
-            "rationale": "Addresses R1 using b0ce57c46d920b2a (matched: building, years).",
+            "rationale": "Addresses R5 using b0ce57c46d920b2a (matched: batch, pipelines).",
             "requirement_ids": [
-              "R1"
+              "R5"
             ],
             "template_id": null,
             "text": "A relevant example from my CV: Senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
@@ -41,14 +49,14 @@
                   ]
                 }
               ],
-              "model_rationale": "Addresses R2 using cf3d6b86fa121547 (matched: Kubernetes, kubernetes, workloads).",
+              "model_rationale": "Addresses R2 using cf3d6b86fa121547 (matched: Kubernetes).",
               "requirement_ids": [
                 "R2"
               ]
             },
             "id": "Q1.S2",
             "kind": "claim",
-            "rationale": "Addresses R2 using cf3d6b86fa121547 (matched: Kubernetes, kubernetes, workloads).",
+            "rationale": "Addresses R2 using cf3d6b86fa121547 (matched: Kubernetes).",
             "requirement_ids": [
               "R2"
             ],
@@ -68,14 +76,14 @@
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 698a247d52da85e7 (matched: Python, python).",
+              "model_rationale": "Addresses R1 using 698a247d52da85e7 (matched: Python).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q1.S3",
             "kind": "claim",
-            "rationale": "Addresses R1 using 698a247d52da85e7 (matched: Python, python).",
+            "rationale": "Addresses R1 using 698a247d52da85e7 (matched: Python).",
             "requirement_ids": [
               "R1"
             ],
@@ -101,14 +109,14 @@
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 23c0fce35130905a (matched: Python, python).",
+              "model_rationale": "Addresses R1 using 23c0fce35130905a (matched: Python).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q2.S1",
             "kind": "claim",
-            "rationale": "Addresses R1 using 23c0fce35130905a (matched: Python, python).",
+            "rationale": "Addresses R1 using 23c0fce35130905a (matched: Python).",
             "requirement_ids": [
               "R1"
             ],
@@ -128,14 +136,14 @@
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using ac06f583e4a0bd7f (matched: Python, python).",
+              "model_rationale": "Addresses R1 using ac06f583e4a0bd7f (matched: Python).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q2.S2",
             "kind": "claim",
-            "rationale": "Addresses R1 using ac06f583e4a0bd7f (matched: Python, python).",
+            "rationale": "Addresses R1 using ac06f583e4a0bd7f (matched: Python).",
             "requirement_ids": [
               "R1"
             ],
@@ -160,23 +168,30 @@
         },
         {
           "citations": [
-            "b0ce57c46d920b2a"
+            "698a247d52da85e7"
           ],
           "explanation": {
-            "matches": [],
-            "model_rationale": "Highlights R1 via b0ce57c46d920b2a.",
+            "matches": [
+              {
+                "chunk_id": "698a247d52da85e7",
+                "terms": [
+                  "Python"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R1 via 698a247d52da85e7.",
             "requirement_ids": [
               "R1"
             ]
           },
           "id": "C.S1",
           "kind": "claim",
-          "rationale": "Highlights R1 via b0ce57c46d920b2a.",
+          "rationale": "Highlights R1 via 698a247d52da85e7.",
           "requirement_ids": [
             "R1"
           ],
           "template_id": null,
-          "text": "My background includes: Senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
+          "text": "My background includes: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
         },
         {
           "citations": [
@@ -207,6 +222,34 @@
         },
         {
           "citations": [
+            "b0ce57c46d920b2a"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "b0ce57c46d920b2a",
+                "terms": [
+                  "batch",
+                  "pipelines"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R5 via b0ce57c46d920b2a.",
+            "requirement_ids": [
+              "R5"
+            ]
+          },
+          "id": "C.S3",
+          "kind": "claim",
+          "rationale": "Highlights R5 via b0ce57c46d920b2a.",
+          "requirement_ids": [
+            "R5"
+          ],
+          "template_id": null,
+          "text": "My background includes: Senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
+        },
+        {
+          "citations": [
             "cf3d6b86fa121547"
           ],
           "explanation": {
@@ -214,7 +257,7 @@
             "model_rationale": "Synthetic unsupported claim for demo.",
             "requirement_ids": []
           },
-          "id": "C.S3",
+          "id": "C.S4",
           "kind": "claim",
           "rationale": "Synthetic unsupported claim for demo.",
           "requirement_ids": [],
@@ -355,38 +398,27 @@
     }
   ],
   "id": "run-0001",
-  "job_id": "job-e8f4b1075a6dbaba",
+  "job_id": "job-71da11466824c444",
   "judge_enabled": false,
   "judge_model": null,
   "model": "mock-1",
   "parent_run_id": null,
   "provider": "mock",
   "report": {
-    "badge_text": "3 unsupported, 0 not verified (of 8 claims)",
-    "claims": 8,
+    "badge_text": "1 unsupported, 0 not verified (of 9 claims)",
+    "claims": 9,
     "flagged_ids": [
-      "Q1.S1",
-      "C.S1",
-      "C.S3"
+      "C.S4"
     ],
     "judge_enabled": false,
     "not_verified": 0,
     "sentences": [
       {
-        "checks_run": [
-          "requirement"
-        ],
-        "failures": [
-          {
-            "check": "requirement",
-            "detail": "Cited evidence does not support linked requirements",
-            "outcome": "fail",
-            "token": "R1"
-          }
-        ],
+        "checks_run": [],
+        "failures": [],
         "judge": null,
         "sentence_id": "Q1.S1",
-        "status": "unsupported"
+        "status": "checks_passed"
       },
       {
         "checks_run": [],
@@ -424,26 +456,24 @@
         "status": "checks_passed"
       },
       {
-        "checks_run": [
-          "requirement"
-        ],
-        "failures": [
-          {
-            "check": "requirement",
-            "detail": "Cited evidence does not support linked requirements",
-            "outcome": "fail",
-            "token": "R1"
-          }
-        ],
+        "checks_run": [],
+        "failures": [],
         "judge": null,
         "sentence_id": "C.S1",
-        "status": "unsupported"
+        "status": "checks_passed"
       },
       {
         "checks_run": [],
         "failures": [],
         "judge": null,
         "sentence_id": "C.S2",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S3",
         "status": "checks_passed"
       },
       {
@@ -466,7 +496,7 @@
           }
         ],
         "judge": null,
-        "sentence_id": "C.S3",
+        "sentence_id": "C.S4",
         "status": "unsupported"
       },
       {
@@ -477,7 +507,7 @@
         "status": "checks_passed"
       }
     ],
-    "unsupported": 3
+    "unsupported": 1
   },
   "requirements": [
     {

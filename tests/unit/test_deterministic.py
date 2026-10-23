@@ -180,16 +180,66 @@ def test_valid_citation_passes() -> None:
 
 
 def test_framing_skips_checks() -> None:
+    ctx = CheckContext(
+        lexicon=LEX,
+        reference_date=REF,
+        target_company=None,
+        job_title="Senior Data Engineer",
+        company="Acme Logistics",
+    )
     s = Sentence(
         id="C.F1",
         kind="framing",
-        text="Dear team,",
+        text="I am applying for the Senior Data Engineer role at Acme Logistics.",
         citations=[],
         requirement_ids=[],
         rationale="",
         template_id="open",
     )
-    assert check_sentence(s, {}, CTX).status == "checks_passed"
+    assert check_sentence(s, {}, ctx).status == "checks_passed"
+
+
+def test_framing_without_matching_template_text_fails() -> None:
+    ctx = CheckContext(
+        lexicon=LEX,
+        reference_date=REF,
+        target_company=None,
+        job_title="Senior Data Engineer",
+        company="Acme Logistics",
+    )
+    s = Sentence(
+        id="C.F1",
+        kind="framing",
+        text="At Initech I built the company's Rust data platform.",
+        citations=[],
+        requirement_ids=[],
+        rationale="",
+        template_id=None,
+    )
+    r = check_sentence(s, {}, ctx)
+    assert r.status == "unsupported"
+    assert any(f.check == "no_citation" for f in r.failures)
+
+
+def test_framing_wrong_template_id_text_fails() -> None:
+    ctx = CheckContext(
+        lexicon=LEX,
+        reference_date=REF,
+        target_company=None,
+        job_title="Senior Data Engineer",
+        company="Acme Logistics",
+    )
+    s = Sentence(
+        id="C.F1",
+        kind="framing",
+        text="At Initech I built the company's Rust data platform.",
+        citations=[],
+        requirement_ids=[],
+        rationale="",
+        template_id="open",
+    )
+    r = check_sentence(s, {}, ctx)
+    assert r.status == "unsupported"
 
 
 def test_framing_labeled_claim_still_checked() -> None:
@@ -207,6 +257,37 @@ def test_framing_labeled_claim_still_checked() -> None:
     r = check_sentence(s, pool, CTX)
     assert r.status == "unsupported"
     assert any(f.check == "employer" for f in r.failures)
+
+
+def test_requirement_link_skipped_when_requirement_ids_empty() -> None:
+    req = Requirement(
+        id="R2",
+        text="Strong Python and SQL skills.",
+        priority="must",
+        skills=["Python", "SQL"],
+        terms=["Python", "SQL"],
+        min_years=None,
+    )
+    ctx = CheckContext(
+        lexicon=LEX,
+        reference_date=REF,
+        target_company=None,
+        requirements={"R2": req},
+    )
+    pool = {
+        "c1": _chunk("c1", "Partnered with analytics on dbt models serving finance dashboards."),
+    }
+    s = Sentence(
+        id="Q2.S3",
+        kind="claim",
+        text="In addition: dbt.",
+        citations=["c1"],
+        requirement_ids=[],
+        rationale="",
+    )
+    r = check_sentence(s, pool, ctx)
+    assert r.status == "checks_passed"
+    assert not any(f.check == "requirement" for f in r.failures)
 
 
 def test_requirement_link_needs_eligible_evidence() -> None:

@@ -1,9 +1,9 @@
-# ML Platform Engineer — Globex Energy
+# ML Platform Engineer - Globex Energy
 
 FICTIONAL SAMPLE DATA for portfolio demo only.
 
 **Company:** Globex Energy  
-**Location:** Hybrid — Austin, TX
+**Location:** Hybrid - Austin, TX
 
 ## About the role
 

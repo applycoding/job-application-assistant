@@ -1,6 +1,6 @@
 {
-  "check_rules_version": "2026-10-24.1",
-  "corpus_version": "72c968afab2749543dbacdaeb624d57ea4936671aaa4a20b6b890c915fd24abe",
+  "check_rules_version": "2026-10-24.2",
+  "corpus_version": "44e91b6a8de701b9006a40df7913ab825f85b4b064ae55bee927ac865d3c73e3",
   "created_at": "2026-10-23T09:00:00+00:00",
   "drafts": {
     "answers": [
@@ -22,14 +22,14 @@
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 23c0fce35130905a (matched: FastAPI, Python, fastapi, python).",
+              "model_rationale": "Addresses R1 using 23c0fce35130905a (matched: FastAPI, Python).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q1.S1",
             "kind": "claim",
-            "rationale": "Addresses R1 using 23c0fce35130905a (matched: FastAPI, Python, fastapi, python).",
+            "rationale": "Addresses R1 using 23c0fce35130905a (matched: FastAPI, Python).",
             "requirement_ids": [
               "R1"
             ],
@@ -49,14 +49,14 @@
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 698a247d52da85e7 (matched: Python, python).",
+              "model_rationale": "Addresses R1 using 698a247d52da85e7 (matched: Python).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q1.S2",
             "kind": "claim",
-            "rationale": "Addresses R1 using 698a247d52da85e7 (matched: Python, python).",
+            "rationale": "Addresses R1 using 698a247d52da85e7 (matched: Python).",
             "requirement_ids": [
               "R1"
             ],
@@ -77,14 +77,14 @@
                   ]
                 }
               ],
-              "model_rationale": "Addresses R5 using 6314bf3592cea2bd (matched: review).",
+              "model_rationale": "Addresses R5 using 6314bf3592cea2bd (matched: code, review).",
               "requirement_ids": [
                 "R5"
               ]
             },
             "id": "Q1.S3",
             "kind": "claim",
-            "rationale": "Addresses R5 using 6314bf3592cea2bd (matched: review).",
+            "rationale": "Addresses R5 using 6314bf3592cea2bd (matched: code, review).",
             "requirement_ids": [
               "R5"
             ],
@@ -110,14 +110,14 @@
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using ac06f583e4a0bd7f (matched: Python, python).",
+              "model_rationale": "Addresses R1 using ac06f583e4a0bd7f (matched: Python).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q2.S1",
             "kind": "claim",
-            "rationale": "Addresses R1 using ac06f583e4a0bd7f (matched: Python, python).",
+            "rationale": "Addresses R1 using ac06f583e4a0bd7f (matched: Python).",
             "requirement_ids": [
               "R1"
             ],
@@ -129,17 +129,24 @@
               "0e2df92c5fbd05ea"
             ],
             "explanation": {
-              "matches": [],
-              "model_rationale": "Addresses R3 using 0e2df92c5fbd05ea (matched: production).",
+              "matches": [
+                {
+                  "chunk_id": "0e2df92c5fbd05ea",
+                  "terms": [
+                    "production"
+                  ]
+                }
+              ],
+              "model_rationale": "Addresses R8 using 0e2df92c5fbd05ea (matched: production).",
               "requirement_ids": [
-                "R3"
+                "R8"
               ]
             },
             "id": "Q2.S2",
             "kind": "claim",
-            "rationale": "Addresses R3 using 0e2df92c5fbd05ea (matched: production).",
+            "rationale": "Addresses R8 using 0e2df92c5fbd05ea (matched: production).",
             "requirement_ids": [
-              "R3"
+              "R8"
             ],
             "template_id": null,
             "text": "I can also point to this: Introduced Great Expectations checks; reduced bad loads reaching production."
@@ -149,14 +156,25 @@
               "8ebfad1dd21499a6"
             ],
             "explanation": {
-              "matches": [],
-              "model_rationale": "Addresses R1 using 8ebfad1dd21499a6.",
-              "requirement_ids": []
+              "matches": [
+                {
+                  "chunk_id": "8ebfad1dd21499a6",
+                  "terms": [
+                    "SQL"
+                  ]
+                }
+              ],
+              "model_rationale": "Addresses R2 using 8ebfad1dd21499a6 (matched: SQL).",
+              "requirement_ids": [
+                "R2"
+              ]
             },
             "id": "Q2.S3",
             "kind": "claim",
-            "rationale": "Addresses R1 using 8ebfad1dd21499a6.",
-            "requirement_ids": [],
+            "rationale": "Addresses R2 using 8ebfad1dd21499a6 (matched: SQL).",
+            "requirement_ids": [
+              "R2"
+            ],
             "template_id": null,
             "text": "In addition: SQL."
           }
@@ -233,23 +251,31 @@
         },
         {
           "citations": [
-            "0e2df92c5fbd05ea"
+            "6314bf3592cea2bd"
           ],
           "explanation": {
-            "matches": [],
-            "model_rationale": "Highlights R3 via 0e2df92c5fbd05ea.",
+            "matches": [
+              {
+                "chunk_id": "6314bf3592cea2bd",
+                "terms": [
+                  "code",
+                  "review"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R5 via 6314bf3592cea2bd.",
             "requirement_ids": [
-              "R3"
+              "R5"
             ]
           },
           "id": "C.S3",
           "kind": "claim",
-          "rationale": "Highlights R3 via 0e2df92c5fbd05ea.",
+          "rationale": "Highlights R5 via 6314bf3592cea2bd.",
           "requirement_ids": [
-            "R3"
+            "R5"
           ],
           "template_id": null,
-          "text": "My background includes: Introduced Great Expectations checks; reduced bad loads reaching production."
+          "text": "My background includes: Mentored two junior engineers on code review and incident response."
         },
         {
           "citations": [
@@ -437,18 +463,16 @@
     }
   ],
   "id": "run-0001",
-  "job_id": "job-ab6b6923316ad663",
+  "job_id": "job-3a430ac52f2eb0b4",
   "judge_enabled": false,
   "judge_model": null,
   "model": "mock-1",
   "parent_run_id": null,
   "provider": "mock",
   "report": {
-    "badge_text": "3 unsupported, 0 not verified (of 10 claims)",
+    "badge_text": "1 unsupported, 0 not verified (of 10 claims)",
     "claims": 10,
     "flagged_ids": [
-      "Q2.S2",
-      "C.S3",
       "C.S4"
     ],
     "judge_enabled": false,
@@ -483,20 +507,11 @@
         "status": "checks_passed"
       },
       {
-        "checks_run": [
-          "requirement"
-        ],
-        "failures": [
-          {
-            "check": "requirement",
-            "detail": "Cited evidence does not support linked requirements",
-            "outcome": "fail",
-            "token": "R3"
-          }
-        ],
+        "checks_run": [],
+        "failures": [],
         "judge": null,
         "sentence_id": "Q2.S2",
-        "status": "unsupported"
+        "status": "checks_passed"
       },
       {
         "checks_run": [],
@@ -527,20 +542,11 @@
         "status": "checks_passed"
       },
       {
-        "checks_run": [
-          "requirement"
-        ],
-        "failures": [
-          {
-            "check": "requirement",
-            "detail": "Cited evidence does not support linked requirements",
-            "outcome": "fail",
-            "token": "R3"
-          }
-        ],
+        "checks_run": [],
+        "failures": [],
         "judge": null,
         "sentence_id": "C.S3",
-        "status": "unsupported"
+        "status": "checks_passed"
       },
       {
         "checks_run": [
@@ -573,7 +579,7 @@
         "status": "checks_passed"
       }
     ],
-    "unsupported": 3
+    "unsupported": 1
   },
   "requirements": [
     {

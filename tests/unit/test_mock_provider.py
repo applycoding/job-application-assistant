@@ -21,7 +21,13 @@ def _minimal_outbound() -> OutboundDraft:
         job_title="Role",
         company="Acme",
         requirements=[
-            OutboundRequirement(id="R1", text="Python", priority="must"),
+            OutboundRequirement(
+                id="R1",
+                text="Python",
+                priority="must",
+                skills=["Python"],
+                terms=["Python"],
+            ),
         ],
         questions=[Question(id="Q1", text="Experience?")],
         evidence=[ev],
@@ -47,8 +53,9 @@ async def test_injected_claim_present() -> None:
 
 
 @pytest.mark.asyncio
-async def test_cover_includes_supported_cv_claims(
-    app, settings, repo, fixed_clock, seq_ids
+@pytest.mark.parametrize("company_marker", ["Acme", "Globex", "Vandelay"])
+async def test_cover_honest_for_sample_jobs(
+    app, settings, repo, fixed_clock, seq_ids, company_marker: str
 ) -> None:
     from jaa.generation.pipeline import Deps, create_run
     from jaa.models import RunOptions
@@ -56,7 +63,7 @@ async def test_cover_includes_supported_cv_claims(
     from tests.support.jobs import job_with_marker
 
     seed(repo, settings, fixed_clock, seq_ids, app.state.lexicon)
-    job = job_with_marker(repo.list_jobs(), "Acme")
+    job = job_with_marker(repo.list_jobs(), company_marker)
     deps = Deps(
         repo=repo,
         provider=app.state.provider,
@@ -66,16 +73,16 @@ async def test_cover_includes_supported_cv_claims(
         ids=seq_ids,
     )
     run = await create_run(deps, job.id, RunOptions(judge=False))
-    cover_claim_ids = [s.id for s in run.drafts.cover_note.sentences if s.kind == "claim"]
-    assert len(cover_claim_ids) >= 3
+    cover_claims = [s for s in run.drafts.cover_note.sentences if s.kind == "claim"]
+    assert len(cover_claims) >= 3
     by_id = {sc.sentence_id: sc for sc in run.report.sentences}
-    passed = [sid for sid in cover_claim_ids if by_id[sid].status == "checks_passed"]
-    failed = [sid for sid in cover_claim_ids if by_id[sid].status == "unsupported"]
+    unsupported = [s for s in cover_claims if by_id[s.id].status == "unsupported"]
+    assert len(unsupported) == 1
+    assert unsupported[0].text == INJECTED_CLAIM
+    passed = [s for s in cover_claims if by_id[s.id].status == "checks_passed"]
     assert len(passed) >= 2
-    assert len(failed) >= 1
-    assert any(
-        INJECTED_CLAIM in s.text for s in run.drafts.cover_note.sentences if s.kind == "claim"
-    )
+    for sc in (by_id[s.id] for s in cover_claims if s.text != INJECTED_CLAIM):
+        assert not any(f.check == "requirement" for f in sc.failures)
 
 
 @pytest.mark.asyncio

@@ -7,6 +7,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from datetime import date
 
+from jaa.generation.templates import FRAMING_TEMPLATES
 from jaa.models import CheckFailure, CheckName, Chunk, Requirement, Sentence, SentenceCheck
 from jaa.retrieval.eligibility import eligible
 from jaa.truth.dates import extract_spans, month_bounds
@@ -25,7 +26,7 @@ from jaa.truth.extractors import (
 from jaa.truth.lexicon import SkillLexicon
 from jaa.truth.verdict import status_from_checks
 
-CHECK_RULES_VERSION = "2026-10-24.1"
+CHECK_RULES_VERSION = "2026-10-24.2"
 
 
 @dataclass(frozen=True)
@@ -35,6 +36,22 @@ class CheckContext:
     target_company: str | None
     gap_terms: frozenset[str] = frozenset()
     requirements: Mapping[str, Requirement] | None = None
+    job_title: str | None = None
+    company: str | None = None
+
+
+def _framing_template_text(template_id: str, ctx: CheckContext) -> str | None:
+    if template_id not in FRAMING_TEMPLATES:
+        return None
+    if template_id == "open":
+        if not ctx.job_title or not ctx.company:
+            return None
+        return FRAMING_TEMPLATES["open"].format(title=ctx.job_title, company=ctx.company)
+    if template_id == "open_nocompany":
+        if not ctx.job_title:
+            return None
+        return FRAMING_TEMPLATES["open_nocompany"].format(title=ctx.job_title)
+    return FRAMING_TEMPLATES[template_id]
 
 
 def check_sentence(
@@ -42,19 +59,21 @@ def check_sentence(
     pool: Mapping[str, Chunk],
     ctx: CheckContext,
 ) -> SentenceCheck:
-    if s.kind == "framing" and not s.citations and s.template_id:
-        return SentenceCheck(
-            sentence_id=s.id,
-            status="checks_passed",
-            failures=[],
-            checks_run=[],
-            judge=None,
-        )
+    if s.kind == "framing" and not s.citations:
+        expected = _framing_template_text(s.template_id, ctx) if s.template_id else None
+        if expected is not None and s.text == expected:
+            return SentenceCheck(
+                sentence_id=s.id,
+                status="checks_passed",
+                failures=[],
+                checks_run=[],
+                judge=None,
+            )
 
     failures: list[CheckFailure] = []
     checks_run: list[CheckName] = []
 
-    if not s.citations and s.kind != "framing":
+    if not s.citations:
         failures.append(
             CheckFailure(check="no_citation", token=None, detail="No citations", outcome="fail")
         )

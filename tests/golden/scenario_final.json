@@ -1,6 +1,6 @@
 {
-  "check_rules_version": "2026-10-24.1",
-  "corpus_version": "2c9261acc44cbb7d8b7482dfd6cca17af22914861c5bf463fd6f2b944faf7d39",
+  "check_rules_version": "2026-10-24.2",
+  "corpus_version": "73d2c038acc6890f25359ea2840eccd9efc022315f1808b89fb52f67e8a09ea7",
   "created_at": "2026-10-23T09:00:00Z",
   "drafts": {
     "answers": [
@@ -22,14 +22,14 @@
                   ]
                 }
               ],
-              "model_rationale": "Addresses R2 using ee92bbdb0644ec3e (matched: Python, SQL, python, skills).",
+              "model_rationale": "Addresses R2 using ee92bbdb0644ec3e (matched: Python, SQL).",
               "requirement_ids": [
                 "R2"
               ]
             },
             "id": "Q1.S1",
             "kind": "claim",
-            "rationale": "Addresses R2 using ee92bbdb0644ec3e (matched: Python, SQL, python, skills).",
+            "rationale": "Addresses R2 using ee92bbdb0644ec3e (matched: Python, SQL).",
             "requirement_ids": [
               "R2"
             ],
@@ -49,14 +49,14 @@
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using e82988b69f23a21b (matched: years).",
+              "model_rationale": "Addresses R1 using e82988b69f23a21b (matched: data).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q1.S2",
             "kind": "claim",
-            "rationale": "Addresses R1 using e82988b69f23a21b (matched: years).",
+            "rationale": "Addresses R1 using e82988b69f23a21b (matched: data).",
             "requirement_ids": [
               "R1"
             ],
@@ -72,20 +72,20 @@
                 {
                   "chunk_id": "e5cc390be9431197",
                   "terms": [
-                    "AWS"
+                    "data"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R4 using e5cc390be9431197 (matched: AWS).",
+              "model_rationale": "Addresses R1 using e5cc390be9431197 (matched: data).",
               "requirement_ids": [
-                "R4"
+                "R1"
               ]
             },
             "id": "Q1.S3",
             "kind": "claim",
-            "rationale": "Addresses R4 using e5cc390be9431197 (matched: AWS).",
+            "rationale": "Addresses R1 using e5cc390be9431197 (matched: data).",
             "requirement_ids": [
-              "R4"
+              "R1"
             ],
             "template_id": null,
             "text": "In addition: AWS."
@@ -105,20 +105,20 @@
                 {
                   "chunk_id": "95630d921b0fe522",
                   "terms": [
-                    "Kafka"
+                    "Apache Spark"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R5 using 95630d921b0fe522 (matched: Kafka, kafka, streaming).",
+              "model_rationale": "Addresses R3 using 95630d921b0fe522 (matched: Apache Spark).",
               "requirement_ids": [
-                "R5"
+                "R3"
               ]
             },
             "id": "Q2.S1",
             "kind": "claim",
-            "rationale": "Addresses R5 using 95630d921b0fe522 (matched: Kafka, kafka, streaming).",
+            "rationale": "Addresses R3 using 95630d921b0fe522 (matched: Apache Spark).",
             "requirement_ids": [
-              "R5"
+              "R3"
             ],
             "template_id": null,
             "text": "A relevant example from my CV: Apache Spark, Kafka."
@@ -137,14 +137,14 @@
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 993e6d3d45c4bace (matched: engineering).",
+              "model_rationale": "Addresses R1 using 993e6d3d45c4bace (matched: data, engineering).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q2.S2",
             "kind": "claim",
-            "rationale": "Addresses R1 using 993e6d3d45c4bace (matched: engineering).",
+            "rationale": "Addresses R1 using 993e6d3d45c4bace (matched: data, engineering).",
             "requirement_ids": [
               "R1"
             ],
@@ -156,14 +156,25 @@
               "97b798af26b2d0e7"
             ],
             "explanation": {
-              "matches": [],
-              "model_rationale": "Addresses R2 using 97b798af26b2d0e7.",
-              "requirement_ids": []
+              "matches": [
+                {
+                  "chunk_id": "97b798af26b2d0e7",
+                  "terms": [
+                    "data"
+                  ]
+                }
+              ],
+              "model_rationale": "Addresses R1 using 97b798af26b2d0e7 (matched: data).",
+              "requirement_ids": [
+                "R1"
+              ]
             },
             "id": "Q2.S3",
             "kind": "claim",
-            "rationale": "Addresses R2 using 97b798af26b2d0e7.",
-            "requirement_ids": [],
+            "rationale": "Addresses R1 using 97b798af26b2d0e7 (matched: data).",
+            "requirement_ids": [
+              "R1"
+            ],
             "template_id": null,
             "text": "In addition: Mentored two junior engineers on code review and incident response."
           }
@@ -626,7 +637,7 @@
   ],
   "gaps": [],
   "id": "run-0008",
-  "job_id": "job-6280dd602d4eb59c",
+  "job_id": "job-9bfc5e1a5a56a8d6",
   "judge_enabled": false,
   "judge_model": null,
   "model": "mock-1",
