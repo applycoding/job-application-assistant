@@ -1,0 +1,16 @@
+.git/
+.env*
+data/
+var/
+*.db*
+*.sqlite3*
+.venv/
+test-results/
+__pycache__/
+.github/
+tests/
+docs/
+PLAN.md
+*.md
+!README.md
+!samples/README.md

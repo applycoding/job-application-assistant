@@ -1,0 +1,7 @@
+{
+  "description": "Raw contact strings used in privacy adapter tests; outbound DTO must redact these before HTTP.",
+  "email": "reach.me@example.com",
+  "phone": "+1 (555) 123-4567",
+  "url": "https://portfolio.example.com/cv",
+  "address": "742 Evergreen Terrace Street"
+}
