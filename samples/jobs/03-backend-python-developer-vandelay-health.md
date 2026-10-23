@@ -1,4 +1,4 @@
-# Backend Python Developer — Vandelay Health
+# Backend Python Developer - Vandelay Health
 
 FICTIONAL SAMPLE DATA for portfolio demo only.
 

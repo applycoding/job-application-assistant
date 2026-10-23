@@ -20,7 +20,7 @@ Turn uploaded CV files into classified lines, then into chunks with stable ids s
 
 Each `RawLine` carries `line_no`, `text`, `kind`, and a `section` path (for example `Experience > Acme Corp`). Loaders raise `IngestError` for bad encodings or mismatched extensions, and `UploadTooLarge` when streaming exceeds `max_upload_mb`.
 
-Chunk ids look like `{doc_id}:{16-char sha256 prefix}` where the hash input is `section + separator + text`. `ChunkIdCollision` fires if two different bodies share the same prefix, which protects citation integrity.
+Chunk ids are a 16-character SHA-256 prefix of `file_sha_prefix + line_no + section + text` (the random document uuid is not part of the id). Re-uploading the same file bytes keeps chunk ids stable even when SQLite assigns a new document row. `ChunkIdCollision` fires if two different bodies share the same prefix within one ingest, which protects citation integrity.
 
 `corpus_version()` hashes ordered chunk metadata plus `RETRIEVAL_VERSION` and `CHECK_RULES_VERSION` so runs know when evidence pools changed.
 

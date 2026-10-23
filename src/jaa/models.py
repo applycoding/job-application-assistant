@@ -23,6 +23,7 @@ CheckName = Literal[
     "ownership",
     "negation",
     "mixed_citations",
+    "requirement",
     "judge",
 ]
 
