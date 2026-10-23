@@ -21,7 +21,13 @@ def _minimal_outbound() -> OutboundDraft:
         job_title="Role",
         company="Acme",
         requirements=[
-            OutboundRequirement(id="R1", text="Python", priority="must"),
+            OutboundRequirement(
+                id="R1",
+                text="Python",
+                priority="must",
+                skills=["Python"],
+                terms=["Python"],
+            ),
         ],
         questions=[Question(id="Q1", text="Experience?")],
         evidence=[ev],
@@ -44,6 +50,39 @@ async def test_injected_claim_present() -> None:
     out = await MockProvider().draft(_minimal_outbound())
     texts = [s.text for s in out.cover_note]
     assert INJECTED_CLAIM in texts
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("company_marker", ["Acme", "Globex", "Vandelay"])
+async def test_cover_honest_for_sample_jobs(
+    app, settings, repo, fixed_clock, seq_ids, company_marker: str
+) -> None:
+    from jaa.generation.pipeline import Deps, create_run
+    from jaa.models import RunOptions
+    from jaa.samples import seed
+    from tests.support.jobs import job_with_marker
+
+    seed(repo, settings, fixed_clock, seq_ids, app.state.lexicon)
+    job = job_with_marker(repo.list_jobs(), company_marker)
+    deps = Deps(
+        repo=repo,
+        provider=app.state.provider,
+        settings=settings,
+        lexicon=app.state.lexicon,
+        clock=fixed_clock,
+        ids=seq_ids,
+    )
+    run = await create_run(deps, job.id, RunOptions(judge=False))
+    cover_claims = [s for s in run.drafts.cover_note.sentences if s.kind == "claim"]
+    assert len(cover_claims) >= 3
+    by_id = {sc.sentence_id: sc for sc in run.report.sentences}
+    unsupported = [s for s in cover_claims if by_id[s.id].status == "unsupported"]
+    assert len(unsupported) == 1
+    assert unsupported[0].text == INJECTED_CLAIM
+    passed = [s for s in cover_claims if by_id[s.id].status == "checks_passed"]
+    assert len(passed) >= 2
+    for sc in (by_id[s.id] for s in cover_claims if s.text != INJECTED_CLAIM):
+        assert not any(f.check == "requirement" for f in sc.failures)
 
 
 @pytest.mark.asyncio

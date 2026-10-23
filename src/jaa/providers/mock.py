@@ -4,11 +4,20 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 
-from jaa.models import AnswerOut, Chunk, JudgeOut, JudgeVerdict, LLMDraftOut, SentenceOut
+from jaa.models import (
+    AnswerOut,
+    Chunk,
+    JudgeOut,
+    JudgeVerdict,
+    LLMDraftOut,
+    Requirement,
+    SentenceOut,
+)
 from jaa.privacy.outbound import OutboundDraft as OutboundDraftModel
 from jaa.privacy.outbound import OutboundJudge, OutboundRequirement
 from jaa.providers.validate import validate_draft
 from jaa.retrieval.bm25 import BM25Ranker
+from jaa.retrieval.eligibility import eligible
 from jaa.retrieval.tokenize import tokenize
 from jaa.truth.lexicon import SkillLexicon
 
@@ -21,6 +30,7 @@ LEAD_INS = (
 )
 
 _LEAD_PHRASES = tuple(s.split("{")[0].strip().lower() for s in LEAD_INS)
+_COVER_PREFIX = "my background includes:"
 
 
 class MockProvider:
@@ -36,7 +46,8 @@ class MockProvider:
         chunks = _chunks_from_outbound(req)
         must_reqs = [r for r in req.requirements if r.priority == "must"]
         must_text = " ".join(r.text for r in must_reqs)
-        used_claims: set[str] = set()
+        used_answer_bodies: set[str] = set()
+        used_cover_bodies: set[str] = set()
         used_cover_chunks: set[str] = set()
 
         answers: list[AnswerOut] = []
@@ -46,19 +57,15 @@ class MockProvider:
             sentences: list[SentenceOut] = []
             lead_idx = 0
             for chunk in ranked:
-                text = _unique_claim_text(chunk, lex, used_claims)
+                text = _unique_claim_text(chunk, lex, used_answer_bodies)
                 if text is None:
                     continue
                 lead_idx += 1
-                rid = _best_requirement(chunk, req.requirements)
-                terms = _matched_terms(chunk, req.requirements)
-                req_for_chunk = next((r for r in req.requirements if r.id == rid), None)
-                if req_for_chunk is not None:
-                    terms = _matched_terms(chunk, [req_for_chunk])
+                rid, terms = _pick_requirement_for_chunk(chunk, req.requirements, lex)
                 if terms:
                     rationale = f"Addresses {rid} using {chunk.id} (matched: {', '.join(terms)})."
                 else:
-                    rationale = f"Addresses {rid} using {chunk.id}."
+                    rationale = f"Addresses {rid} using {chunk.id}." if rid else "Evidence from CV."
                 sentences.append(
                     SentenceOut(
                         text=LEAD_INS[(lead_idx - 1) % 3].format(text=text),
@@ -82,17 +89,20 @@ class MockProvider:
                 )
             answers.append(AnswerOut(question_id=question.id, sentences=sentences))
 
+        cover_reqs = must_reqs if must_reqs else list(req.requirements)
         cover_claims: list[SentenceOut] = []
-        for req_item in must_reqs[:4]:
-            cover_chunk = _top_chunk_for_requirement(chunks, req_item, req.requirements)
+        for req_item in cover_reqs:
+            if len(cover_claims) >= 3:
+                break
+            cover_chunk = _top_chunk_for_requirement(chunks, req_item, lex)
             if cover_chunk is None:
                 continue
-            if not _matched_terms(cover_chunk, [req_item]):
+            if not _eligible_terms(cover_chunk, req_item, lex):
                 continue
             if cover_chunk.id in used_cover_chunks:
                 continue
             used_cover_chunks.add(cover_chunk.id)
-            cover_body = _unique_claim_text(cover_chunk, lex, used_claims)
+            cover_body = _unique_claim_text(cover_chunk, lex, used_cover_bodies)
             if cover_body is None:
                 continue
             cover_claims.append(
@@ -152,6 +162,53 @@ class _PoolChunk:
         return f"{self.section}\n{self.text}"
 
 
+def _pool_to_chunk(chunk: _PoolChunk) -> Chunk:
+    return Chunk(
+        id=chunk.id,
+        doc_id="mock",
+        line_no=0,
+        kind="bullet",
+        text=chunk.text,
+        section=chunk.section,
+    )
+
+
+def _requirement_from_outbound(req: OutboundRequirement) -> Requirement:
+    return Requirement(
+        id=req.id,
+        text=req.text,
+        priority=req.priority,
+        skills=list(req.skills),
+        terms=list(req.terms),
+        min_years=None,
+    )
+
+
+def _eligible_terms(
+    chunk: _PoolChunk,
+    req: OutboundRequirement,
+    lexicon: SkillLexicon,
+) -> list[str]:
+    return eligible(_pool_to_chunk(chunk), _requirement_from_outbound(req), lexicon)
+
+
+def _pick_requirement_for_chunk(
+    chunk: _PoolChunk,
+    requirements: Sequence[OutboundRequirement],
+    lexicon: SkillLexicon,
+) -> tuple[str, list[str]]:
+    best_id = ""
+    best_terms: list[str] = []
+    for req in requirements:
+        terms = _eligible_terms(chunk, req, lexicon)
+        if len(terms) > len(best_terms) or (
+            len(terms) == len(best_terms) and terms and (not best_id or req.id < best_id)
+        ):
+            best_id = req.id
+            best_terms = terms
+    return best_id, best_terms
+
+
 def _rank_pool(chunks: Sequence[_PoolChunk], query: list[str]) -> list[_PoolChunk]:
     if not chunks:
         return []
@@ -191,43 +248,17 @@ def _unique_claim_text(
     return body
 
 
-def _best_requirement(chunk: _PoolChunk, requirements: Sequence[OutboundRequirement]) -> str:
-    best_id = ""
-    best_count = -1
-    chunk_tokens = set(tokenize(chunk.evidence_text))
-    for req in requirements:
-        overlap = sum(1 for t in _req_tokens(req) if t in chunk_tokens)
-        if overlap > best_count or (overlap == best_count and req.id < best_id):
-            best_count = overlap
-            best_id = req.id
-    return best_id
-
-
-def _matched_terms(chunk: _PoolChunk, requirements: Sequence[OutboundRequirement]) -> list[str]:
-    chunk_tokens = set(tokenize(chunk.evidence_text))
-    terms: set[str] = set()
-    for req in requirements:
-        for t in _req_tokens(req):
-            if t in chunk_tokens:
-                terms.add(t)
-    return sorted(terms)
-
-
-def _req_tokens(req: OutboundRequirement) -> list[str]:
-    return tokenize(req.text)
-
-
 def _top_chunk_for_requirement(
     chunks: Sequence[_PoolChunk],
     req_item: OutboundRequirement,
-    all_reqs: Sequence[OutboundRequirement],
+    lexicon: SkillLexicon,
 ) -> _PoolChunk | None:
     query = tokenize(req_item.text)
     ranked = _rank_pool(chunks, query)
     for chunk in ranked:
-        if _matched_terms(chunk, [req_item]):
+        if _eligible_terms(chunk, req_item, lexicon):
             return chunk
-    return ranked[0] if ranked else None
+    return None
 
 
 def _fallback_cover(chunks: Sequence[_PoolChunk]) -> SentenceOut:
@@ -245,5 +276,8 @@ def _content_tokens(claim: str) -> set[str]:
     for prefix in _LEAD_PHRASES:
         if lower.startswith(prefix):
             claim = claim[len(prefix) :].lstrip(" :")
+            lower = claim.lower()
             break
-    return set(tokenize(claim))
+    if lower.startswith(_COVER_PREFIX):
+        claim = claim[len(_COVER_PREFIX) :].lstrip(" :")
+    return set(tokenize(claim.rstrip(" .")))

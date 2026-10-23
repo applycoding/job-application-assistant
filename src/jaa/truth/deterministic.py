@@ -7,7 +7,9 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from datetime import date
 
-from jaa.models import CheckFailure, CheckName, Chunk, Sentence, SentenceCheck
+from jaa.generation.templates import FRAMING_TEMPLATES
+from jaa.models import CheckFailure, CheckName, Chunk, Requirement, Sentence, SentenceCheck
+from jaa.retrieval.eligibility import eligible
 from jaa.truth.dates import extract_spans, month_bounds
 from jaa.truth.extractors import (
     DurationMention,
@@ -24,7 +26,7 @@ from jaa.truth.extractors import (
 from jaa.truth.lexicon import SkillLexicon
 from jaa.truth.verdict import status_from_checks
 
-CHECK_RULES_VERSION = "2026-10-23.3"
+CHECK_RULES_VERSION = "2026-10-24.2"
 
 
 @dataclass(frozen=True)
@@ -33,6 +35,23 @@ class CheckContext:
     reference_date: date
     target_company: str | None
     gap_terms: frozenset[str] = frozenset()
+    requirements: Mapping[str, Requirement] | None = None
+    job_title: str | None = None
+    company: str | None = None
+
+
+def _framing_template_text(template_id: str, ctx: CheckContext) -> str | None:
+    if template_id not in FRAMING_TEMPLATES:
+        return None
+    if template_id == "open":
+        if not ctx.job_title or not ctx.company:
+            return None
+        return FRAMING_TEMPLATES["open"].format(title=ctx.job_title, company=ctx.company)
+    if template_id == "open_nocompany":
+        if not ctx.job_title:
+            return None
+        return FRAMING_TEMPLATES["open_nocompany"].format(title=ctx.job_title)
+    return FRAMING_TEMPLATES[template_id]
 
 
 def check_sentence(
@@ -40,14 +59,16 @@ def check_sentence(
     pool: Mapping[str, Chunk],
     ctx: CheckContext,
 ) -> SentenceCheck:
-    if s.kind == "framing":
-        return SentenceCheck(
-            sentence_id=s.id,
-            status="checks_passed",
-            failures=[],
-            checks_run=[],
-            judge=None,
-        )
+    if s.kind == "framing" and not s.citations:
+        expected = _framing_template_text(s.template_id, ctx) if s.template_id else None
+        if expected is not None and s.text == expected:
+            return SentenceCheck(
+                sentence_id=s.id,
+                status="checks_passed",
+                failures=[],
+                checks_run=[],
+                judge=None,
+            )
 
     failures: list[CheckFailure] = []
     checks_run: list[CheckName] = []
@@ -65,6 +86,30 @@ def check_sentence(
         )
 
     cited = [pool[cid] for cid in s.citations if cid in pool]
+    reqs = ctx.requirements or {}
+    if s.requirement_ids and reqs and cited:
+        linked = False
+        for rid in s.requirement_ids:
+            req = reqs.get(rid)
+            if req is None:
+                continue
+            for chunk in cited:
+                if eligible(chunk, req, ctx.lexicon):
+                    linked = True
+                    break
+            if linked:
+                break
+        if not linked:
+            failures.append(
+                CheckFailure(
+                    check="requirement",
+                    token=",".join(s.requirement_ids),
+                    detail="Cited evidence does not support linked requirements",
+                    outcome="fail",
+                )
+            )
+            checks_run.append("requirement")
+
     for cid in s.citations:
         if cid not in pool:
             failures.append(
@@ -80,7 +125,7 @@ def check_sentence(
             sentence_id=s.id,
             status="unsupported",
             failures=failures,
-            checks_run=["invalid_citation"],
+            checks_run=sorted({f.check for f in failures}),
             judge=None,
         )
 

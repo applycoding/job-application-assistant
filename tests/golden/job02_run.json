@@ -1,6 +1,6 @@
 {
-  "check_rules_version": "2026-10-23.3",
-  "corpus_version": "cf15c03612362bf28e29e8dc6542add2cd1e6acf11b77f56de252d0748442cc7",
+  "check_rules_version": "2026-10-24.2",
+  "corpus_version": "44e91b6a8de701b9006a40df7913ab825f85b4b064ae55bee927ac865d3c73e3",
   "created_at": "2026-10-23T09:00:00+00:00",
   "drafts": {
     "answers": [
@@ -10,45 +10,53 @@
         "sentences": [
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1"
+              "b0ce57c46d920b2a"
             ],
             "explanation": {
-              "matches": [],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1 (matched: building, data, years).",
+              "matches": [
+                {
+                  "chunk_id": "b0ce57c46d920b2a",
+                  "terms": [
+                    "batch",
+                    "pipelines"
+                  ]
+                }
+              ],
+              "model_rationale": "Addresses R5 using b0ce57c46d920b2a (matched: batch, pipelines).",
               "requirement_ids": [
-                "R1"
+                "R5"
               ]
             },
             "id": "Q1.S1",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1 (matched: building, data, years).",
+            "rationale": "Addresses R5 using b0ce57c46d920b2a (matched: batch, pipelines).",
             "requirement_ids": [
-              "R1"
+              "R5"
             ],
             "template_id": null,
             "text": "A relevant example from my CV: Senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
           },
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d"
+              "cf3d6b86fa121547"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d",
+                  "chunk_id": "cf3d6b86fa121547",
                   "terms": [
                     "Kubernetes"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R2 using 00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d (matched: kubernetes, workloads).",
+              "model_rationale": "Addresses R2 using cf3d6b86fa121547 (matched: Kubernetes).",
               "requirement_ids": [
                 "R2"
               ]
             },
             "id": "Q1.S2",
             "kind": "claim",
-            "rationale": "Addresses R2 using 00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d (matched: kubernetes, workloads).",
+            "rationale": "Addresses R2 using cf3d6b86fa121547 (matched: Kubernetes).",
             "requirement_ids": [
               "R2"
             ],
@@ -57,25 +65,25 @@
           },
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
+              "698a247d52da85e7"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
+                  "chunk_id": "698a247d52da85e7",
                   "terms": [
                     "Python"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python).",
+              "model_rationale": "Addresses R1 using 698a247d52da85e7 (matched: Python).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q1.S3",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python).",
+            "rationale": "Addresses R1 using 698a247d52da85e7 (matched: Python).",
             "requirement_ids": [
               "R1"
             ],
@@ -90,25 +98,25 @@
         "sentences": [
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000002:13508608df1dff4c"
+              "23c0fce35130905a"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000002:13508608df1dff4c",
+                  "chunk_id": "23c0fce35130905a",
                   "terms": [
                     "Python"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:13508608df1dff4c (matched: python).",
+              "model_rationale": "Addresses R1 using 23c0fce35130905a (matched: Python).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q2.S1",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000002:13508608df1dff4c (matched: python).",
+            "rationale": "Addresses R1 using 23c0fce35130905a (matched: Python).",
             "requirement_ids": [
               "R1"
             ],
@@ -117,25 +125,25 @@
           },
           {
             "citations": [
-              "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4"
+              "ac06f583e4a0bd7f"
             ],
             "explanation": {
               "matches": [
                 {
-                  "chunk_id": "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4",
+                  "chunk_id": "ac06f583e4a0bd7f",
                   "terms": [
                     "Python"
                   ]
                 }
               ],
-              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:e8a15de8c27940c4 (matched: python).",
+              "model_rationale": "Addresses R1 using ac06f583e4a0bd7f (matched: Python).",
               "requirement_ids": [
                 "R1"
               ]
             },
             "id": "Q2.S2",
             "kind": "claim",
-            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:e8a15de8c27940c4 (matched: python).",
+            "rationale": "Addresses R1 using ac06f583e4a0bd7f (matched: Python).",
             "requirement_ids": [
               "R1"
             ],
@@ -160,14 +168,96 @@
         },
         {
           "citations": [
-            "00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d"
+            "698a247d52da85e7"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "698a247d52da85e7",
+                "terms": [
+                  "Python"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R1 via 698a247d52da85e7.",
+            "requirement_ids": [
+              "R1"
+            ]
+          },
+          "id": "C.S1",
+          "kind": "claim",
+          "rationale": "Highlights R1 via 698a247d52da85e7.",
+          "requirement_ids": [
+            "R1"
+          ],
+          "template_id": null,
+          "text": "My background includes: Airflow, Apache Spark, AWS, Kubernetes, Python, SQL."
+        },
+        {
+          "citations": [
+            "cf3d6b86fa121547"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "cf3d6b86fa121547",
+                "terms": [
+                  "Kubernetes"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R2 via cf3d6b86fa121547.",
+            "requirement_ids": [
+              "R2"
+            ]
+          },
+          "id": "C.S2",
+          "kind": "claim",
+          "rationale": "Highlights R2 via cf3d6b86fa121547.",
+          "requirement_ids": [
+            "R2"
+          ],
+          "template_id": null,
+          "text": "My background includes: Kubernetes."
+        },
+        {
+          "citations": [
+            "b0ce57c46d920b2a"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "b0ce57c46d920b2a",
+                "terms": [
+                  "batch",
+                  "pipelines"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R5 via b0ce57c46d920b2a.",
+            "requirement_ids": [
+              "R5"
+            ]
+          },
+          "id": "C.S3",
+          "kind": "claim",
+          "rationale": "Highlights R5 via b0ce57c46d920b2a.",
+          "requirement_ids": [
+            "R5"
+          ],
+          "template_id": null,
+          "text": "My background includes: Senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
+        },
+        {
+          "citations": [
+            "cf3d6b86fa121547"
           ],
           "explanation": {
             "matches": [],
             "model_rationale": "Synthetic unsupported claim for demo.",
             "requirement_ids": []
           },
-          "id": "C.S1",
+          "id": "C.S4",
           "kind": "claim",
           "rationale": "Synthetic unsupported claim for demo.",
           "requirement_ids": [],
@@ -192,11 +282,11 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
-        "evidence_text": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)\nSupported a migration led by another team to containerize batch workloads on Kubernetes.",
-        "id": "00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d",
+        "evidence_text": "Contoso Retail - Data Engineer (Jun 2017-Feb 2021)\nSupported a migration led by another team to containerize batch workloads on Kubernetes.",
+        "id": "cf3d6b86fa121547",
         "kind": "bullet",
         "line_no": 32,
-        "section": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)",
+        "section": "Contoso Retail - Data Engineer (Jun 2017-Feb 2021)",
         "text": "Supported a migration led by another team to containerize batch workloads on Kubernetes."
       },
       "matched_terms": [
@@ -213,7 +303,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
         "evidence_text": "Skills\nPython, SQL, Spark, Airflow, Kubernetes, AWS",
-        "id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
+        "id": "698a247d52da85e7",
         "kind": "line",
         "line_no": 17,
         "section": "Skills",
@@ -233,7 +323,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000002",
         "evidence_text": "\nPython service predicting delivery windows from historical routes; deployed on ECS with FastAPI.",
-        "id": "00000000-0000-4000-8000-000000000002:13508608df1dff4c",
+        "id": "23c0fce35130905a",
         "kind": "bullet",
         "line_no": 6,
         "section": "",
@@ -250,11 +340,11 @@
     {
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
-        "evidence_text": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)\nWrote SQL reports and small Python utilities for clinical trial operations.",
-        "id": "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4",
+        "evidence_text": "Fabrikam Labs - Analyst Programmer (Aug 2014-May 2017)\nWrote SQL reports and small Python utilities for clinical trial operations.",
+        "id": "ac06f583e4a0bd7f",
         "kind": "bullet",
         "line_no": 36,
-        "section": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)",
+        "section": "Fabrikam Labs - Analyst Programmer (Aug 2014-May 2017)",
         "text": "Wrote SQL reports and small Python utilities for clinical trial operations."
       },
       "matched_terms": [
@@ -269,7 +359,7 @@
       "chunk": {
         "doc_id": "00000000-0000-4000-8000-000000000001",
         "evidence_text": "Summary\nSenior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call.",
-        "id": "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1",
+        "id": "b0ce57c46d920b2a",
         "kind": "line",
         "line_no": 13,
         "section": "Summary",
@@ -308,17 +398,17 @@
     }
   ],
   "id": "run-0001",
-  "job_id": "job-e8f4b1075a6dbaba",
+  "job_id": "job-71da11466824c444",
   "judge_enabled": false,
   "judge_model": null,
   "model": "mock-1",
   "parent_run_id": null,
   "provider": "mock",
   "report": {
-    "badge_text": "1 unsupported, 0 not verified (of 6 claims)",
-    "claims": 6,
+    "badge_text": "1 unsupported, 0 not verified (of 9 claims)",
+    "claims": 9,
     "flagged_ids": [
-      "C.S1"
+      "C.S4"
     ],
     "judge_enabled": false,
     "not_verified": 0,
@@ -366,6 +456,27 @@
         "status": "checks_passed"
       },
       {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S2",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S3",
+        "status": "checks_passed"
+      },
+      {
         "checks_run": [
           "employer",
           "number"
@@ -385,7 +496,7 @@
           }
         ],
         "judge": null,
-        "sentence_id": "C.S1",
+        "sentence_id": "C.S4",
         "status": "unsupported"
       },
       {

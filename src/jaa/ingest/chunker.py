@@ -69,17 +69,31 @@ def _expand_lines(lines: list[RawLine]) -> list[RawLine]:
     return expanded
 
 
-def chunk_id(doc_id: str, section: str, text: str, seen: dict[str, str]) -> str:
-    digest = hashlib.sha256((section + _CHUNK_SEP + text).encode()).hexdigest()[:16]
+def chunk_id(
+    section: str,
+    text: str,
+    line_no: int,
+    seen: dict[str, str],
+    *,
+    doc_scope: str,
+) -> str:
+    """Stable id from document content scope (file sha prefix) + line position + body."""
+    content = f"{doc_scope}{_CHUNK_SEP}{line_no}{_CHUNK_SEP}{section}{_CHUNK_SEP}{text}"
+    digest = hashlib.sha256(content.encode()).hexdigest()[:16]
     prior = seen.get(digest)
-    content = section + _CHUNK_SEP + text
     if prior is not None and prior != content:
         raise ChunkIdCollision(f"Chunk id collision for digest {digest}")
     seen[digest] = content
-    return f"{doc_id}:{digest}"
+    return digest
 
 
-def chunk_document(doc_id: str, lines: list[RawLine]) -> list[Chunk]:
+def chunk_document(
+    doc_id: str,
+    lines: list[RawLine],
+    *,
+    content_sha256: str | None = None,
+) -> list[Chunk]:
+    doc_scope = (content_sha256 or doc_id)[:16]
     expanded = _expand_lines(lines)
     if len(expanded) > MAX_CHUNKS_PER_DOC:
         raise IngestError(f"Document exceeds {MAX_CHUNKS_PER_DOC} chunks")
@@ -89,8 +103,8 @@ def chunk_document(doc_id: str, lines: list[RawLine]) -> list[Chunk]:
     for line in expanded:
         section = _section_str(line.section)
         text = line.text
-        base = chunk_id(doc_id, section, text, digest_seen)
-        hex_part = base.split(":", 1)[1]
+        base = chunk_id(section, text, line.line_no, digest_seen, doc_scope=doc_scope)
+        hex_part = base
         occurrence[hex_part] = occurrence.get(hex_part, 0) + 1
         n = occurrence[hex_part]
         cid = base if n == 1 else f"{base}~{n}"

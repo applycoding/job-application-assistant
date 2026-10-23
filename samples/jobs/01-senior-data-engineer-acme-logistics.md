@@ -1,4 +1,4 @@
-# Senior Data Engineer — Acme Logistics
+# Senior Data Engineer - Acme Logistics
 
 FICTIONAL SAMPLE DATA for portfolio demo only.
 
