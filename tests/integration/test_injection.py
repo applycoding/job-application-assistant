@@ -53,7 +53,9 @@ def test_adversarial_text_only_inside_data_block(app, settings, repo, fixed_cloc
     assert any(INJECT_PHRASE in c.text for c in chunks)
     job_model = repo.get_job(job_id)
     result = retrieve_for_job(job_model, chunks, app.state.lexicon)
-    assert any(INJECT_NEEDLE in e.chunk.text for e in result.evidence), "adversarial line must be retrieved"
+    assert any(INJECT_NEEDLE in e.chunk.text for e in result.evidence), (
+        "adversarial line must be retrieved"
+    )
     outbound = build_outbound_draft(job_model, result)
     assert INJECT_NEEDLE in outbound.model_dump_json()
     user_message = build_user_message(outbound)
@@ -61,13 +63,17 @@ def test_adversarial_text_only_inside_data_block(app, settings, repo, fixed_cloc
     assert_text_only_inside_data_block(user_message, CANARY)
 
 
-def test_data_block_mutation_would_leak_outside_block(app, settings, repo, fixed_clock, seq_ids, client):
+def test_data_block_mutation_would_leak_outside_block(
+    app, settings, repo, fixed_clock, seq_ids, client
+):
     client.delete("/api/data")
     _upload_adversarial(client)
     job_id = _injection_job(client)
     job_model = repo.get_job(job_id)
     chunks = repo.get_chunks(retrievable_only=True)
-    outbound = build_outbound_draft(job_model, retrieve_for_job(job_model, chunks, app.state.lexicon))
+    outbound = build_outbound_draft(
+        job_model, retrieve_for_job(job_model, chunks, app.state.lexicon)
+    )
     assert INJECT_NEEDLE in outbound.model_dump_json()
     user_message = build_user_message(outbound)
     bare_json = outbound.model_dump_json()
@@ -83,7 +89,9 @@ async def test_fake_citation_ids_retry_then_502(app, settings, repo, fixed_clock
     job = repo.list_jobs()[0]
     chunks = repo.get_chunks(retrievable_only=True)
     outbound = build_outbound_draft(job, retrieve_for_job(job, chunks, app.state.lexicon))
-    bad = minimal_draft(outbound, claim_text="I build Python pipelines.", citation_id="00000000-fake")
+    bad = minimal_draft(
+        outbound, claim_text="I build Python pipelines.", citation_id="00000000-fake"
+    )
     provider = InvalidDraftTwiceProvider(draft=bad)
     deps = Deps(
         repo=repo,
@@ -131,8 +139,9 @@ async def test_gap_term_claim_fails_skill_check(app, settings, repo, fixed_clock
     )
     run = await create_run(deps, job.id, RunOptions())
     skill_fail = [
-        f for s in run.report.sentences for f in s.failures if f.check == "skill" and f.token == "Go"
+        f
+        for s in run.report.sentences
+        for f in s.failures
+        if f.check == "skill" and f.token == "Go"
     ]
     assert skill_fail
-
-

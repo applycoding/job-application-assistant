@@ -17,6 +17,8 @@ _ADDRESS_RE = re.compile(
     r"(?:Street|St|Avenue|Ave|Road|Rd|Boulevard|Blvd|Lane|Ln|Drive|Dr|Court|Ct|Way)\.?",
     re.IGNORECASE,
 )
+
+
 def redact(text: str) -> str:
     out = _EMAIL_RE.sub("[email]", text)
     out = _PHONE_RE.sub("[phone]", out)

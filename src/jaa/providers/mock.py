@@ -56,9 +56,7 @@ class MockProvider:
                 if req_for_chunk is not None:
                     terms = _matched_terms(chunk, [req_for_chunk])
                 if terms:
-                    rationale = (
-                        f"Addresses {rid} using {chunk.id} (matched: {', '.join(terms)})."
-                    )
+                    rationale = f"Addresses {rid} using {chunk.id} (matched: {', '.join(terms)})."
                 else:
                     rationale = f"Addresses {rid} using {chunk.id}."
                 sentences.append(

@@ -9,7 +9,7 @@ import pytest
 from jaa.samples import seed
 from jaa.web import routes_html
 
-XSS_IMG = '<img src=x onerror=alert(1)>'
+XSS_IMG = "<img src=x onerror=alert(1)>"
 XSS_TITLE_MARK = "XSSTITLEMARK"
 XSS_COMPANY_MARK = "XSSCOMPANYMARK"
 
