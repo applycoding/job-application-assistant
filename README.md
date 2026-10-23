@@ -10,6 +10,8 @@ Tailored job applications from *your* CV, where every claim is cited and checked
 
 ## Screenshots
 
+Mock provider, Alex Doe samples, Acme Logistics job. The run view shows **1 unsupported, 0 not verified (of 10 claims)** (Initech/15); after **Remove flagged claims**, the badge reads **No deterministic issues found** with the remaining cited cover claims.
+
 | Home | Job |
 | --- | --- |
 | ![Home](docs/screenshots/home.png) | ![Job](docs/screenshots/job.png) |
@@ -136,7 +138,7 @@ Step-by-step chapters: [`docs/tutorial/`](docs/tutorial/) (00-12).
 
 Alex Doe and all employers in `samples/` are **fictional**. CV and project files use `FICTIONAL SAMPLE DATA` markers; job posts use a portfolio-demo banner.
 
-With the default **mock** provider, generated cover notes include several CV-backed claims (with citations) plus one deliberate unsupported line (`At Initech…`) so you can see both passing citations and truth failures; pruning removes only the flagged claim.
+With the default **mock** provider, generated cover notes include several CV-backed claims (with citations) plus one deliberate unsupported Initech line so you can see both passing citations and truth failures; pruning removes only that flagged claim.
 
 ## License
 
