@@ -1,0 +1,35 @@
+[mock]
+model = "mock-1"
+judge_model = "mock-judge-1"
+structured_output = "native"
+
+[anthropic]
+model = "claude-sonnet-5-5"
+judge_model = "claude-haiku-5-5"
+structured_output = "anthropic_output_config"
+sampling_params = false
+key_env = "ANTHROPIC_API_KEY"
+
+[openai]
+model = "gpt-6.1-sol"
+judge_model = "gpt-6-luna"
+structured_output = "openai_text_format"
+sampling_params = false
+store = false
+key_env = "OPENAI_API_KEY"
+
+[google]
+model = "gemini-3.8-flash"
+judge_model = "gemini-3.5-flash-lite"
+structured_output = "gemini_response_json_schema"
+sampling_params = false
+key_env = "GEMINI_API_KEY"
+
+[xai]
+model = "grok-4.7"
+judge_model = "grok-4.7"
+structured_output = "openai_text_format"
+sampling_params = false
+store = false
+key_env = "XAI_API_KEY"
+base_url = "https://api.x.ai/v1"

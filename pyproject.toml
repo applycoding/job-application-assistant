@@ -1,0 +1,76 @@
+[project]
+name = "job-application-assistant"
+version = "0.1.0"
+description = "RAG over your CV for job application drafts with cited, checked claims"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.13,<3.14"
+authors = [{ name = "Arpan Bom" }]
+dependencies = [
+    "fastapi==0.161.1",
+    "uvicorn==0.54.0",
+    "pydantic==2.14.1",
+    "jinja2==3.1.6",
+    "python-multipart==0.0.32",
+    "sqlmodel==0.0.48",
+    "rank-bm25==0.2.2",
+    "pypdf==6.21.2",
+    "python-docx==1.2.0",
+]
+
+[project.optional-dependencies]
+llm = [
+    "anthropic==2.1.0",
+    "openai==3.37.0",
+    "httpx2==2.16.0",
+    "google-genai==2.33.0",
+]
+
+[project.scripts]
+jaa = "jaa.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jaa"]
+
+[dependency-groups]
+dev = [
+    "httpx==0.28.1",
+    "pytest==9.1.1",
+    "pytest-asyncio==1.4.0",
+    "playwright==1.64.1",
+    "pytest-playwright==0.10.0",
+    "ruff==0.17.2",
+    "mypy==2.4.0",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+markers = [
+    "scenario: long seeded scenario test",
+    "e2e: Playwright smoke tests",
+    "adapters: LLM adapter contract tests",
+]
+addopts = "-m 'not e2e'"
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+plugins = ["pydantic.mypy"]
+mypy_path = "src"
+packages = ["jaa"]
+
+[tool.mypy.overrides]
+module = ["rank_bm25.*", "pypdf.*", "docx.*"]
+ignore_missing_imports = true

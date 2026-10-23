@@ -1,38 +1,127 @@
-# Built-in skill lexicon (fictional demo corpus)
-version = "1"
-
-[[skills]]
+[[skill]]
 name = "Python"
-aliases = ["python3", "py"]
+aliases = ["python", "py"]
 
-[[skills]]
+[[skill]]
 name = "Go"
-aliases = []
+aliases = ["golang"]
 
-[[skills]]
+[[skill]]
 name = "SQL"
-aliases = ["postgres", "postgresql"]
+aliases = ["sql", "postgresql", "postgres", "mysql"]
 
-[[skills]]
-name = "AWS"
-aliases = ["amazon web services"]
-
-[[skills]]
+[[skill]]
 name = "Kubernetes"
-aliases = ["k8s"]
+aliases = ["kubernetes", "k8s"]
 
-[[skills]]
-name = "Spark"
-aliases = ["apache spark"]
-
-[[skills]]
-name = "MLflow"
-aliases = []
-
-[[skills]]
+[[skill]]
 name = "Docker"
-aliases = []
+aliases = ["docker", "containers"]
 
-[[skills]]
+[[skill]]
+name = "AWS"
+aliases = ["aws", "amazon web services"]
+
+[[skill]]
+name = "GCP"
+aliases = ["gcp", "google cloud"]
+
+[[skill]]
+name = "Terraform"
+aliases = ["terraform", "tf"]
+
+[[skill]]
+name = "Apache Spark"
+aliases = ["spark", "pyspark"]
+
+[[skill]]
+name = "Kafka"
+aliases = ["kafka", "apache kafka"]
+
+[[skill]]
+name = "Airflow"
+aliases = ["airflow", "apache airflow"]
+
+[[skill]]
+name = "dbt"
+aliases = ["dbt"]
+
+[[skill]]
+name = "MLflow"
+aliases = ["mlflow"]
+
+[[skill]]
+name = "PyTorch"
+aliases = ["pytorch", "torch"]
+
+[[skill]]
+name = "scikit-learn"
+aliases = ["scikit-learn", "sklearn"]
+
+[[skill]]
+name = "FastAPI"
+aliases = ["fastapi"]
+
+[[skill]]
+name = "TypeScript"
+aliases = ["typescript", "ts"]
+
+[[skill]]
+name = "JavaScript"
+aliases = ["javascript", "js"]
+
+[[skill]]
+name = "React"
+aliases = ["react"]
+
+[[skill]]
+name = "Linux"
+aliases = ["linux", "unix"]
+
+[[skill]]
+name = "Git"
+aliases = ["git", "github", "gitlab"]
+
+[[skill]]
+name = "CI/CD"
+aliases = ["ci/cd", "cicd", "continuous integration"]
+
+[[skill]]
 name = "R"
-aliases = []
+aliases = ["r"]
+
+[[skill]]
+name = "C++"
+aliases = ["c++", "cpp"]
+
+[[skill]]
+name = "C#"
+aliases = ["c#", "csharp"]
+
+[[skill]]
+name = "Node.js"
+aliases = ["node.js", "nodejs", "node"]
+
+[[skill]]
+name = "Redis"
+aliases = ["redis"]
+
+[[skill]]
+name = "Snowflake"
+aliases = ["snowflake"]
+
+[[skill]]
+name = "BigQuery"
+aliases = ["bigquery", "big query"]
+
+[[skill]]
+name = "Databricks"
+aliases = ["databricks"]
+
+[[skill]]
+name = "Pandas"
+aliases = ["pandas"]
+
+[[skill]]
+name = "NumPy"
+aliases = ["numpy"]
