@@ -59,10 +59,7 @@ def build_outbound_draft(job: JobPost, result: RetrievalResult) -> OutboundDraft
         )
         for req in job.requirements
     ]
-    questions = [
-        Question(id=q.id, text=redact(q.text)[:500])
-        for q in job.questions
-    ]
+    questions = [Question(id=q.id, text=redact(q.text)[:500]) for q in job.questions]
     gap_terms = sorted({g.term for g in result.gaps if g.term is not None})
     return OutboundDraft(
         job_title=redact(job.title),

@@ -48,6 +48,7 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
+pythonpath = [".", "src"]
 asyncio_mode = "auto"
 markers = [
     "scenario: long seeded scenario test",
@@ -64,6 +65,12 @@ src = ["src", "tests"]
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM"]
 
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["E501", "B017"]
+"tests/e2e/**" = ["SIM115"]
+"src/jaa/web/routes_api.py" = ["B008"]
+"src/jaa/providers/prompts.py" = ["E501"]
+
 [tool.mypy]
 python_version = "3.13"
 strict = true
@@ -71,6 +78,14 @@ plugins = ["pydantic.mypy"]
 mypy_path = "src"
 packages = ["jaa"]
 
-[tool.mypy.overrides]
+[[tool.mypy.overrides]]
 module = ["rank_bm25.*", "pypdf.*", "docx.*"]
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = ["tests.conftest"]
+disable_error_code = ["arg-type", "misc"]

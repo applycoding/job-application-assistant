@@ -81,7 +81,7 @@ class StructuredLLMProvider(ABC):
         schema = portable_json_schema(LLMDraftOut)
         user = build_user_message(req, judge=False)
         last_error: str | None = None
-        for attempt in range(2):
+        for _attempt in range(2):
             self._budget.charge()
             msg = append_validation_error(user, last_error) if last_error else user
             try:
@@ -106,7 +106,7 @@ class StructuredLLMProvider(ABC):
         schema = portable_json_schema(JudgeOut)
         user = build_user_message(req, judge=True)
         last_error: str | None = None
-        for attempt in range(2):
+        for _attempt in range(2):
             self._budget.charge()
             msg = append_validation_error(user, last_error) if last_error else user
             try:

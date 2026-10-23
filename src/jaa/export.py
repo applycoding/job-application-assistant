@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from html import escape
 
-from jaa.models import Run
+from jaa.models import Run, Sentence
 
 
 def is_stale(run: Run, current_corpus_version: str) -> bool:
@@ -52,7 +52,7 @@ def export_markdown(run: Run, *, citations: bool = True) -> str:
     return "\n".join(lines)
 
 
-def _sentence_md(sent, run: Run, *, citations: bool) -> str:
+def _sentence_md(sent: Sentence, run: Run, *, citations: bool) -> str:
     check = next((s for s in run.report.sentences if s.sentence_id == sent.id), None)
     status = check.status if check else "checks_passed"
     prefix = "*" if sent.kind == "framing" else "-"

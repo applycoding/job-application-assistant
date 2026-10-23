@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-from typing import Any
 
 from pydantic import BaseModel
 
@@ -29,12 +28,7 @@ def build_user_message(dto: BaseModel, *, judge: bool = False) -> str:
     digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()[:12]
     boundary = f"DATA-{digest}"
     instruction = _USER_INSTRUCTION_JUDGE if judge else _USER_INSTRUCTION_DRAFT
-    return (
-        f"{instruction}\n"
-        f"BEGIN {boundary}\n"
-        f"{payload}\n"
-        f"END {boundary}"
-    )
+    return f"{instruction}\nBEGIN {boundary}\n{payload}\nEND {boundary}"
 
 
 def append_validation_error(user_message: str, error: str) -> str:

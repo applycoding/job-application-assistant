@@ -13,9 +13,9 @@ from jaa.clock import SystemClock
 from jaa.config import Settings
 from jaa.ids import Uuid4Factory
 from jaa.ingest.loaders import detect_media_type, load_lines
+from jaa.samples import load_samples
 from jaa.storage.db import create_db_engine
 from jaa.storage.repo import DuplicateDocument, Repository
-from jaa.samples import load_samples
 from jaa.truth.lexicon import SkillLexicon
 
 

@@ -240,172 +240,303 @@ ChunkKind = Literal["heading", "bullet", "line", "table_row", "contact"]
 MediaType = Literal["md", "txt", "pdf", "docx"]
 SentenceKind = Literal["claim", "framing"]
 ClaimStatus = Literal["checks_passed", "entailed", "unsupported", "not_verified"]
-CheckName = Literal["no_citation", "invalid_citation", "number", "year", "duration", "employer",
-                    "skill", "skill_version", "ownership", "negation", "mixed_citations", "judge"]
+CheckName = Literal[
+    "no_citation",
+    "invalid_citation",
+    "number",
+    "year",
+    "duration",
+    "employer",
+    "skill",
+    "skill_version",
+    "ownership",
+    "negation",
+    "mixed_citations",
+    "judge",
+]
+
 
 class RawLine(BaseModel):
-    line_no: int; text: str; kind: ChunkKind
-    section: list[str]                 # heading path, e.g. ["Experience", "Northwind Analytics — Senior Data Engineer (Mar 2021–present)"]
+    line_no: int
+    text: str
+    kind: ChunkKind
+    section: list[
+        str
+    ]  # heading path, e.g. ["Experience", "Northwind Analytics — Senior Data Engineer (Mar 2021–present)"]
+
 
 class Chunk(BaseModel):
-    id: str                            # "<doc_id>:<sha256(section+'\x1f'+text)[:16]>[~n]"
-    doc_id: str; line_no: int; kind: ChunkKind; text: str
-    section: str                       # " > ".join(path)
+    id: str  # "<doc_id>:<sha256(section+'\x1f'+text)[:16]>[~n]"
+    doc_id: str
+    line_no: int
+    kind: ChunkKind
+    text: str
+    section: str  # " > ".join(path)
+
     @computed_field
     @property
-    def evidence_text(self) -> str: return f"{self.section}\n{self.text}"
+    def evidence_text(self) -> str:
+        return f"{self.section}\n{self.text}"
+
 
 class Document(BaseModel):
-    id: str                            # uuid4 (IdFactory)
-    filename: str; filename_key: str   # key: NFKC+casefold basename, unique
-    media_type: MediaType; sha256: str; chunk_count: int; created_at: datetime
+    id: str  # uuid4 (IdFactory)
+    filename: str
+    filename_key: str  # key: NFKC+casefold basename, unique
+    media_type: MediaType
+    sha256: str
+    chunk_count: int
+    created_at: datetime
     warnings: list[str] = []
 
+
 class Requirement(BaseModel):
-    id: str; text: str; priority: Literal["must", "nice"]
-    skills: list[str]                  # canonical lexicon names
-    terms: list[str]                   # eligibility terms: skills, else content tokens minus generic words
+    id: str
+    text: str
+    priority: Literal["must", "nice"]
+    skills: list[str]  # canonical lexicon names
+    terms: list[str]  # eligibility terms: skills, else content tokens minus generic words
     min_years: int | None = None
 
-class Question(BaseModel): id: str; text: str = Field(max_length=500)
+
+class Question(BaseModel):
+    id: str
+    text: str = Field(max_length=500)
+
 
 class JobPost(BaseModel):
-    id: str; title: str; company: str | None; text: str
-    requirements: list[Requirement]; questions: list[Question]
-    warnings: list[str] = []; created_at: datetime
+    id: str
+    title: str
+    company: str | None
+    text: str
+    requirements: list[Requirement]
+    questions: list[Question]
+    warnings: list[str] = []
+    created_at: datetime
+
 
 class EvidenceItem(BaseModel):
-    chunk: Chunk; score: float; requirement_ids: list[str]; matched_terms: list[str]
+    chunk: Chunk
+    score: float
+    requirement_ids: list[str]
+    matched_terms: list[str]
+
 
 class Gap(BaseModel):
     requirement_id: str
-    term: str | None                   # None: whole requirement uncovered; else the missing term ("Go")
+    term: str | None  # None: whole requirement uncovered; else the missing term ("Go")
+
 
 class RetrievalResult(BaseModel):
-    evidence: list[EvidenceItem]       # <= POOL_MAX, score desc then chunk id
+    evidence: list[EvidenceItem]  # <= POOL_MAX, score desc then chunk id
     gaps: list[Gap]
 
-class SentenceOut(BaseModel):          # model output: claims only, no "kind" field
+
+class SentenceOut(BaseModel):  # model output: claims only, no "kind" field
     model_config = ConfigDict(extra="forbid")
     text: str = Field(min_length=1, max_length=400)
-    citations: list[str] = Field(max_length=4)        # 0 allowed -> flagged no_citation
+    citations: list[str] = Field(max_length=4)  # 0 allowed -> flagged no_citation
     requirement_ids: list[str] = Field(max_length=5)
     rationale: str = Field(max_length=300)
 
+
 class AnswerOut(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    question_id: str; sentences: list[SentenceOut] = Field(min_length=1, max_length=5)
+    question_id: str
+    sentences: list[SentenceOut] = Field(min_length=1, max_length=5)
+
 
 class LLMDraftOut(BaseModel):
     model_config = ConfigDict(extra="forbid")
     answers: list[AnswerOut] = Field(min_length=1, max_length=10)
-    cover_note: list[SentenceOut] = Field(min_length=1, max_length=6)   # empty cover note = failure
+    cover_note: list[SentenceOut] = Field(min_length=1, max_length=6)  # empty cover note = failure
+
 
 class JudgeVerdict(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    sentence_id: str; entailed: bool; rationale: str = Field(max_length=300)
+    sentence_id: str
+    entailed: bool
+    rationale: str = Field(max_length=300)
+
 
 class JudgeOut(BaseModel):
     model_config = ConfigDict(extra="forbid")
     verdicts: list[JudgeVerdict] = Field(max_length=60)
 
-class MatchedTerm(BaseModel): chunk_id: str; terms: list[str]
+
+class MatchedTerm(BaseModel):
+    chunk_id: str
+    terms: list[str]
+
+
 class Explanation(BaseModel):
-    requirement_ids: list[str]; matches: list[MatchedTerm]; model_rationale: str
+    requirement_ids: list[str]
+    matches: list[MatchedTerm]
+    model_rationale: str
+
 
 class Sentence(BaseModel):
-    id: str; kind: SentenceKind; text: str
-    citations: list[str] = []; requirement_ids: list[str] = []; rationale: str = ""
-    template_id: str | None = None     # set only for framing
-    explanation: Explanation | None = None   # claims only
+    id: str
+    kind: SentenceKind
+    text: str
+    citations: list[str] = []
+    requirement_ids: list[str] = []
+    rationale: str = ""
+    template_id: str | None = None  # set only for framing
+    explanation: Explanation | None = None  # claims only
 
-class AnswerDraft(BaseModel): question_id: str; question: str; sentences: list[Sentence]
+
+class AnswerDraft(BaseModel):
+    question_id: str
+    question: str
+    sentences: list[Sentence]
+
+
 class CoverNote(BaseModel):
-    salutation: str; sentences: list[Sentence]; signoff: str = "Kind regards,"
-class Drafts(BaseModel): answers: list[AnswerDraft]; cover_note: CoverNote
+    salutation: str
+    sentences: list[Sentence]
+    signoff: str = "Kind regards,"
+
+
+class Drafts(BaseModel):
+    answers: list[AnswerDraft]
+    cover_note: CoverNote
+
 
 class CheckFailure(BaseModel):
-    check: CheckName; token: str | None; detail: str
+    check: CheckName
+    token: str | None
+    detail: str
     outcome: Literal["fail", "abstain"]
 
-class SentenceCheck(BaseModel):        # claims only; framing is never checked or counted
-    sentence_id: str; status: ClaimStatus
-    failures: list[CheckFailure]; checks_run: list[CheckName]
+
+class SentenceCheck(BaseModel):  # claims only; framing is never checked or counted
+    sentence_id: str
+    status: ClaimStatus
+    failures: list[CheckFailure]
+    checks_run: list[CheckName]
     judge: JudgeVerdict | None = None
 
+
 class TruthReport(BaseModel):
-    sentences: list[SentenceCheck]; judge_enabled: bool
+    sentences: list[SentenceCheck]
+    judge_enabled: bool
     # computed: claims, unsupported, not_verified, checks_passed, entailed, flagged_ids, badge_text (§5.8)
 
+
 class RunOptions(BaseModel):
-    judge: bool | None = None          # None = settings default
+    judge: bool | None = None  # None = settings default
+
 
 class Run(BaseModel):
-    id: str; job_id: str; parent_run_id: str | None; created_at: datetime
-    provider: str; model: str; judge_model: str | None; judge_enabled: bool
-    corpus_version: str; check_rules_version: str
-    requirements: list[Requirement]; evidence: list[EvidenceItem]; gaps: list[Gap]
-    drafts: Drafts; report: TruthReport; warnings: list[str]
+    id: str
+    job_id: str
+    parent_run_id: str | None
+    created_at: datetime
+    provider: str
+    model: str
+    judge_model: str | None
+    judge_enabled: bool
+    corpus_version: str
+    check_rules_version: str
+    requirements: list[Requirement]
+    evidence: list[EvidenceItem]
+    gaps: list[Gap]
+    drafts: Drafts
+    report: TruthReport
+    warnings: list[str]
 ```
 
 ### 5.2 Config (`jaa/config.py`)
 ```python
 class Settings(BaseModel):
-    provider: Literal["mock", "anthropic", "openai", "google", "xai"] = "mock"   # JAA_PROVIDER
-    model: str | None = None                  # JAA_MODEL
-    judge_model: str | None = None            # JAA_JUDGE_MODEL
-    judge: bool = False                       # JAA_JUDGE=on|off
-    db_path: Path = Path("var/jaa.sqlite3")   # JAA_DB_PATH
-    samples_dir: Path = Path("samples")       # JAA_SAMPLES_DIR
-    enable_samples: bool = True               # JAA_ENABLE_SAMPLES
-    host: str = "127.0.0.1"; port: int = 8000 # JAA_HOST, JAA_PORT (bind)
-    public_port: int | None = None            # JAA_PUBLIC_PORT: browser-facing port for Origin check (None = port)
-    reference_date: date | None = None        # JAA_REFERENCE_DATE (None = today)
-    skills_file: Path | None = None           # JAA_SKILLS_FILE (merged with built-in)
-    max_upload_mb: int = 5                    # JAA_MAX_UPLOAD_MB
-    request_timeout_s: float = 60.0           # per provider HTTP request
-    run_deadline_s: float = 120.0             # whole run, asyncio.timeout
-    instance_nonce: str | None = None         # JAA_INSTANCE_NONCE, echoed by /healthz (e2e)
+    provider: Literal["mock", "anthropic", "openai", "google", "xai"] = "mock"  # JAA_PROVIDER
+    model: str | None = None  # JAA_MODEL
+    judge_model: str | None = None  # JAA_JUDGE_MODEL
+    judge: bool = False  # JAA_JUDGE=on|off
+    db_path: Path = Path("var/jaa.sqlite3")  # JAA_DB_PATH
+    samples_dir: Path = Path("samples")  # JAA_SAMPLES_DIR
+    enable_samples: bool = True  # JAA_ENABLE_SAMPLES
+    host: str = "127.0.0.1"
+    port: int = 8000  # JAA_HOST, JAA_PORT (bind)
+    public_port: int | None = (
+        None  # JAA_PUBLIC_PORT: browser-facing port for Origin check (None = port)
+    )
+    reference_date: date | None = None  # JAA_REFERENCE_DATE (None = today)
+    skills_file: Path | None = None  # JAA_SKILLS_FILE (merged with built-in)
+    max_upload_mb: int = 5  # JAA_MAX_UPLOAD_MB
+    request_timeout_s: float = 60.0  # per provider HTTP request
+    run_deadline_s: float = 120.0  # whole run, asyncio.timeout
+    instance_nonce: str | None = None  # JAA_INSTANCE_NONCE, echoed by /healthz (e2e)
+
     @classmethod
-    def from_env(cls, env: Mapping[str, str] | None = None, dotenv: Path | None = Path(".env")) -> "Settings": ...
+    def from_env(
+        cls, env: Mapping[str, str] | None = None, dotenv: Path | None = Path(".env")
+    ) -> "Settings": ...
     def resolved_models(self) -> tuple[str, str]: ...
 ```
 
 ### 5.3 Limits and ingestion
 ```python
 # limits.py
-UPLOAD_READ_CHUNK = 64 * 1024        # upload size is enforced while streaming
+UPLOAD_READ_CHUNK = 64 * 1024  # upload size is enforced while streaming
 PDF_MAX_PAGES = 20
-MAX_EXTRACTED_CHARS = 200_000        # per document, all formats
+MAX_EXTRACTED_CHARS = 200_000  # per document, all formats
 DOCX_MAX_ZIP_ENTRIES = 300
-DOCX_MAX_DECOMPRESSED_BYTES = 50 * 1024 * 1024   # declared sizes AND bytes actually read
-MAX_LINE_CHARS = 600                 # split at sentence boundary, then hard split
+DOCX_MAX_DECOMPRESSED_BYTES = 50 * 1024 * 1024  # declared sizes AND bytes actually read
+MAX_LINE_CHARS = 600  # split at sentence boundary, then hard split
 MAX_CHUNKS_PER_DOC = 2_000
 MAX_CORPUS_CHUNKS = 5_000
 MAX_JOB_CHARS = 30_000
-MAX_REQUIREMENTS = 30                # extra requirements dropped, with a job warning
-MAX_QUESTIONS = 10                   # more -> 422
-POOL_MAX = 20; K_PER_REQ = 5
-MAX_PROVIDER_CALLS_PER_RUN = 4       # draft + retry, one batched judge + retry
+MAX_REQUIREMENTS = 30  # extra requirements dropped, with a job warning
+MAX_QUESTIONS = 10  # more -> 422
+POOL_MAX = 20
+K_PER_REQ = 5
+MAX_PROVIDER_CALLS_PER_RUN = 4  # draft + retry, one batched judge + retry
+
 
 # ingest/loaders.py
-class IngestError(ValueError): ...                 # 422
-class UploadTooLarge(IngestError): ...             # 413
-async def read_upload_limited(f: UploadFile, max_bytes: int) -> bytes: ...   # stops reading at max_bytes + 1
-def detect_media_type(filename: str, head: bytes) -> MediaType: ...           # extension AND magic bytes
-def decode_text(data: bytes) -> str: ...           # utf-8-sig; NUL bytes or invalid UTF-8 -> IngestError; no Latin-1 fallback
-def load_lines(data: bytes, media_type: MediaType) -> tuple[list[RawLine], list[str]]: ...  # (lines, warnings); DOCX paragraphs and tables in body order
+class IngestError(ValueError): ...  # 422
+
+
+class UploadTooLarge(IngestError): ...  # 413
+
+
+async def read_upload_limited(
+    f: UploadFile, max_bytes: int
+) -> bytes: ...  # stops reading at max_bytes + 1
+def detect_media_type(filename: str, head: bytes) -> MediaType: ...  # extension AND magic bytes
+def decode_text(
+    data: bytes,
+) -> str: ...  # utf-8-sig; NUL bytes or invalid UTF-8 -> IngestError; no Latin-1 fallback
+def load_lines(
+    data: bytes, media_type: MediaType
+) -> tuple[
+    list[RawLine], list[str]
+]: ...  # (lines, warnings); DOCX paragraphs and tables in body order
 # ingest/normalize.py
-def normalize_line(text: str) -> str: ...          # NFKC, collapse whitespace, strip "-", "*", "•", "1." markers
-def filename_key(filename: str) -> str: ...        # basename only, NFKC, casefold
+def normalize_line(
+    text: str,
+) -> str: ...  # NFKC, collapse whitespace, strip "-", "*", "•", "1." markers
+def filename_key(filename: str) -> str: ...  # basename only, NFKC, casefold
 # ingest/classify.py  (runs BEFORE short-line filtering)
 def classify(line: str, *, md_heading: bool, docx_style: str | None) -> ChunkKind: ...
-def keep_line(line: RawLine, lexicon: SkillLexicon) -> bool: ...  # headings/contacts always kept; others need >= 3 tokens OR a lexicon skill ("Go")
+def keep_line(
+    line: RawLine, lexicon: SkillLexicon
+) -> bool: ...  # headings/contacts always kept; others need >= 3 tokens OR a lexicon skill ("Go")
+
+
 # ingest/chunker.py
 class ChunkIdCollision(IngestError): ...
+
+
 def chunk_document(doc_id: str, lines: list[RawLine]) -> list[Chunk]: ...
-def chunk_id(doc_id: str, section: str, text: str, seen: dict[str, str]) -> str: ...  # same prefix, different input -> ChunkIdCollision
-def corpus_version(chunks: Iterable[Chunk], *, lexicon_version: str, reference_date: date) -> str: ...
+def chunk_id(
+    doc_id: str, section: str, text: str, seen: dict[str, str]
+) -> str: ...  # same prefix, different input -> ChunkIdCollision
+def corpus_version(
+    chunks: Iterable[Chunk], *, lexicon_version: str, reference_date: date
+) -> str: ...
 ```
 
 ### 5.4 Storage (`storage/repo.py`)
@@ -437,24 +568,50 @@ class Repository:
 
 ### 5.5 Jobs
 ```python
-def parse_job(text: str, lexicon: SkillLexicon, clock: Clock, extra_questions: Sequence[str] = ()) -> JobPost: ...
+def parse_job(
+    text: str, lexicon: SkillLexicon, clock: Clock, extra_questions: Sequence[str] = ()
+) -> JobPost: ...
+
+
 SECTION_MUST = ("requirements", "what you'll bring", "must have", "qualifications", "about you")
 SECTION_NICE = ("nice to have", "bonus", "preferred")
 SECTION_QUESTIONS = ("application questions", "questions")
-def extract_requirements(sections: Mapping[str, list[str]], full_text: str, lexicon: SkillLexicon) -> list[Requirement]: ...
-def requirement_terms(text: str, skills: list[str]) -> list[str]: ...  # skills if any; else content tokens minus stopwords and GENERIC_WORDS ("experience", "strong", "knowledge", "years", ...)
+
+
+def extract_requirements(
+    sections: Mapping[str, list[str]], full_text: str, lexicon: SkillLexicon
+) -> list[Requirement]: ...
+def requirement_terms(
+    text: str, skills: list[str]
+) -> list[
+    str
+]: ...  # skills if any; else content tokens minus stopwords and GENERIC_WORDS ("experience", "strong", "knowledge", "years", ...)
 def extract_min_years(text: str) -> int | None: ...
+
+
 DEFAULT_QUESTION = "What relevant experience do you bring to this role?"
 ```
 
 ### 5.6 Retrieval
 ```python
-def tokenize(text: str) -> list[str]: ...   # lowercase, r"[a-z0-9][a-z0-9+#.]*", trim trailing ".", drop stopwords
-def eligible(chunk: Chunk, req: Requirement, lexicon: SkillLexicon) -> list[str]: ...  # terms present (skills via lexicon incl. aliases; else tokens)
+def tokenize(
+    text: str,
+) -> list[str]: ...  # lowercase, r"[a-z0-9][a-z0-9+#.]*", trim trailing ".", drop stopwords
+def eligible(
+    chunk: Chunk, req: Requirement, lexicon: SkillLexicon
+) -> list[str]: ...  # terms present (skills via lexicon incl. aliases; else tokens)
+
+
 class BM25Ranker:
-    def __init__(self, chunks: Sequence[Chunk]) -> None: ...   # BM25Plus(k1=1.5, b=0.75, delta=1.0) over all retrievable evidence_text
+    def __init__(
+        self, chunks: Sequence[Chunk]
+    ) -> None: ...  # BM25Plus(k1=1.5, b=0.75, delta=1.0) over all retrievable evidence_text
     def score(self, query: list[str], ids: Sequence[str]) -> dict[str, float]: ...
-def retrieve_for_job(job: JobPost, chunks: Sequence[Chunk], lexicon: SkillLexicon) -> RetrievalResult: ...
+
+
+def retrieve_for_job(
+    job: JobPost, chunks: Sequence[Chunk], lexicon: SkillLexicon
+) -> RetrievalResult: ...
 ```
 **Algorithm.** For each requirement:
 1. Compute the eligible set, the chunks containing at least one term. Ranking never decides eligibility.
@@ -474,50 +631,114 @@ BM25Plus is chosen because BM25Okapi gives negative scores for exact matches in 
 ### 5.7 Privacy DTO and providers
 ```python
 # privacy/redact.py
-def redact(text: str) -> str: ...   # regex: emails -> [email], phones -> [phone], URLs -> [url], street addresses -> [address]
+def redact(
+    text: str,
+) -> (
+    str
+): ...  # regex: emails -> [email], phones -> [phone], URLs -> [url], street addresses -> [address]
+
+
 # privacy/outbound.py — the ONLY objects ever serialized to a provider
-class OutboundEvidence(BaseModel): id: str; section: str; text: str            # redacted
-class OutboundRequirement(BaseModel): id: str; text: str; priority: Literal["must", "nice"]
+class OutboundEvidence(BaseModel):
+    id: str
+    section: str
+    text: str  # redacted
+
+
+class OutboundRequirement(BaseModel):
+    id: str
+    text: str
+    priority: Literal["must", "nice"]
+
+
 class OutboundDraft(BaseModel):
-    job_title: str; company: str | None
-    requirements: list[OutboundRequirement]; questions: list[Question]
-    evidence: list[OutboundEvidence]; gap_terms: list[str]
-    max_sentences_per_answer: int = 5; max_cover_claims: int = 6
-class JudgeItem(BaseModel): sentence_id: str; claim: str; evidence: list[OutboundEvidence]
-class OutboundJudge(BaseModel): items: list[JudgeItem]
-def build_outbound_draft(job: JobPost, result: RetrievalResult) -> OutboundDraft: ...  # all strings redacted
-def build_outbound_judge(claims: Sequence[Sentence], draft: OutboundDraft) -> OutboundJudge: ...  # evidence from the same sanitized pool
+    job_title: str
+    company: str | None
+    requirements: list[OutboundRequirement]
+    questions: list[Question]
+    evidence: list[OutboundEvidence]
+    gap_terms: list[str]
+    max_sentences_per_answer: int = 5
+    max_cover_claims: int = 6
+
+
+class JudgeItem(BaseModel):
+    sentence_id: str
+    claim: str
+    evidence: list[OutboundEvidence]
+
+
+class OutboundJudge(BaseModel):
+    items: list[JudgeItem]
+
+
+def build_outbound_draft(
+    job: JobPost, result: RetrievalResult
+) -> OutboundDraft: ...  # all strings redacted
+def build_outbound_judge(
+    claims: Sequence[Sentence], draft: OutboundDraft
+) -> OutboundJudge: ...  # evidence from the same sanitized pool
+
 
 # providers/base.py
-class ProviderError(RuntimeError): ...        # 502 with a user-facing message; no run saved
-class ProviderConfigError(RuntimeError): ...  # startup: missing key (names the env var), extra missing, flag mismatch
-class JudgeUnavailable(RuntimeError): ...     # caught by truth.report -> not_verified
-class CallBudget: ...                         # raises ProviderError after MAX_PROVIDER_CALLS_PER_RUN logical calls
+class ProviderError(RuntimeError): ...  # 502 with a user-facing message; no run saved
+
+
+class ProviderConfigError(
+    RuntimeError
+): ...  # startup: missing key (names the env var), extra missing, flag mismatch
+
+
+class JudgeUnavailable(RuntimeError): ...  # caught by truth.report -> not_verified
+
+
+class CallBudget: ...  # raises ProviderError after MAX_PROVIDER_CALLS_PER_RUN logical calls
+
 
 class LLMProvider(Protocol):
-    name: str; model: str; judge_model: str
+    name: str
+    model: str
+    judge_model: str
+
     async def draft(self, req: OutboundDraft) -> LLMDraftOut: ...
     async def judge(self, req: OutboundJudge) -> JudgeOut: ...
+
 
 class StructuredLLMProvider(ABC):
     @abstractmethod
-    async def _complete_json(self, *, model: str, system: str, user: str,
-                             schema: dict[str, Any], schema_name: str) -> str: ...   # raw JSON text
-    async def draft(self, req: OutboundDraft) -> LLMDraftOut: ...
+    async def _complete_json(
+        self, *, model: str, system: str, user: str, schema: dict[str, Any], schema_name: str
+    ) -> str: ...  # raw JSON text
+    async def draft(self, req: OutboundDraft) -> LLMDraftOut:
+        ...
         # parse + pydantic + validate_draft; on error: ONE retry with the error appended; then ProviderError
-    async def judge(self, req: OutboundJudge) -> JudgeOut: ...
+
+    async def judge(self, req: OutboundJudge) -> JudgeOut:
+        ...
         # parse + pydantic + validate_judge; ONE retry; then JudgeUnavailable
 
+
 # providers/validate.py
-def validate_draft(out: LLMDraftOut, req: OutboundDraft) -> None: ...
+def validate_draft(out: LLMDraftOut, req: OutboundDraft) -> None:
+    ...
     # answers cover exactly the requested question ids, once each; citation ids unique per sentence and in req.evidence;
     # cover_note non-empty; list and length bounds as in §5.1. Raises DraftInvariantError.
-def validate_judge(out: JudgeOut, req: OutboundJudge) -> None: ...   # verdicts cover exactly the requested sentence ids, once each
 
-def portable_json_schema(model: type[BaseModel]) -> dict[str, Any]: ...
+
+def validate_judge(
+    out: JudgeOut, req: OutboundJudge
+) -> None: ...  # verdicts cover exactly the requested sentence ids, once each
+
+
+def portable_json_schema(model: type[BaseModel]) -> dict[str, Any]:
+    ...
     # type/properties/required/items/enum only; additionalProperties false; all fields required;
     # length/count keywords stripped (enforced by pydantic server-side)
-def build_provider(settings: Settings, *, transport: Any | None = None) -> LLMProvider: ...   # tests inject transport
+
+
+def build_provider(
+    settings: Settings, *, transport: Any | None = None
+) -> LLMProvider: ...  # tests inject transport
 ```
 **Adapters.** Every adapter uses `timeout=settings.request_timeout_s` and `max_retries=2`. None of them sends `tools`, `tool_choice`, `temperature`, `top_p` or `top_k`. SDK clients are closed in the app lifespan.
 - **AnthropicProvider:**
@@ -563,25 +784,69 @@ def build_provider(settings: Settings, *, transport: Any | None = None) -> LLMPr
 
 ### 5.8 Truth check
 ```python
-def extract_numbers(text: str) -> list[NumberMention]: ...   # "1,200"->1200, "15-person"->15, "40%", "2M"->(2,"m"), zero–twenty, "3rd"->3; excludes years and skill versions
-def extract_years(text: str) -> list[int]: ...                # 1950–2100
-def extract_spans(text: str, reference: date) -> list[MonthSpan]: ...   # "Mar 2019 – Jun 2021", "03/2019–present", "2019–2021"; present = reference month
-def month_bounds(span: MonthSpan) -> tuple[int, int]: ...      # inclusive months (min, max); equal when both ends have month precision
-def extract_durations(text: str) -> list[DurationMention]: ... # "6 years" (>=72 mo), "6+ years" (>=72), "over/more than 6 years" (>72)
-def extract_orgs(text: str, lexicon: SkillLexicon) -> list[str]: ...    # case-insensitive "at|for|with|joined" + Capitalized words, or company suffix; skills excluded
-def extract_ownership(text: str) -> set[str]: ...  # lemmas lead/manage/own/build/architect; active only (an inflection followed by "by" does not count)
-def negated_terms(text: str, terms: Iterable[str]) -> set[str]: ...  # term within 4 tokens after no|not|never|without|n't|cannot|none
-def extract_skill_versions(text: str, lexicon: SkillLexicon) -> set[tuple[str, str]]: ...   # ("python","3.12"); leading "v" stripped
+def extract_numbers(
+    text: str,
+) -> list[
+    NumberMention
+]: ...  # "1,200"->1200, "15-person"->15, "40%", "2M"->(2,"m"), zero–twenty, "3rd"->3; excludes years and skill versions
+def extract_years(text: str) -> list[int]: ...  # 1950–2100
+def extract_spans(
+    text: str, reference: date
+) -> list[
+    MonthSpan
+]: ...  # "Mar 2019 – Jun 2021", "03/2019–present", "2019–2021"; present = reference month
+def month_bounds(
+    span: MonthSpan,
+) -> tuple[int, int]: ...  # inclusive months (min, max); equal when both ends have month precision
+def extract_durations(
+    text: str,
+) -> list[
+    DurationMention
+]: ...  # "6 years" (>=72 mo), "6+ years" (>=72), "over/more than 6 years" (>72)
+def extract_orgs(
+    text: str, lexicon: SkillLexicon
+) -> list[
+    str
+]: ...  # case-insensitive "at|for|with|joined" + Capitalized words, or company suffix; skills excluded
+def extract_ownership(
+    text: str,
+) -> set[
+    str
+]: ...  # lemmas lead/manage/own/build/architect; active only (an inflection followed by "by" does not count)
+def negated_terms(
+    text: str, terms: Iterable[str]
+) -> set[str]: ...  # term within 4 tokens after no|not|never|without|n't|cannot|none
+def extract_skill_versions(
+    text: str, lexicon: SkillLexicon
+) -> set[tuple[str, str]]: ...  # ("python","3.12"); leading "v" stripped
+
 
 class SkillLexicon:
-    version: str                                     # sha256(merged skills.toml)[:16]
-    def find(self, text: str) -> set[str]: ...       # word-boundary, case-insensitive; "Go", "R" are case-sensitive
+    version: str  # sha256(merged skills.toml)[:16]
+
+    def find(
+        self, text: str
+    ) -> set[str]: ...  # word-boundary, case-insensitive; "Go", "R" are case-sensitive
+
+
 @dataclass(frozen=True)
-class CheckContext: lexicon: SkillLexicon; reference_date: date; target_company: str | None
+class CheckContext:
+    lexicon: SkillLexicon
+    reference_date: date
+    target_company: str | None
+
+
 CHECK_RULES_VERSION = "2026-10-23.1"
+
+
 def check_sentence(s: Sentence, pool: Mapping[str, Chunk], ctx: CheckContext) -> SentenceCheck: ...
-async def run_truth_check(drafts: Drafts, pool: Mapping[str, Chunk], ctx: CheckContext,
-                          judge: LLMProvider | None, outbound: OutboundDraft) -> TruthReport: ...
+async def run_truth_check(
+    drafts: Drafts,
+    pool: Mapping[str, Chunk],
+    ctx: CheckContext,
+    judge: LLMProvider | None,
+    outbound: OutboundDraft,
+) -> TruthReport: ...
 def prune_flagged(drafts: Drafts, report: TruthReport) -> tuple[Drafts, list[str]]: ...
 ```
 
@@ -622,23 +887,45 @@ def prune_flagged(drafts: Drafts, report: TruthReport) -> tuple[Drafts, list[str
 ### 5.9 Pipeline, explanations, export
 ```python
 @dataclass
-class Deps: repo: Repository; provider: LLMProvider; settings: Settings; lexicon: SkillLexicon; clock: Clock; ids: IdFactory
-async def create_run(deps: Deps, job_id: str, opts: RunOptions) -> Run: ...
+class Deps:
+    repo: Repository
+    provider: LLMProvider
+    settings: Settings
+    lexicon: SkillLexicon
+    clock: Clock
+    ids: IdFactory
+
+
+async def create_run(deps: Deps, job_id: str, opts: RunOptions) -> Run:
+    ...
     # 1 corpus_snapshot (short read) -> 2 retrieve -> 3 build_outbound_draft
     # 4 async with asyncio.timeout(run_deadline_s): draft (+ batched judge), CallBudget enforced
     # 5 assemble -> 6 check -> 7 insert_run (short write). Deadline -> 504; no run saved.
+
+
 async def prune_run(deps: Deps, run_id: str) -> Run: ...
+
+
 FRAMING_TEMPLATES = {
     "open": "I am applying for the {title} role at {company}.",
     "open_nocompany": "I am applying for the {title} role.",
     "close": "I would welcome the chance to discuss how this experience fits your team.",
 }
-def assemble_drafts(out: LLMDraftOut, job: JobPost, pool: Mapping[str, Chunk],
-                    lexicon: SkillLexicon) -> tuple[Drafts, list[str]]: ...  # ids, salutation, framing from templates; unknown requirement ids dropped with a warning
-def explain(s: Sentence, reqs: Mapping[str, Requirement], pool: Mapping[str, Chunk]) -> Explanation: ...
+
+
+def assemble_drafts(
+    out: LLMDraftOut, job: JobPost, pool: Mapping[str, Chunk], lexicon: SkillLexicon
+) -> tuple[
+    Drafts, list[str]
+]: ...  # ids, salutation, framing from templates; unknown requirement ids dropped with a warning
+def explain(
+    s: Sentence, reqs: Mapping[str, Requirement], pool: Mapping[str, Chunk]
+) -> Explanation: ...
 def is_stale(run: Run, current_corpus_version: str) -> bool: ...
-def export_markdown(run: Run, *, citations: bool = True) -> str: ...   # untrusted text Markdown-escaped
-def export_json(run: Run) -> str: ...                                  # sorted keys, indent=2, floats rounded to 6 dp
+def export_markdown(
+    run: Run, *, citations: bool = True
+) -> str: ...  # untrusted text Markdown-escaped
+def export_json(run: Run) -> str: ...  # sorted keys, indent=2, floats rounded to 6 dp
 ```
 
 ### 5.10 HTTP surface

@@ -225,8 +225,7 @@ class TruthReport(BaseModel):
         return [
             s.sentence_id
             for s in self.sentences
-            if _is_claim_sentence_id(s.sentence_id)
-            and s.status in ("unsupported", "not_verified")
+            if _is_claim_sentence_id(s.sentence_id) and s.status in ("unsupported", "not_verified")
         ]
 
     @computed_field  # type: ignore[prop-decorator]

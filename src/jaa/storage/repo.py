@@ -6,6 +6,7 @@ import json
 import uuid
 from dataclasses import dataclass
 from datetime import date
+from pathlib import Path
 
 from sqlalchemy import text
 from sqlalchemy.engine import Engine
@@ -107,17 +108,15 @@ class Repository:
                     raise DuplicateDocument(
                         "Document with this content already exists under another name"
                     )
-                old_chunks = session.exec(
-                    select(ChunkRow).where(ChunkRow.doc_id == doc_id)
-                ).all()
+                old_chunks = session.exec(select(ChunkRow).where(ChunkRow.doc_id == doc_id)).all()
                 other_count = len(
                     [c for c in session.exec(select(ChunkRow)).all() if c.doc_id != doc_id]
                 )
                 new_chunks = chunk_document(doc_id, filtered)
                 if other_count + len(new_chunks) > MAX_CORPUS_CHUNKS:
                     raise IngestError(f"Corpus exceeds {MAX_CORPUS_CHUNKS} chunks")
-                for row in old_chunks:
-                    session.delete(row)
+                for chunk_row in old_chunks:
+                    session.delete(chunk_row)
                 self._insert_chunks(session, new_chunks)
                 existing_key.filename = filename
                 existing_key.media_type = media_type
@@ -150,6 +149,7 @@ class Repository:
                 warnings_json=json.dumps(warnings),
             )
             session.add(row)
+            session.flush()
             self._insert_chunks(session, new_chunks)
             session.commit()
             return self._document_from_row(row)
@@ -169,7 +169,9 @@ class Repository:
 
     def list_documents(self) -> list[Document]:
         with Session(self._engine) as session:
-            rows = session.exec(select(DocumentRow).order_by(DocumentRow.created_at)).all()
+            rows = session.exec(
+                select(DocumentRow).order_by(DocumentRow.created_at)  # type: ignore[arg-type]
+            ).all()
             return [self._document_from_row(r) for r in rows]
 
     def get_chunks(
@@ -256,7 +258,9 @@ class Repository:
 
     def list_jobs(self) -> list[JobPost]:
         with Session(self._engine) as session:
-            rows = session.exec(select(JobRow).order_by(JobRow.created_at)).all()
+            rows = session.exec(
+                select(JobRow).order_by(JobRow.created_at)  # type: ignore[arg-type]
+            ).all()
             return [JobPost.model_validate_json(r.payload_json) for r in rows]
 
     def insert_run(self, run: RunData) -> Run:
@@ -329,17 +333,20 @@ class Repository:
     def list_runs(self, job_id: str) -> list[Run]:
         with Session(self._engine) as session:
             rows = session.exec(
-                select(RunRow).where(RunRow.job_id == job_id).order_by(RunRow.seq)
+                select(RunRow)
+                .where(RunRow.job_id == job_id)
+                .order_by(RunRow.seq)  # type: ignore[arg-type]
             ).all()
             return [Run.model_validate_json(r.payload_json) for r in rows]
 
     def delete_all(self) -> None:
         with Session(self._engine) as session:
-            session.exec(text("DELETE FROM run_citation"))
-            session.exec(text("DELETE FROM run"))
-            session.exec(text("DELETE FROM chunk"))
-            session.exec(text("DELETE FROM document"))
-            session.exec(text("DELETE FROM job"))
+            conn = session.connection()
+            conn.execute(text("DELETE FROM run_citation"))
+            conn.execute(text("DELETE FROM run"))
+            conn.execute(text("DELETE FROM chunk"))
+            conn.execute(text("DELETE FROM document"))
+            conn.execute(text("DELETE FROM job"))
             session.commit()
         with self._engine.connect() as conn:
             conn.execute(text("PRAGMA wal_checkpoint(TRUNCATE)"))
@@ -352,7 +359,7 @@ class Repository:
             id=row.id,
             filename=row.filename,
             filename_key=row.filename_key,
-            media_type=row.media_type,  # type: ignore[arg-type]
+            media_type=row.media_type,
             sha256=row.sha256,
             chunk_count=row.chunk_count,
             created_at=row.created_at,
@@ -365,7 +372,7 @@ class Repository:
             id=row.id,
             doc_id=row.doc_id,
             line_no=row.line_no,
-            kind=row.kind,  # type: ignore[arg-type]
+            kind=row.kind,
             section=row.section,
             text=row.text,
         )

@@ -10,8 +10,8 @@ from jaa.clock import Clock
 from jaa.config import Settings
 from jaa.ids import IdFactory
 from jaa.ingest.loaders import detect_media_type, load_lines
-from jaa.models import Document, JobPost
 from jaa.jobs.parser import parse_job
+from jaa.models import Document, JobPost
 from jaa.storage.repo import Repository
 from jaa.truth.lexicon import SkillLexicon, load_lexicon
 
@@ -97,4 +97,18 @@ def seed(
     lex = lexicon or load_lexicon(settings.skills_file)
     documents = seed_documents(repo, settings)
     jobs = seed_jobs(repo, settings, clock, lex)
+    return SeedResult(documents=documents, jobs=jobs)
+
+
+def load_samples(
+    repo: Repository,
+    settings: Settings,
+    lexicon: SkillLexicon,
+    clock: Clock,
+) -> SeedResult:
+    """Load committed sample documents and jobs (API/CLI entry point)."""
+    if not settings.enable_samples:
+        raise FileNotFoundError("Sample loading is disabled")
+    documents = seed_documents(repo, settings)
+    jobs = seed_jobs(repo, settings, clock, lexicon)
     return SeedResult(documents=documents, jobs=jobs)

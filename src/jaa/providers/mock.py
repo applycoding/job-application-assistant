@@ -6,8 +6,7 @@ from collections.abc import Sequence
 
 from jaa.models import AnswerOut, Chunk, JudgeOut, JudgeVerdict, LLMDraftOut, SentenceOut
 from jaa.privacy.outbound import OutboundDraft as OutboundDraftModel
-from jaa.privacy.outbound import OutboundRequirement
-from jaa.privacy.outbound import OutboundJudge
+from jaa.privacy.outbound import OutboundJudge, OutboundRequirement
 from jaa.providers.validate import validate_draft
 from jaa.retrieval.bm25 import BM25Ranker
 from jaa.retrieval.tokenize import tokenize
@@ -20,9 +19,7 @@ LEAD_INS = (
     "In addition: {text}.",
 )
 
-_LEAD_PHRASES = tuple(
-    s.split("{")[0].strip().lower() for s in LEAD_INS
-)
+_LEAD_PHRASES = tuple(s.split("{")[0].strip().lower() for s in LEAD_INS)
 
 
 class MockProvider:
@@ -48,39 +45,43 @@ class MockProvider:
                 text = LEAD_INS[j % 3].format(text=_lower_first(_strip_period(chunk.text)))
                 rid = _best_requirement(chunk, req.requirements)
                 terms = _matched_terms(chunk, req.requirements)
+                req_for_chunk = next((r for r in req.requirements if r.id == rid), None)
+                if req_for_chunk is not None:
+                    terms = _matched_terms(chunk, [req_for_chunk])
                 sentences.append(
                     SentenceOut(
                         text=text,
                         citations=[chunk.id],
-                        requirement_ids=[rid] if rid else [],
-                        rationale=f"Addresses {rid} using {chunk.id} (matched: {', '.join(terms)}).",
+                        requirement_ids=[rid] if rid and terms else [],
+                        rationale=(
+                            f"Addresses {rid} using {chunk.id} (matched: {', '.join(terms)})."
+                        ),
                     )
                 )
             answers.append(AnswerOut(question_id=question.id, sentences=sentences))
 
         cover_claims: list[SentenceOut] = []
         for req_item in must_reqs[:4]:
-            chunk = _top_chunk_for_requirement(chunks, req_item, req.requirements)
-            if chunk is None:
+            cover_chunk = _top_chunk_for_requirement(chunks, req_item, req.requirements)
+            if cover_chunk is None:
+                continue
+            if not _matched_terms(cover_chunk, [req_item]):
                 continue
             cover_claims.append(
                 SentenceOut(
-                    text=f"My background includes: {_strip_period(chunk.text)}.",
-                    citations=[chunk.id],
+                    text=f"My background includes: {_strip_period(cover_chunk.text)}.",
+                    citations=[cover_chunk.id],
                     requirement_ids=[req_item.id],
-                    rationale=f"Highlights {req_item.id} via {chunk.id}.",
+                    rationale=f"Highlights {req_item.id} via {cover_chunk.id}.",
                 )
             )
 
         if self._inject_unsupported and chunks:
-            first_must = must_reqs[0].id if must_reqs else (
-                req.requirements[0].id if req.requirements else ""
-            )
             cover_claims.append(
                 SentenceOut(
                     text=INJECTED_CLAIM,
                     citations=[chunks[0].id],
-                    requirement_ids=[first_must] if first_must else [],
+                    requirement_ids=[],
                     rationale="Synthetic unsupported claim for demo.",
                 )
             )
@@ -96,10 +97,7 @@ class MockProvider:
             ev_tokens: set[str] = set()
             for ev in item.evidence:
                 ev_tokens |= set(tokenize(f"{ev.section} {ev.text}"))
-            if not claim_tokens:
-                ratio = 1.0
-            else:
-                ratio = len(claim_tokens & ev_tokens) / len(claim_tokens)
+            ratio = 1.0 if not claim_tokens else len(claim_tokens & ev_tokens) / len(claim_tokens)
             entailed = ratio >= 0.6
             verdicts.append(
                 JudgeVerdict(
@@ -192,7 +190,6 @@ def _top_chunk_for_requirement(
         if _matched_terms(chunk, [req_item]):
             return chunk
     return ranked[0] if ranked else None
-
 
 
 def _fallback_cover(chunks: Sequence[_PoolChunk]) -> SentenceOut:

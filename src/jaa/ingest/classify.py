@@ -39,9 +39,9 @@ def _is_contact_line(text: str) -> bool:
         return True
     if _URL_RE.search(text) or _LINKEDIN_RE.search(lowered):
         return True
-    if lowered.startswith("email:") or lowered.startswith("phone:") or lowered.startswith("tel:"):
-        return True
-    return False
+    return bool(
+        lowered.startswith("email:") or lowered.startswith("phone:") or lowered.startswith("tel:")
+    )
 
 
 def keep_line(line: RawLine, lexicon: SkillLexicon) -> bool:

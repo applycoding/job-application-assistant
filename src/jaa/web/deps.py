@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Annotated
+from typing import Annotated, cast
 
 from fastapi import Depends, Request
 
@@ -17,31 +17,31 @@ from jaa.web.security import validate_mutation
 
 
 def get_settings(request: Request) -> Settings:
-    return request.app.state.settings
+    return cast(Settings, request.app.state.settings)
 
 
 def get_repo(request: Request) -> Repository:
-    return request.app.state.repo
+    return cast(Repository, request.app.state.repo)
 
 
 def get_provider(request: Request) -> LLMProvider:
-    return request.app.state.provider
+    return cast(LLMProvider, request.app.state.provider)
 
 
 def get_lexicon(request: Request) -> SkillLexicon:
-    return request.app.state.lexicon
+    return cast(SkillLexicon, request.app.state.lexicon)
 
 
 def get_clock(request: Request) -> Clock:
-    return request.app.state.clock
+    return cast(Clock, request.app.state.clock)
 
 
 def get_ids(request: Request) -> IdFactory:
-    return request.app.state.ids
+    return cast(IdFactory, request.app.state.ids)
 
 
 def get_csrf_token(request: Request) -> str:
-    return request.app.state.csrf_token
+    return cast(str, request.app.state.csrf_token)
 
 
 def get_pipeline_deps(

@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-import asyncio
 import hashlib
 import json
 from typing import Annotated, Any, Literal
 
-from fastapi import APIRouter, Body, File, HTTPException, Query, UploadFile
+from fastapi import APIRouter, File, HTTPException, Query, UploadFile
 from fastapi.responses import Response
 from pydantic import BaseModel, Field
 
@@ -147,7 +146,7 @@ def api_outbound_preview(
         job = repo.get_job(job_id)
     except KeyError:
         raise HTTPException(status_code=404, detail="Job not found") from None
-    ref = settings.reference_date or clock.today()
+    ref = settings.reference_date or clock.now().date()
     try:
         _version, chunks = repo.corpus_snapshot(ref)
     except ValueError as exc:
@@ -156,7 +155,7 @@ def api_outbound_preview(
         raise HTTPException(status_code=409, detail="upload documents first")
     result = retrieve_for_job(job, chunks, lexicon)
     draft = build_outbound_draft(job, result)
-    return json.loads(draft.model_dump_json())
+    return json.loads(draft.model_dump_json())  # type: ignore[no-any-return]
 
 
 @router.post("/jobs/{job_id}/runs", status_code=201)
@@ -164,7 +163,7 @@ async def api_create_run(
     job_id: str,
     _auth: MutationAuth,
     deps: PipelineDeps,
-    opts: RunOptions = Body(default_factory=RunOptions),
+    opts: RunOptions = RunOptions(),
 ) -> Run:
     options = opts
     try:
@@ -176,8 +175,6 @@ async def api_create_run(
     except ProviderError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
     except TimeoutError:
-        raise HTTPException(status_code=504, detail="Run deadline exceeded") from None
-    except asyncio.TimeoutError:
         raise HTTPException(status_code=504, detail="Run deadline exceeded") from None
 
 
@@ -192,7 +189,7 @@ def api_get_run(
         run = repo.get_run(run_id)
     except KeyError:
         raise HTTPException(status_code=404, detail="Run not found") from None
-    ref = settings.reference_date or clock.today()
+    ref = settings.reference_date or clock.now().date()
     current_version, _chunks = repo.corpus_snapshot(ref)
     payload = run.model_dump()
     payload["stale"] = is_stale(run, current_version)

@@ -22,7 +22,7 @@ from jaa.limits import (
     MAX_EXTRACTED_CHARS,
     PDF_MAX_PAGES,
 )
-from jaa.models import ChunkKind, MediaType, RawLine
+from jaa.models import MediaType, RawLine
 
 _MD_HEADING = re.compile(r"^(#{1,6})\s+(.*)$")
 
@@ -58,7 +58,7 @@ def detect_media_type(filename: str, head: bytes) -> MediaType:
         raise IngestError("File extension is .pdf but content is not a PDF")
     if media == "docx" and not head.startswith(b"PK"):
         raise IngestError("File extension is .docx but content is not a ZIP archive")
-    return media
+    return media  # type: ignore[return-value]
 
 
 def decode_text(data: bytes) -> str:

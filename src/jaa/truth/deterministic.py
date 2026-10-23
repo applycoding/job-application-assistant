@@ -11,6 +11,7 @@ from jaa.models import CheckFailure, CheckName, Chunk, Sentence, SentenceCheck
 from jaa.truth.dates import extract_spans, month_bounds
 from jaa.truth.extractors import (
     DurationMention,
+    NumberMention,
     extract_durations,
     extract_numbers,
     extract_orgs,
@@ -84,12 +85,12 @@ def check_sentence(
 
     claim_text = s.text
     durations = extract_durations(claim_text)
-    duration_nums = {d.years for d in durations}
+    duration_years = {d.years for d in durations}
 
     numbers = [
         n
         for n in extract_numbers(claim_text)
-        if not any(d.years == n.value for d in durations if isinstance(n.value, int))
+        if not (isinstance(n.value, int) and n.value in duration_years)
     ]
     years = extract_years(claim_text)
     orgs = extract_orgs(claim_text, ctx.lexicon)
@@ -217,7 +218,7 @@ def check_sentence(
                 )
 
     for skill in skills_in_claim:
-        if not any(skill.lower() in c.evidence_text.lower() for c in cited):
+        if not _skill_in_citations(skill, cited, ctx.lexicon):
             failures.append(
                 CheckFailure(
                     check="skill",
@@ -238,16 +239,19 @@ def check_sentence(
                 )
             )
 
-    if ctx.target_company and ctx.target_company.lower() in claim_text.lower():
-        if not any(ctx.target_company.lower() in c.evidence_text.lower() for c in cited):
-            failures.append(
-                CheckFailure(
-                    check="employer",
-                    token=ctx.target_company,
-                    detail="Target company not in evidence",
-                    outcome="fail",
-                )
+    if (
+        ctx.target_company
+        and ctx.target_company.lower() in claim_text.lower()
+        and not any(ctx.target_company.lower() in c.evidence_text.lower() for c in cited)
+    ):
+        failures.append(
+            CheckFailure(
+                check="employer",
+                token=ctx.target_company,
+                detail="Target company not in evidence",
+                outcome="fail",
             )
+        )
 
     dur_failure = _check_duration(claim_text, cited, skills_in_claim, ctx, durations)
     if dur_failure is not None:
@@ -267,7 +271,7 @@ def check_sentence(
 def _find_supporting_chunk(
     cited: list[Chunk],
     *,
-    numbers,
+    numbers: list[NumberMention],
     years: list[int],
     orgs: list[str],
     ownership: set[str],
@@ -295,7 +299,7 @@ def _find_supporting_chunk(
 
 def _facts_split_across_chunks(
     cited: list[Chunk],
-    numbers,
+    numbers: list[NumberMention],
     years: list[int],
     orgs: list[str],
     ownership: set[str],
@@ -303,7 +307,9 @@ def _facts_split_across_chunks(
 ) -> bool:
     if not (numbers or years or orgs or ownership):
         return False
-    if _find_supporting_chunk(cited, numbers=numbers, years=years, orgs=orgs, ownership=ownership, ctx=ctx):
+    if _find_supporting_chunk(
+        cited, numbers=numbers, years=years, orgs=orgs, ownership=ownership, ctx=ctx
+    ):
         return False
     any_fact = False
     all_in_some = True
@@ -326,11 +332,19 @@ def _facts_split_across_chunks(
     return any_fact and all_in_some
 
 
-def _number_in_any(n, cited: list[Chunk]) -> bool:
+def _skill_in_citations(skill: str, cited: list[Chunk], lexicon: SkillLexicon) -> bool:
+    needles = {skill.lower()}
+    for alias in lexicon.aliases_for(skill):
+        needles.add(alias.lower())
+    needles.add(skill.split()[-1].lower())
+    return any(any(n in c.evidence_text.lower() for n in needles) for c in cited)
+
+
+def _number_in_any(n: NumberMention, cited: list[Chunk]) -> bool:
     return any(number_in_text(n.value, c.evidence_text) for c in cited)
 
 
-def _number_in_text_loose(n, text: str) -> bool:
+def _number_in_text_loose(n: NumberMention, text: str) -> bool:
     return str(int(n.value)) in text.replace(",", "")
 
 
@@ -341,10 +355,7 @@ def _year_in_any(y: int, cited: list[Chunk]) -> bool:
 def _year_in_text(y: int, text: str) -> bool:
     if str(y) in text:
         return True
-    for span in extract_spans(text, date.today()):
-        if y in (span.start_year, span.end_year):
-            return True
-    return False
+    return any(y in (span.start_year, span.end_year) for span in extract_spans(text, date.today()))
 
 
 def _org_in_any(org: str, cited: list[Chunk]) -> bool:

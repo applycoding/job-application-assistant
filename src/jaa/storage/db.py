@@ -14,7 +14,7 @@ from jaa.storage.tables import ChunkRow, DocumentRow, JobRow, RunCitationRow, Ru
 
 
 def _set_sqlite_pragma(dbapi_conn: object, _connection_record: object) -> None:
-    cursor = dbapi_conn.cursor()  # type: ignore[union-attr]
+    cursor = dbapi_conn.cursor()  # type: ignore[attr-defined]
     cursor.execute("PRAGMA journal_mode=WAL")
     cursor.execute("PRAGMA foreign_keys=ON")
     cursor.execute("PRAGMA busy_timeout=5000")
@@ -32,11 +32,11 @@ def create_db_engine(db_path: Path) -> Engine:
     SQLModel.metadata.create_all(
         engine,
         tables=[
-            DocumentRow.__table__,
-            ChunkRow.__table__,
-            JobRow.__table__,
-            RunRow.__table__,
-            RunCitationRow.__table__,
+            DocumentRow.__table__,  # type: ignore[attr-defined]
+            ChunkRow.__table__,  # type: ignore[attr-defined]
+            JobRow.__table__,  # type: ignore[attr-defined]
+            RunRow.__table__,  # type: ignore[attr-defined]
+            RunCitationRow.__table__,  # type: ignore[attr-defined]
         ],
     )
     return engine

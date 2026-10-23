@@ -5,7 +5,6 @@ from __future__ import annotations
 import re
 from collections.abc import Iterable
 from dataclasses import dataclass
-from typing import Literal
 
 from jaa.truth.lexicon import SkillLexicon
 
@@ -49,6 +48,7 @@ _DURATION_RE = re.compile(
 
 _ORG_RE = re.compile(
     r"\b(?:at|for|with|joined)\s+([A-Z][A-Za-z0-9&.'\-]+(?:\s+[A-Z][A-Za-z0-9&.'\-]+)*)",
+    re.IGNORECASE,
 )
 _COMPANY_SUFFIX_RE = re.compile(
     r"\b([A-Z][A-Za-z0-9&.'\-]+(?:\s+[A-Z][A-Za-z0-9&.'\-]+)*)\s+"
@@ -114,10 +114,7 @@ def extract_numbers(text: str, *, exclude_years: bool = True) -> list[NumberMent
 
     for m in _NUMERIC_RE.finditer(text):
         whole = m.group(1).replace(",", "")
-        if "." in whole and m.group(2):
-            val = float(f"{whole}.{m.group(2)}")
-        else:
-            val = int(whole)
+        val = float(f"{whole}.{m.group(2)}") if "." in whole and m.group(2) else int(whole)
         unit = (m.group(3) or "").lower() or None
         if unit == "%":
             add(m.group(0), val, "%")
@@ -147,7 +144,9 @@ def extract_durations(text: str) -> list[DurationMention]:
         if m.group(1) in ("over", "more than"):
             years = int(m.group(2))
             out.append(
-                DurationMention(years=years, raw=m.group(0), strict_more=True, plus="+" in m.group(0))
+                DurationMention(
+                    years=years, raw=m.group(0), strict_more=True, plus="+" in m.group(0)
+                )
             )
         else:
             years = int(m.group(3))

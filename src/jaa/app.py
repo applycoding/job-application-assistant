@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any
@@ -40,7 +41,7 @@ def _configure_logging() -> None:
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     yield
     provider = app.state.provider
     close = getattr(provider, "aclose", None)
@@ -81,8 +82,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(html_router)
     app.include_router(api_router)
 
-    @app.get("/healthz")
-    def healthz() -> dict[str, Any]:
+    @app.get("/healthz", response_model=None)
+    def healthz() -> JSONResponse | dict[str, Any]:
         db_status = "ok"
         try:
             with engine.connect() as conn:

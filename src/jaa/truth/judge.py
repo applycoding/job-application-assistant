@@ -16,11 +16,7 @@ async def apply_judge(
     provider: LLMProvider,
     outbound: OutboundDraft,
 ) -> list[SentenceCheck]:
-    eligible = [
-        c
-        for c in checks
-        if c.status == "checks_passed" and not c.failures
-    ]
+    eligible = [c for c in checks if c.status == "checks_passed" and not c.failures]
     if not eligible:
         return checks
 

@@ -1,0 +1,677 @@
+{
+  "check_rules_version": "2026-10-23.1",
+  "corpus_version": "0d5d8f174b79e9f7b3a6e3bcef7d442b9f56df95d4ff5cff3aac1c9997101e02",
+  "created_at": "2026-10-23T09:00:00+00:00",
+  "drafts": {
+    "answers": [
+      {
+        "question": "Tell us about a platform component you built that other teams adopted.",
+        "question_id": "Q1",
+        "sentences": [
+          {
+            "citations": [
+              "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1"
+            ],
+            "explanation": {
+              "matches": [
+                {
+                  "chunk_id": "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1",
+                  "terms": [
+                    "building",
+                    "data"
+                  ]
+                }
+              ],
+              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1 (matched: building, data, years).",
+              "requirement_ids": [
+                "R1"
+              ]
+            },
+            "id": "Q1.S1",
+            "kind": "claim",
+            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1 (matched: building, data, years).",
+            "requirement_ids": [
+              "R1"
+            ],
+            "template_id": null,
+            "text": "A relevant example from my CV: senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
+          },
+          {
+            "citations": [
+              "00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d"
+            ],
+            "explanation": {
+              "matches": [],
+              "model_rationale": "Addresses R2 using 00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d (matched: kubernetes, workloads).",
+              "requirement_ids": [
+                "R2"
+              ]
+            },
+            "id": "Q1.S2",
+            "kind": "claim",
+            "rationale": "Addresses R2 using 00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d (matched: kubernetes, workloads).",
+            "requirement_ids": [
+              "R2"
+            ],
+            "template_id": null,
+            "text": "I can also point to this: supported a migration led by another team to containerize batch workloads on Kubernetes."
+          },
+          {
+            "citations": [
+              "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
+            ],
+            "explanation": {
+              "matches": [
+                {
+                  "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
+                  "terms": [
+                    "python"
+                  ]
+                }
+              ],
+              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python).",
+              "requirement_ids": [
+                "R1"
+              ]
+            },
+            "id": "Q1.S3",
+            "kind": "claim",
+            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python).",
+            "requirement_ids": [
+              "R1"
+            ],
+            "template_id": null,
+            "text": "In addition: python, SQL, Spark, Airflow, Kubernetes, AWS."
+          }
+        ]
+      },
+      {
+        "question": "How do you balance researcher flexibility with production guardrails?",
+        "question_id": "Q2",
+        "sentences": [
+          {
+            "citations": [
+              "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1"
+            ],
+            "explanation": {
+              "matches": [
+                {
+                  "chunk_id": "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1",
+                  "terms": [
+                    "building",
+                    "data"
+                  ]
+                }
+              ],
+              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1 (matched: building, data, years).",
+              "requirement_ids": [
+                "R1"
+              ]
+            },
+            "id": "Q2.S1",
+            "kind": "claim",
+            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1 (matched: building, data, years).",
+            "requirement_ids": [
+              "R1"
+            ],
+            "template_id": null,
+            "text": "A relevant example from my CV: senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
+          },
+          {
+            "citations": [
+              "00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d"
+            ],
+            "explanation": {
+              "matches": [],
+              "model_rationale": "Addresses R2 using 00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d (matched: kubernetes, workloads).",
+              "requirement_ids": [
+                "R2"
+              ]
+            },
+            "id": "Q2.S2",
+            "kind": "claim",
+            "rationale": "Addresses R2 using 00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d (matched: kubernetes, workloads).",
+            "requirement_ids": [
+              "R2"
+            ],
+            "template_id": null,
+            "text": "I can also point to this: supported a migration led by another team to containerize batch workloads on Kubernetes."
+          },
+          {
+            "citations": [
+              "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
+            ],
+            "explanation": {
+              "matches": [
+                {
+                  "chunk_id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
+                  "terms": [
+                    "python"
+                  ]
+                }
+              ],
+              "model_rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python).",
+              "requirement_ids": [
+                "R1"
+              ]
+            },
+            "id": "Q2.S3",
+            "kind": "claim",
+            "rationale": "Addresses R1 using 00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465 (matched: python).",
+            "requirement_ids": [
+              "R1"
+            ],
+            "template_id": null,
+            "text": "In addition: python, SQL, Spark, Airflow, Kubernetes, AWS."
+          }
+        ]
+      }
+    ],
+    "cover_note": {
+      "salutation": "Dear FICTIONAL SAMPLE DATA \u2014 Alex Doe is not a real person. Team,",
+      "sentences": [
+        {
+          "citations": [],
+          "explanation": null,
+          "id": "C.F1",
+          "kind": "framing",
+          "rationale": "",
+          "requirement_ids": [],
+          "template_id": "open",
+          "text": "I am applying for the ML Platform Engineer \u2014 Globex Energy role at FICTIONAL SAMPLE DATA \u2014 Alex Doe is not a real person.."
+        },
+        {
+          "citations": [
+            "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1"
+          ],
+          "explanation": {
+            "matches": [
+              {
+                "chunk_id": "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1",
+                "terms": [
+                  "building",
+                  "data"
+                ]
+              }
+            ],
+            "model_rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1.",
+            "requirement_ids": [
+              "R1"
+            ]
+          },
+          "id": "C.S1",
+          "kind": "claim",
+          "rationale": "Highlights R1 via 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1.",
+          "requirement_ids": [
+            "R1"
+          ],
+          "template_id": null,
+          "text": "My background includes: Senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
+        },
+        {
+          "citations": [
+            "00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d"
+          ],
+          "explanation": {
+            "matches": [],
+            "model_rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d.",
+            "requirement_ids": [
+              "R2"
+            ]
+          },
+          "id": "C.S2",
+          "kind": "claim",
+          "rationale": "Highlights R2 via 00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d.",
+          "requirement_ids": [
+            "R2"
+          ],
+          "template_id": null,
+          "text": "My background includes: Supported a migration led by another team to containerize batch workloads on Kubernetes."
+        },
+        {
+          "citations": [
+            "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1"
+          ],
+          "explanation": {
+            "matches": [],
+            "model_rationale": "Highlights R4 via 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1.",
+            "requirement_ids": [
+              "R4"
+            ]
+          },
+          "id": "C.S3",
+          "kind": "claim",
+          "rationale": "Highlights R4 via 00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1.",
+          "requirement_ids": [
+            "R4"
+          ],
+          "template_id": null,
+          "text": "My background includes: Senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
+        },
+        {
+          "citations": [
+            "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465"
+          ],
+          "explanation": {
+            "matches": [],
+            "model_rationale": "Synthetic unsupported claim for demo.",
+            "requirement_ids": []
+          },
+          "id": "C.S4",
+          "kind": "claim",
+          "rationale": "Synthetic unsupported claim for demo.",
+          "requirement_ids": [],
+          "template_id": null,
+          "text": "At Initech, I was part of a 15-person platform team."
+        },
+        {
+          "citations": [],
+          "explanation": null,
+          "id": "C.F2",
+          "kind": "framing",
+          "rationale": "",
+          "requirement_ids": [],
+          "template_id": "close",
+          "text": "I would welcome the chance to discuss how this experience fits your team."
+        }
+      ],
+      "signoff": "Kind regards,"
+    }
+  },
+  "evidence": [
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000001",
+        "evidence_text": "Skills\nPython, SQL, Spark, Airflow, Kubernetes, AWS",
+        "id": "00000000-0000-4000-8000-000000000001:39ea5d9b2b9c3465",
+        "kind": "line",
+        "line_no": 17,
+        "section": "Skills",
+        "text": "Python, SQL, Spark, Airflow, Kubernetes, AWS"
+      },
+      "matched_terms": [
+        "Kubernetes",
+        "python"
+      ],
+      "requirement_ids": [
+        "R1",
+        "R2"
+      ],
+      "score": 19.074103
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000001",
+        "evidence_text": "Summary\nSenior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call.",
+        "id": "00000000-0000-4000-8000-000000000001:7ca93d9a4f3807b1",
+        "kind": "line",
+        "line_no": 13,
+        "section": "Summary",
+        "text": "Senior data engineer with 8+ years building batch and streaming pipelines on cloud infrastructure. Comfortable owning services end-to-end from design through on-call."
+      },
+      "matched_terms": [
+        "batch",
+        "building",
+        "data",
+        "pipelines"
+      ],
+      "requirement_ids": [
+        "R1",
+        "R5"
+      ],
+      "score": 15.707237
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000002",
+        "evidence_text": "\nPython service predicting delivery windows from historical routes; deployed on ECS with FastAPI.",
+        "id": "00000000-0000-4000-8000-000000000002:13508608df1dff4c",
+        "kind": "bullet",
+        "line_no": 6,
+        "section": "",
+        "text": "Python service predicting delivery windows from historical routes; deployed on ECS with FastAPI."
+      },
+      "matched_terms": [
+        "python"
+      ],
+      "requirement_ids": [
+        "R1"
+      ],
+      "score": 12.573885
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000001",
+        "evidence_text": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)\nWrote SQL reports and small Python utilities for clinical trial operations.",
+        "id": "00000000-0000-4000-8000-000000000001:e8a15de8c27940c4",
+        "kind": "bullet",
+        "line_no": 37,
+        "section": "Fabrikam Labs \u2014 Analyst Programmer (Aug 2014\u2013May 2017)",
+        "text": "Wrote SQL reports and small Python utilities for clinical trial operations."
+      },
+      "matched_terms": [
+        "python"
+      ],
+      "requirement_ids": [
+        "R1"
+      ],
+      "score": 12.064125
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000003",
+        "evidence_text": "\nData Engineering Specialty - Example Board 2023",
+        "id": "00000000-0000-4000-8000-000000000003:80bba84915a1e528",
+        "kind": "line",
+        "line_no": 4,
+        "section": "",
+        "text": "Data Engineering Specialty - Example Board 2023"
+      },
+      "matched_terms": [
+        "data"
+      ],
+      "requirement_ids": [
+        "R1"
+      ],
+      "score": 11.13991
+    },
+    {
+      "chunk": {
+        "doc_id": "00000000-0000-4000-8000-000000000001",
+        "evidence_text": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)\nSupported a migration led by another team to containerize batch workloads on Kubernetes.",
+        "id": "00000000-0000-4000-8000-000000000001:edf5f94be00e4a7d",
+        "kind": "bullet",
+        "line_no": 33,
+        "section": "Contoso Retail \u2014 Data Engineer (Jun 2017\u2013Feb 2021)",
+        "text": "Supported a migration led by another team to containerize batch workloads on Kubernetes."
+      },
+      "matched_terms": [
+        "batch"
+      ],
+      "requirement_ids": [
+        "R5"
+      ],
+      "score": 8.42782
+    }
+  ],
+  "gaps": [
+    {
+      "requirement_id": "R1",
+      "term": "4+"
+    },
+    {
+      "requirement_id": "R1",
+      "term": "backend"
+    },
+    {
+      "requirement_id": "R1",
+      "term": "platforms"
+    },
+    {
+      "requirement_id": "R3",
+      "term": null
+    },
+    {
+      "requirement_id": "R4",
+      "term": null
+    },
+    {
+      "requirement_id": "R5",
+      "term": "feature"
+    },
+    {
+      "requirement_id": "R5",
+      "term": "stores"
+    },
+    {
+      "requirement_id": "R5",
+      "term": "large"
+    },
+    {
+      "requirement_id": "R5",
+      "term": "scale"
+    },
+    {
+      "requirement_id": "R5",
+      "term": "scoring"
+    },
+    {
+      "requirement_id": "R6",
+      "term": null
+    },
+    {
+      "requirement_id": "R7",
+      "term": null
+    },
+    {
+      "requirement_id": "R8",
+      "term": null
+    }
+  ],
+  "id": "run-0001",
+  "job_id": "job-f96001bb8095cef5",
+  "judge_enabled": false,
+  "judge_model": null,
+  "model": "mock-1",
+  "parent_run_id": null,
+  "provider": "mock",
+  "report": {
+    "badge_text": "1 unsupported, 0 not verified (of 10 claims)",
+    "claims": 10,
+    "flagged_ids": [
+      "C.S4"
+    ],
+    "judge_enabled": false,
+    "not_verified": 0,
+    "sentences": [
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "Q1.S1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "Q1.S2",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "Q1.S3",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "Q2.S1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "Q2.S2",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "Q2.S3",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.F1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S1",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S2",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.S3",
+        "status": "checks_passed"
+      },
+      {
+        "checks_run": [
+          "employer",
+          "number"
+        ],
+        "failures": [
+          {
+            "check": "number",
+            "detail": "Number 15 not in evidence",
+            "outcome": "fail",
+            "token": "15"
+          },
+          {
+            "check": "employer",
+            "detail": "Employer Initech not in evidence",
+            "outcome": "fail",
+            "token": "Initech"
+          }
+        ],
+        "judge": null,
+        "sentence_id": "C.S4",
+        "status": "unsupported"
+      },
+      {
+        "checks_run": [],
+        "failures": [],
+        "judge": null,
+        "sentence_id": "C.F2",
+        "status": "checks_passed"
+      }
+    ],
+    "unsupported": 1
+  },
+  "requirements": [
+    {
+      "id": "R1",
+      "min_years": 4,
+      "priority": "must",
+      "skills": [],
+      "terms": [
+        "4+",
+        "building",
+        "backend",
+        "data",
+        "platforms",
+        "python"
+      ],
+      "text": "4+ years building backend or data platforms in Python."
+    },
+    {
+      "id": "R2",
+      "min_years": null,
+      "priority": "must",
+      "skills": [
+        "Kubernetes"
+      ],
+      "terms": [
+        "Kubernetes"
+      ],
+      "text": "Production experience with Kubernetes and containerized workloads."
+    },
+    {
+      "id": "R3",
+      "min_years": null,
+      "priority": "must",
+      "skills": [
+        "MLflow"
+      ],
+      "terms": [
+        "MLflow"
+      ],
+      "text": "Familiarity with experiment tracking and model registry tooling (MLflow or equivalent)."
+    },
+    {
+      "id": "R4",
+      "min_years": null,
+      "priority": "must",
+      "skills": [
+        "CI/CD"
+      ],
+      "terms": [
+        "CI/CD"
+      ],
+      "text": "Solid understanding of CI/CD for machine learning services."
+    },
+    {
+      "id": "R5",
+      "min_years": null,
+      "priority": "must",
+      "skills": [],
+      "terms": [
+        "feature",
+        "stores",
+        "large",
+        "scale",
+        "batch",
+        "scoring",
+        "pipelines"
+      ],
+      "text": "Experience with feature stores or large-scale batch scoring pipelines."
+    },
+    {
+      "id": "R6",
+      "min_years": null,
+      "priority": "nice",
+      "skills": [],
+      "terms": [
+        "gpu",
+        "scheduling"
+      ],
+      "text": "GPU scheduling experience."
+    },
+    {
+      "id": "R7",
+      "min_years": null,
+      "priority": "nice",
+      "skills": [
+        "Terraform"
+      ],
+      "terms": [
+        "Terraform"
+      ],
+      "text": "Terraform for cloud provisioning."
+    },
+    {
+      "id": "R8",
+      "min_years": null,
+      "priority": "nice",
+      "skills": [],
+      "terms": [
+        "prior",
+        "work",
+        "energy",
+        "industrial",
+        "iot"
+      ],
+      "text": "Prior work in energy or industrial IoT."
+    }
+  ],
+  "warnings": []
+}

@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 
 from jaa.generation.explain import explain
-from jaa.models import Chunk, Drafts, Requirement, Sentence, TruthReport
+from jaa.models import Chunk, Drafts, Requirement, Sentence, SentenceCheck, TruthReport
 from jaa.privacy.outbound import OutboundDraft
 from jaa.providers.base import LLMProvider
 from jaa.truth.deterministic import CheckContext, check_sentence
@@ -34,7 +34,7 @@ async def run_truth_check(
 
     lexicon = ctx.lexicon if isinstance(ctx.lexicon, SkillLexicon) else ctx.lexicon
 
-    sentences_out: list = []
+    sentences_out: list[SentenceCheck] = []
     claims_for_judge: list[Sentence] = []
 
     for ans in drafts.answers:

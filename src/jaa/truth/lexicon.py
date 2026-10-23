@@ -60,9 +60,7 @@ class SkillLexicon:
         for name, aliases in skills.items():
             for term in [name, *aliases]:
                 if name in CASE_SENSITIVE_SKILLS:
-                    pat = re.compile(
-                        rf"(?<![A-Za-z0-9+#.]){re.escape(term)}(?![A-Za-z0-9+#.])"
-                    )
+                    pat = re.compile(rf"(?<![A-Za-z0-9+#.]){re.escape(term)}(?![A-Za-z0-9+#.])")
                 else:
                     pat = re.compile(
                         rf"(?<![a-z0-9+#.]){re.escape(term)}(?![a-z0-9+#.])",

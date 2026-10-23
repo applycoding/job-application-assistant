@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-import asyncio
 import hashlib
+from datetime import date
 from pathlib import Path
 from typing import Annotated
 
@@ -39,7 +39,7 @@ from jaa.web.deps import (
 )
 
 _TEMPLATES_DIR = Path(__file__).resolve().parent / "templates"
-templates = Jinja2Templates(directory=str(_TEMPLATES_DIR), autoescape=True)
+templates = Jinja2Templates(directory=str(_TEMPLATES_DIR))
 
 router = APIRouter()
 
@@ -48,7 +48,7 @@ def _redirect(path: str, status_code: int = 303) -> RedirectResponse:
     return RedirectResponse(url=path, status_code=status_code)
 
 
-def _reference_date(settings: SettingsDep, clock: ClockDep):
+def _reference_date(settings: SettingsDep, clock: ClockDep) -> date:
     if settings.reference_date is not None:
         return settings.reference_date
     return clock.now().date()
@@ -242,7 +242,7 @@ async def html_create_run(
         raise HTTPException(status_code=409, detail=str(exc)) from exc
     except ProviderError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
-    except (TimeoutError, asyncio.TimeoutError):
+    except TimeoutError:
         raise HTTPException(status_code=504, detail="Run deadline exceeded") from None
     return _redirect(f"/runs/{run.id}")
 

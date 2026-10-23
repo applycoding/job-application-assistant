@@ -7,17 +7,16 @@ from dataclasses import dataclass
 
 from jaa.clock import Clock
 from jaa.config import Settings
+from jaa.export import is_stale
 from jaa.generation.assemble import assemble_drafts
 from jaa.ids import IdFactory
 from jaa.models import RetrievalResult, Run, RunOptions
 from jaa.privacy.outbound import build_outbound_draft
-from jaa.providers.base import CallBudget, ProviderError
-from jaa.providers.base import LLMProvider
+from jaa.providers.base import CallBudget, LLMProvider, ProviderError
 from jaa.retrieval.service import retrieve_for_job
 from jaa.storage.repo import Repository, RunData
 from jaa.truth.deterministic import CHECK_RULES_VERSION, CheckContext
 from jaa.truth.lexicon import SkillLexicon
-from jaa.export import is_stale
 from jaa.truth.prune import prune_flagged
 from jaa.truth.report import run_truth_check
 
@@ -53,7 +52,7 @@ async def create_run(deps: Deps, job_id: str, opts: RunOptions) -> Run:
 
     budget = CallBudget()
     if hasattr(deps.provider, "_budget"):
-        deps.provider._budget = budget  # type: ignore[attr-defined]
+        deps.provider._budget = budget
 
     try:
         async with asyncio.timeout(deps.settings.run_deadline_s):
@@ -78,23 +77,6 @@ async def create_run(deps: Deps, job_id: str, opts: RunOptions) -> Run:
         reqs=req_map,
     )
 
-    run_payload = {
-        "job_id": job_id,
-        "parent_run_id": None,
-        "created_at": deps.clock.now(),
-        "provider": deps.settings.provider,
-        "model": model,
-        "judge_model": judge_model if judge_enabled else None,
-        "judge_enabled": judge_enabled,
-        "corpus_version": corpus_version,
-        "check_rules_version": CHECK_RULES_VERSION,
-        "requirements": job.requirements,
-        "evidence": result.evidence,
-        "gaps": result.gaps,
-        "drafts": drafts,
-        "report": report,
-        "warnings": warnings,
-    }
     data = RunData(
         job_id=job_id,
         parent_run_id=None,
@@ -104,7 +86,12 @@ async def create_run(deps: Deps, job_id: str, opts: RunOptions) -> Run:
         judge_enabled=judge_enabled,
         corpus_version=corpus_version,
         check_rules_version=CHECK_RULES_VERSION,
-        payload=run_payload,
+        requirements=job.requirements,
+        evidence=result.evidence,
+        gaps=result.gaps,
+        drafts=drafts,
+        report=report,
+        warnings=warnings,
     )
     return deps.repo.insert_run(data)
 
@@ -140,17 +127,6 @@ async def prune_run(deps: Deps, run_id: str) -> Run:
         if old and old.judge:
             sc.judge = old.judge
 
-    payload = parent.model_dump()
-    payload.update(
-        {
-            "parent_run_id": parent.id,
-            "created_at": deps.clock.now(),
-            "drafts": new_drafts,
-            "report": report,
-            "warnings": list(parent.warnings) + warnings,
-            "corpus_version": parent.corpus_version,
-        }
-    )
     data = RunData(
         job_id=parent.job_id,
         parent_run_id=parent.id,
@@ -160,6 +136,11 @@ async def prune_run(deps: Deps, run_id: str) -> Run:
         judge_enabled=parent.judge_enabled,
         corpus_version=parent.corpus_version,
         check_rules_version=parent.check_rules_version,
-        payload=payload,
+        requirements=parent.requirements,
+        evidence=parent.evidence,
+        gaps=parent.gaps,
+        drafts=new_drafts,
+        report=report,
+        warnings=list(parent.warnings) + warnings,
     )
     return deps.repo.insert_run(data)

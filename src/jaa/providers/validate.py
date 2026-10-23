@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from jaa.models import AnswerOut, JudgeOut, LLMDraftOut
+from jaa.models import JudgeOut, LLMDraftOut, SentenceOut
 from jaa.privacy.outbound import OutboundDraft, OutboundJudge
 
 
@@ -37,7 +37,7 @@ def validate_draft(out: LLMDraftOut, req: OutboundDraft) -> None:
         raise DraftInvariantError("missing question ids in answers")
 
 
-def _check_sentences(sentences: list, req: OutboundDraft) -> None:
+def _check_sentences(sentences: list[SentenceOut], req: OutboundDraft) -> None:
     pool_ids = {e.id for e in req.evidence}
     for sent in sentences:
         if len(sent.citations) > 4:
