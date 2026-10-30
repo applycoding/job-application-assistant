@@ -44,7 +44,7 @@ dev = [
     "google-genai==2.33.0",
     "httpx==0.28.1",
     "pytest==9.1.1",
-    "pytest-asyncio==1.4.0",
+    "pytest-asyncio==1.4.1",
     "playwright==1.64.1",
     "pytest-playwright==0.10.0",
     "ruff==0.17.2",
